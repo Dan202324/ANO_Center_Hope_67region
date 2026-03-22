@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата заказа</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f4ff 0%, #e6ecf7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .payment-card {
+            max-width: 560px;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 48px 48px 40px 40px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3), 0 8px 20px -8px rgba(0,40,100,0.2);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .header {
+            background: #1A2A4F;
+            color: white;
+            padding: 28px 28px 20px 28px;
+            text-align: center;
+        }
+        .header i {
+            font-size: 42px;
+            background: rgba(255,255,255,0.12);
+            width: 80px;
+            height: 80px;
+            line-height: 80px !important;
+            border-radius: 40px;
+            margin-bottom: 10px;
+            color: #FFD966;
+        }
+        .header h2 {
+            font-weight: 600;
+            font-size: 26px;
+            letter-spacing: -0.3px;
+        }
+        .header p {
+            opacity: 0.8;
+            font-size: 15px;
+            margin-top: 6px;
+            font-weight: 400;
+        }
+        .content {
+            padding: 30px 28px 28px;
+        }
+        .bill-preview {
+            background: #F2F5FA;
+            border-radius: 28px;
+            padding: 22px 20px;
+            margin-bottom: 28px;
+            border: 2px dashed #9BB7D4;
+            transition: 0.2s;
+        }
+        .bill-preview:hover {
+            border-color: #1A2A4F;
+            background: #eaeef5;
+        }
+        .bill-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #102a43;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+        .bill-header i {
+            font-size: 22px;
+            color: #1e3a6b;
+        }
+        .bill-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 24px;
+            background: white;
+            border-radius: 24px;
+            padding: 18px 18px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02), 0 6px 12px -8px #1e3a6b33;
+        }
+        .detail-item {
+            flex: 1 1 180px;
+        }
+        .detail-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #5b6f88;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .detail-value {
+            font-weight: 700;
+            font-size: 21px;
+            color: #0b1d31;
+            background: #F0F4FA;
+            padding: 10px 14px;
+            border-radius: 18px;
+            border: 1px solid #cbd6e4;
+            word-break: break-word;
+        }
+        .detail-value small {
+            font-weight: 400;
+            font-size: 13px;
+            color: #3f5a7a;
+            margin-left: 6px;
+        }
+        /* Поля, куда вставлять свои данные */
+        .custom-field {
+            background: #fffce6;
+            border-left: 6px solid #FFB347;
+            border-radius: 16px;
+            padding: 12px 18px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(255,180,70,0.2);
+        }
+        .custom-field i {
+            font-size: 26px;
+            color: #b95f00;
+        }
+        .custom-field .cf-text {
+            font-size: 15px;
+            font-weight: 500;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 100px;
+            color: #2c3e4f;
+            border: 1px solid #ffe0b0;
+            width: 100%;
+            text-align: center;
+        }
+        .method-selector {
+            display: flex;
+            gap: 16px;
+            margin: 28px 0 20px;
+        }
+        .method-card, .method-sbp {
+            flex: 1;
+            background: white;
+            border: 2px solid #ccdaea;
+            border-radius: 40px;
+            padding: 14px 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 6px 10px -6px #afc1d4;
+        }
+        .method-card.active, .method-sbp.active {
+            border-color: #1A2A4F;
+            background: #ffffff;
+            box-shadow: 0 10px 18px -10px #0b2b55;
+            transform: scale(1.02);
+        }
+        .method-card i, .method-sbp i {
+            font-size: 24px;
+        }
+        .method-card { color: #1A2A4F; }
+        .method-sbp { color: #28945a; }
+        .method-sbp i { color: #1f8b4c; }
+        /* панель ввода карты (имитация) */
+        .card-details, .sbp-details {
+            background: #F8FAFE;
+            border-radius: 28px;
+            padding: 22px 22px 18px;
+            margin: 10px 0 20px;
+            transition: 0.2s;
+            border: 1px solid #cdddec;
+        }
+        .hidden {
+            display: none;
+        }
+        .input-row {
+            margin-bottom: 18px;
+        }
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #1e3b5c;
+            margin-bottom: 6px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 16px 22px;
+            border: 2px solid #c6d6e9;
+            border-radius: 40px;
+            font-size: 16px;
+            background: white;
+            outline: none;
+            transition: 0.15s;
+        }
+        .input-field:focus {
+            border-color: #1A2A4F;
+            box-shadow: 0 0 0 3px rgba(26,42,79,0.15);
+        }
+        .row2 {
+            display: flex;
+            gap: 15px;
+        }
+        .row2 .input-field {
+            flex: 1;
+        }
+        .sbp-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            background: #deedd9;
+            border-radius: 100px;
+            padding: 18px 18px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #0f5530;
+            border: 2px solid #7fae7a;
+        }
+        .sbp-hint i {
+            font-size: 36px;
+        }
+        .total-section {
+            background: #e9eff9;
+            border-radius: 34px;
+            padding: 18px 24px;
+            margin: 18px 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .total-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #14273e;
+        }
+        .total-amount {
+            font-size: 42px;
+            font-weight: 800;
+            color: #1b3a62;
+            line-height: 1;
+        }
+        .total-currency {
+            font-size: 24px;
+            font-weight: 500;
+            color: #506e96;
+        }
+        .button-pay {
+            background: #1A2A4F;
+            color: white;
+            width: 100%;
+            border: none;
+            border-radius: 60px;
+            padding: 22px 16px;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 18px 28px -14px #0e2642;
+            border: 1px solid #3f5680;
+            margin-top: 8px;
+        }
+        .button-pay:hover {
+            background: #223a66;
+            transform: scale(1.01);
+        }
+        .button-pay i {
+            font-size: 28px;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            color: #50688c;
+            font-size: 15px;
+            font-weight: 500;
+            border-top: 1px solid #cddaec;
+            padding-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+        }
+        .footer-note div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .edit-hint {
+            background: #e3eaf3;
+            border-radius: 40px;
+            padding: 14px 20px;
+            color: #1A2A4F;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0 0;
+            border: 1px solid #9ab0cc;
+        }
+        .edit-hint i {
+            margin-right: 8px;
+            color: #c76f1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-card">
+        <div class="header">
+            <i class="fas fa-shield-alt"></i>
+            <h2>Безопасная оплата</h2>
+            <p>Защищённое соединение • данные шифруются</p>
+        </div>
+
+        <div class="content">
+            <!-- ========== БЛОК ДЛЯ ВАШИХ СЧЕТОВ И РЕКВИЗИТОВ ========== -->
+            <!-- Вставьте сюда номер счета, заказа или любые данные. Они будут отображаться при оплате. 
+                 Поля ниже можно менять прямо в коде (текст внутри span или .detail-value) -->
+            <div class="bill-preview">
+                <div class="bill-header">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>СЧЕТ № <span style="background:#1A2A4F; color:white; padding:5px 18px; border-radius: 60px;"><!-- ВСТАВЬТЕ НОМЕР СЧЕТА --> 128-06/03</span></span>
+                </div>
+                <div class="bill-details">
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-user"></i> Получатель</div>
+                        <div class="detail-value"><!-- ВСТАВЬТЕ НАЗВАНИЕ/ИП --> ООО "Ваш счет"</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label"><i class="fas fa-building"></i> Банк получателя</div>
+                        <div class="detail-value"><!-- ВСТАВЬТЕ БАНК --> Т-Банк (АО)</div>
+                    </div>
+                    <div class="detail-item" style="flex: 2 1 100%;">
+                        <div class="detail-label"><i class="fas fa-hashtag"></i> Расчётный счёт (карта/СБП)</div>
+                        <!-- ГЛАВНОЕ МЕСТО: ВСТАВЬТЕ НОМЕР КАРТЫ ИЛИ СЧЕТА СЮДА -->
+                        <div class="detail-value" id="recipientAccountDisplay">4081 7810 1234 5678 9012 <small>Счёт получателя</small></div>
+                    </div>
+                </div>
+                <!-- Дополнительное поле: например, ИНН или назначение платежа (тоже редактируйте) -->
+                <div class="custom-field">
+                    <i class="fas fa-pen-fancy"></i>
+                    <div class="cf-text" id="purposeDisplay">Оплата по договору №Д-2025-06/03 (вставьте своё)</div>
+                </div>
+                <!-- подсказка для разработчика: все поля выше можно изменить на свои -->
+            </div>
+
+            <!-- Способ оплаты: переключение карта / СБП -->
+            <div class="method-selector">
+                <div class="method-card active" id="methodCardBtn"><i class="fas fa-credit-card"></i> Карта</div>
+                <div class="method-sbp" id="methodSbpBtn"><i class="fas fa-university"></i> СБП</div>
+            </div>
+
+            <!-- Форма оплаты по карте (динамически подставляется тот же счёт) -->
+            <div id="cardForm" class="card-details">
+                <div class="input-row">
+                    <div class="input-label"><i class="fas fa-credit-card"></i> Номер карты</div>
+                    <input class="input-field" type="text" placeholder="0000 0000 0000 0000" value="4111 1111 1111 1111" disabled>
+                </div>
+                <div class="row2">
+                    <div class="input-field" style="text-align: center;">ММ/ГГ</div>
+                    <div class="input-field" style="text-align: center;">CVC</div>
+                </div>
+                <div style="margin: 12px 0 4px; background: #e0e8f2; border-radius: 40px; padding: 10px 16px; color:#1e3b5c;">
+                    <i class="fas fa-lock" style="margin-right: 8px;"></i> 
+                    <!-- Счёт для списания (карта привязана к получателю) -->
+                    <span>Зачисление на счёт: <strong id="cardRecipientSpan">4081 7810 1234 5678 9012</strong></span>
+                </div>
+            </div>
+
+            <!-- Форма оплаты по СБП (имитация) -->
+            <div id="sbpForm" class="sbp-details hidden">
+                <div class="sbp-hint">
+                    <i class="fas fa-qrcode"></i>
+                    <span>QR-код СБП (вставьте свой)</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div style="padding: 14px 0 6px;">
+                    <div class="input-label"><i class="fas fa-mobile-alt"></i> Телефон в СБП</div>
+                    <input class="input-field" type="tel" placeholder="+7 900 000-00-00" value="+7 999 888-77-66" disabled>
+                </div>
+                <div style="margin-top: 14px; background:#e5f0e5; border-radius: 60px; padding: 10px 20px;">
+                    <i class="fas fa-check-circle" style="color:#2b7a4b;"></i> Получатель: <strong><!-- ещё раз счёт --> 4081 7810 1234 5678 9012</strong>
+                </div>
+            </div>
+
+            <!-- Сумма к оплате (можно менять) -->
+            <div class="total-section">
+                <span class="total-label">К оплате:</span>
+                <span class="total-amount">4 990 <span class="total-currency">₽</span></span>
+            </div>
+
+            <!-- Кнопка оплаты -->
+            <button class="button-pay" id="payBtn">
+                <i class="fas fa-lock"></i> Оплатить
+            </button>
+
+            <!-- Подсказки для разработчика: места для вставки счетов выделены -->
+            <div class="footer-note">
+                <div><i class="fas fa-check-circle" style="color:#2a7f4b;"></i> Защита 3-D Secure</div>
+                <div><i class="fas fa-credit-card"></i> Visa/Mastercard/Мир</div>
+                <div><i class="fas fa-mobile-alt"></i> СБП</div>
+            </div>
+
+            <!-- Важное уведомление: куда вставить свои данные -->
+            <div class="edit-hint">
+                <i class="fas fa-edit"></i> 
+                <strong>Место для ваших реквизитов:</strong> В блоке «СЧЕТ №» замените номер, получателя, банк и сам счёт (выделено серым). Также можно изменить сумму (выше) и назначение платежа. 
+                Все данные на странице (включая скрытые поля) автоматически используют ваш счёт.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Элементы интерфейса
+            const methodCard = document.getElementById('methodCardBtn');
+            const methodSbp = document.getElementById('methodSbpBtn');
+            const cardForm = document.getElementById('cardForm');
+            const sbpForm = document.getElementById('sbpForm');
+            const payBtn = document.getElementById('payBtn');
+            
+            // Элементы, отображающие счёт (динамически при изменении — вы можете поменять через код или прямо в HTML)
+            const recipientDisplay = document.getElementById('recipientAccountDisplay');          // главный счёт
+            const cardRecipientSpan = document.getElementById('cardRecipientSpan');            // под картой
+            // также счёт показывается в СБП блоке (жестко в тексте, но для единообразия обновим через js)
+            const sbpRecipientStrong = document.querySelector('#sbpForm strong');              // получатель в блоке СБП
+
+            // Назначение платежа (можно также менять)
+            const purposeDisplay = document.getElementById('purposeDisplay');
+
+            // Функция синхронизации счёта (на случай если вы захотите динамически менять из кода)
+            // по умолчанию всё подхватится из статики, но можно вызвать если меняете через js
+            function syncAccountFromDisplay() {
+                // Берём текст счёта из главного отображения (обрезаем small)
+                let accountText = recipientDisplay.innerText;
+                // удалим возможный суффикс от small (оставим только цифры/пробелы)
+                accountText = accountText.replace('Счёт получателя', '').trim();
+                // Обновим в карточном блоке
+                if (cardRecipientSpan) cardRecipientSpan.innerText = accountText;
+                // Обновим в sbp-блоке (там strong внутри, надо найти)
+                if (sbpRecipientStrong) {
+                    // меняем текст, оставляя "Получатель: "
+                    const parent = sbpRecipientStrong.parentNode; // содержит текст "Получатель: " и strong
+                    // можно просто заменить innerText strong
+                    sbpRecipientStrong.innerText = ' ' + accountText; // небольшой пробел для красоты
+                }
+            }
+
+            // вызываем синхронизацию при загрузке
+            syncAccountFromDisplay();
+
+            // Переключение методов оплаты
+            function setActiveMethod(method) {
+                if (method === 'card') {
+                    methodCard.classList.add('active');
+                    methodSbp.classList.remove('active');
+                    cardForm.classList.remove('hidden');
+                    sbpForm.classList.add('hidden');
+                } else {
+                    methodSbp.classList.add('active');
+                    methodCard.classList.remove('active');
+                    sbpForm.classList.remove('hidden');
+                    cardForm.classList.add('hidden');
+                }
+            }
+
+            methodCard.addEventListener('click', () => setActiveMethod('card'));
+            methodSbp.addEventListener('click', () => setActiveMethod('sbp'));
+
+            // Обработка кнопки "Оплатить" (имитация)
+            payBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Проверим какой метод активен
+                const isCard = methodCard.classList.contains('active');
+                // Покажем сообщение (для демо) что средства уйдут на нужный счет
+                let account = cardRecipientSpan ? cardRecipientSpan.innerText : 'указанный счёт';
+                if (!isCard) {
+                    // для СБП возьмем счёт из sbp блока
+                    account = sbpRecipientStrong ? sbpRecipientStrong.innerText.trim() : account;
+                }
+                const amount = document.querySelector('.total-amount').innerText;
+                alert(`✅ Оплата на сумму ${amount} проведена (тестовый режим).\nСредства поступят на счёт: ${account}\n\nНазначение: ${purposeDisplay.innerText}`);
+            });
+
+            // Дополнительно: поля для редактирования счёта — если вы захотите быстро поменять прямо на странице.
+            // Поскольку в задании нужно оставить место под вставку счетов, мы добавим скрытую возможность:
+            // двойной клик по блоку счёта открывает подсказку, но проще —  уже есть edit-hint.
+            // Для большего удобства можно добавить в консоль функцию, но это не требуется.
+
+            // Однако, убедимся, что при изменении recipientDisplay (вручную, если вы开发者 поменяете в инспекторе) можно вызвать sync.
+            // Слушатель изменения текста (мутации) добавим для примера (опционально)
+            const observer = new MutationObserver(function() {
+                // если кто-то через инструменты разработчика поменяет счёт — синхронизируем
+                syncAccountFromDisplay();
+            });
+            observer.observe(recipientDisplay, { childList: true, subtree: true, characterData: true });
+
+            // Также можно позволить менять сумму прямо в коде (total-amount спан).
+            // Места для счетов: в разметке явно указаны комментарии "ВСТАВЬТЕ ..."
+            // Реквизиты по умолчанию можно заменить на свои прямо в HTML.
+
+            console.log('Страница оплаты готова. Для изменения счетов отредактируйте блок .bill-details и поле .custom-field');
+        })();
+    </script>
+    <!-- Дополнительная заметка: для смены счёта измените текст внутри div с id="recipientAccountDisplay" (в .bill-details) -->
+    <!-- Также можно менять номер счета/карты внутри атрибутов value нет, но визуально они синхронизируются через скрипт. -->
+    <!-- Для полной кастомизации измените статические поля: банк, получатель, сумма и назначение -->
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>АНО Центр "Надежда" - Пожертвование</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #2c7da0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .title h1 {
+            font-size: 1.5rem;
+            color: #1f5068;
+        }
+
+        .title p {
+            font-size: 0.85rem;
+            color: #5a6874;
+        }
+
+        /* Навигация */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c7da0;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: #1f5068;
+            border-bottom: 2px solid #2c7da0;
+            padding-bottom: 5px;
+        }
+
+        /* Основной блок */
+        main {
+            padding: 40px 0 60px;
+        }
+
+        .donation-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .donation-card h2 {
+            font-size: 1.8rem;
+            color: #1f5068;
+            margin-bottom: 10px;
+        }
+
+        .donation-card p {
+            color: #4a627a;
+            margin-bottom: 25px;
+        }
+
+        .amount-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .amount-btn {
+            background: #f0f4f8;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1f5068;
+        }
+
+        .amount-btn.active {
+            background: #2c7da0;
+            color: white;
+            box-shadow: 0 4px 10px rgba(44,125,160,0.3);
+        }
+
+        .custom-amount {
+            margin: 20px 0;
+        }
+
+        .custom-amount input {
+            width: 80%;
+            padding: 14px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px solid #cbd5e1;
+            border-radius: 60px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .custom-amount input:focus {
+            border-color: #2c7da0;
+        }
+
+        .pay-btn {
+            background: #2c7da0;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .pay-btn:hover {
+            background: #1f5e7a;
+            transform: scale(1.01);
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-left: 5px solid #2c7da0;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 16px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .info-box h3 {
+            margin-bottom: 12px;
+            color: #1f5068;
+        }
+
+        .info-box code {
+            background: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        footer {
+            background: #1e2a36;
+            color: #a0b3c4;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 700px) {
+            .header-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+            .amount-buttons {
+                gap: 8px;
+            }
+            .amount-btn {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+        }
+
+                .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- МАТОВАЯ ПАНЕЛЬ (HEADER) --- */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 12px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(230, 240, 255, 0.6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .logo-placeholder:not(:has(img))::after {
+            content: "\f0a3";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 400;
+            font-size: 28px;
+            color: #1e3a5f;
+            opacity: 0.6;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: #1e3a5f;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo-area">
+            <div class="logo-placeholder" id="logoPlaceholder">
+                <img src="2026-03-17_15-37-14.png" alt="Логотип">
+            </div>
+            <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="organizah.html">Об организации</a>
+            <a href="team.html">Наша команда</a>
+            <a href="help.html">Кому помогаем</a>
+            <a href="partner.html">Наши партнеры</a>
+            <a href="photo.html">Фотогалерея</a>
+            <a href="what_help.html">Как помочь</a>
+            <a href="contact.html">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="donation-card">
+            <h2>✨ Поддержите нашу работу ✨</h2>
+            <p>Ваше пожертвование помогает менять жизни к лучшему. Спасибо за вашу доброту!</p>
+            
+            <div class="amount-buttons">
+                <button class="amount-btn" data-value="500">500 ₽</button>
+                <button class="amount-btn" data-value="1000">1000 ₽</button>
+                <button class="amount-btn" data-value="2000">2000 ₽</button>
+                <button class="amount-btn" data-value="5000">5000 ₽</button>
+            </div>
+            
+            <div class="custom-amount">
+                <input type="number" id="customSum" placeholder="Другая сумма (₽)" min="50" step="10">
+            </div>
+            
+            <button class="pay-btn" id="payButton">💳 Перейти к оплате через Робокассу</button>
+            
+            <div class="info-box">
+                <h3>🔐 Как настроить реальный приём платежей?</h3>
+                <p><strong>1. Регистрация в Robokassa:</strong> Перейдите на сайт <a href="https://robokassa.com" target="_blank">robokassa.com</a>, создайте магазин. В личном кабинете получите <strong>Merchant Login</strong> и <strong>Password #1</strong>.</p>
+                <p><strong>2. Внесите данные в код:</strong> В этом файле (index.html) найдите переменные <code>MERCHANT_LOGIN</code> и <code>PASSWORD_1</code> (в блоке JavaScript). Замените значения на свои.</p>
+                <p><strong>3. Переключите в боевой режим:</strong> В параметре оплаты установите <code>IsTest=0</code> (сейчас 1 — тест). После этого деньги начнут поступать на ваш счёт в Robokassa.</p>
+                <p>📌 Все операции защищены, Robokassa сама отправляет чеки и обрабатывает платежи.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 АНО Центр "Надежда" — Официальный сайт. Помощь с любовью.</p>
+    </div>
+</footer>
+
+<script>
+    // ========== НАСТРОЙКИ РОБОКАССЫ (ЗАМЕНИТЕ НА СВОИ) ==========
+    const MERCHANT_LOGIN = "YOUR_MERCHANT_LOGIN";   // Ваш логин из Robokassa
+    const PASSWORD_1 = "YOUR_PASSWORD_1";           // Ваш Password #1 (для подписи)
+    // ============================================================
+    
+    // ТЕКУЩИЙ РЕЖИМ: 1 = тестовый, 0 = реальные деньги
+    const IS_TEST = 1;   // <--- Поменяйте на 0, когда получите логин/пароль и протестируете
+    
+    // Адрес успешной оплаты (можно изменить позже, если создадите свои html)
+    const SUCCESS_URL = window.location.origin + "/success.html"; 
+    const FAIL_URL = window.location.origin + "/fail.html";
+    
+    // Если у вас нет success.html и fail.html, Robokassa всё равно покажет свои страницы.
+    // Для полной работы рекомендую создать простые файлы-заглушки.
+    
+    let selectedAmount = 1000; // по умолчанию
+    
+    // Выбор предустановленных сумм
+    const btns = document.querySelectorAll('.amount-btn');
+    const customInput = document.getElementById('customSum');
+    const payBtn = document.getElementById('payButton');
+    
+    function setActiveButton(activeBtn) {
+        btns.forEach(btn => btn.classList.remove('active'));
+        activeBtn.classList.add('active');
+    }
+    
+    btns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const val = parseInt(this.getAttribute('data-value'));
+            if (!isNaN(val)) {
+                selectedAmount = val;
+                customInput.value = '';
+                setActiveButton(this);
+            }
+        });
+    });
+    
+    customInput.addEventListener('input', function() {
+        let val = parseInt(this.value);
+        if (!isNaN(val) && val > 0) {
+            selectedAmount = val;
+            // убираем активный класс с кнопок
+            btns.forEach(btn => btn.classList.remove('active'));
+        } else if (this.value === '') {
+            // если поле пустое, оставляем последнюю выбранную сумму из кнопок
+            const activeBtn = document.querySelector('.amount-btn.active');
+            if(activeBtn) {
+                selectedAmount = parseInt(activeBtn.getAttribute('data-value'));
+            } else {
+                selectedAmount = 1000;
+            }
+        }
+    });
+    
+    // Формирование подписи (signature) для Robokassa
+    function getSignature(outSum, invId, description) {
+        // Формула: md5(MerchantLogin:OutSum:InvId:Password1)
+        // В данном случае InvId = 0 (для новых заказов, реальный ID придет после создания)
+        // Для генерации формы обычно используем простую подпись с фиктивным InvId=0
+        // Более надежно: на сервере, но для статического сайта подойдет первичная сигнатура.
+        let signatureString = `${MERCHANT_LOGIN}:${outSum}:0:${PASSWORD_1}`;
+        return CryptoJS.MD5(signatureString).toString();
+    }
+    
+    // Функция отправки в Robokassa
+    function redirectToRobokassa(amount) {
+        if (!MERCHANT_LOGIN || MERCHANT_LOGIN === "YOUR_MERCHANT_LOGIN") {
+            alert("⚠️ Внимание! Вы не настроили логин Робокассы. Чтобы принимать реальные платежи, зарегистрируйтесь на robokassa.com и введите данные в коде сайта (см. пояснение внизу страницы). Сейчас это демо-режим.");
+            // Для демонстрации показываем alert, но не даем уйти на пустую форму
+            return;
+        }
+        
+        if (amount < 50) {
+            alert("Минимальная сумма пожертвования 50 рублей");
+            return;
+        }
+        
+        // Параметры заказа
+        let outSum = amount.toFixed(2);
+        let invId = 0; // Для новых заказов
+        let description = encodeURIComponent("Пожертвование АНО Центр Надежда");
+        
+        let signature = getSignature(outSum, invId, description);
+        
+        // Форма для отправки POST запроса в Robokassa
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://auth.robokassa.ru/Merchant/Index.aspx';
+        form.acceptCharset = 'UTF-8';
+        
+        const fields = {
+            MrchLogin: MERCHANT_LOGIN,
+            OutSum: outSum,
+            InvId: invId,
+            Desc: description,
+            SignatureValue: signature,
+            IsTest: IS_TEST,
+            Encoding: "utf-8",
+            Culture: "ru",
+            // Страницы успеха/неудачи (обязательно полные URL)
+            // Если страниц нет, Robokassa покажет свои.
+            Shp_Item: "donation"
+        };
+        
+        for (let key in fields) {
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = fields[key];
+            form.appendChild(input);
+        }
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+    
+    payBtn.addEventListener('click', () => {
+        let finalAmount = selectedAmount;
+        if (customInput.value && parseFloat(customInput.value) > 0) {
+            finalAmount = parseFloat(customInput.value);
+        }
+        redirectToRobokassa(finalAmount);
+    });
+    
+    // Если не выбрана кнопка, но сумма по умолчанию нужна
+    if(!document.querySelector('.amount-btn.active')) {
+        document.querySelector('.amount-btn[data-value="1000"]').classList.add('active');
+        selectedAmount = 1000;
+    }
+</script>
+
+<!-- Подключаем библиотеку CryptoJS для MD5 хэша (Robokassa требует подпись) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+</body>
+</html> 

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Центр "Надежда" | Официальный сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 12px 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(230, 240, 255, 0.5);
+            border: 2px dashed #a0b8d0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a6f8c;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #1e3a5f;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span {
+            font-weight: 300;
+            color: #5f7d9c;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.15s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .page {
+            display: none;
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 1.8rem 2rem 3rem;
+            background: rgba(255, 255, 245, 0.85);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0e5d8;
+            transition: all 0.2s;
+        }
+
+        .page.active-page {
+            display: block;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1.2rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #6f825e;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px dashed #ddcfbc;
+            padding-bottom: 0.75rem;
+        }
+
+        .regular-text {
+            font-size: 1.08rem;
+            color: #2c3e2f;
+            background: #fffff2;
+            padding: 1.4rem 1.8rem;
+            border-radius: 28px;
+            margin: 1.8rem 0;
+            box-shadow: inset 0 0 0 1px #f3ebdf, 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.6;
+        }
+
+        /* группа кнопок PDF */
+        .pdf-button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .pdf-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff;
+            border: 1px solid #dac9b2;
+            padding: 0.9rem 2rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3e6840;
+            background-color: #fcf9f3;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .pdf-button:hover {
+            background: #eef3e9;
+            border-color: #b7cfaa;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 18px -8px rgba(0,0,0,0.1);
+        }
+        .pdf-icon {
+            font-size: 1.4rem;
+            font-weight: normal;
+        }
+        .pdf-note {
+            font-size: 0.75rem;
+            color: #a49780;
+            margin-top: 0.6rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 750px) {
+            .nav-links {
+                justify-content: center;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .page {
+                margin: 1.2rem;
+                padding: 1.2rem;
+            }
+            .pdf-button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="2026-03-17_15-37-14.png" alt="Логотип Центр Надежда">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="photo.html">Фотогалерея</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="bank.html">Реквизиты</a>
+                <a href="contact.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+<!-- ГЛАВНАЯ СТРАНИЦА (активная по умолчанию) -->
+<div id="home-page" class="page active-page">
+    <h2>АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h2>
+    <div class="subtitle">Ваша опора и поддержка на пути к переменам</div>
+    <div class="regular-text">
+        <p><strong>С кем работает:</strong><br>
+•	семьи с нарушением супружеских отношений;<br>
+•	семьи с нарушением детско-родительских отношений;<br>
+•	семьи, находящиеся в трудной жизненной ситуации;<br>
+•	дети и подростки;<br>
+•	участники специальной военной операции и их семьи;<br>
+•	люди, находящиеся в остром кризисе (экстренная психологическая помощь);<br>
+•	люди с психосоматическими и ментальными расстройствами;<br>
+•	люди, пережившие травму или насилие;<br>
+•	люди, пережившие горе и утрату близких;<br>
+•	пожилые люди.<br>
+</p>
+        <p style="margin-top: 1rem;"><strong>Направления работы</strong><br> 
+•	Оказание социально-психологических услуг, предусматривающих содействие в оказание помощи в коррекции психологического состояния граждан для адаптации в социальной среде;<br>
+•	Оказание социально-педагогических услуг, предусматривающих содействие в профилактике отклонений в поведении и развитии личности, формировании позитивных интересов, формировании досуга;<br>
+•	Комплексная профилактическая, коррекционная и реабилитационная работа с лицами оказавшимся в трудной жизненной ситуации<br>
+•	Комплексная профилактическая, коррекционная и реабилитационная работа с семьями, имеющими нарушения внутрисемейных  отношений;<br>
+•	Экстренная психологическая помощь  в стадии острого кризиса;<br>
+•	Организация и проведение культурно-досуговых, спортивных, оздоровительных мероприятий;<br>
+•	Оказание социально-правовых услуг, направленных на оказание помощи в получении юридических услуг в защите прав и законных интересов граждан в рамках своей компетенции;<br>
+•	Осуществление благотворительной деятельности;<br>
+•	Развитие сотрудничество и взаимодействие с государственными органами и негосударственными организациями всех форм собственности;<br>
+•	Поддержка кровных/замещающих и кризисных семей с детьми в решении проблем их самообеспечения, реализации их собственных возможностей по преодолению их сложных жизненных ситуаций;<br>
+•	Профилактика социально-опасных форм поведения детей в семье;<br>
+•	Деятельность по предотвращению жестокого обращения с детьми;<br>
+•	Профилактика социального неблагополучия семей;<br>
+•	Психокоррекционная работа и психопрофилактическая работа с кровными детьми, а также детьми-сиротами и детьми оставшихся без попечения родителей;<br>
+•	Организация досуга семей и детей, развитие творческих способностей детей;<br>
+•	Профилактика социального сиротства;<br>
+•	Пропаганда и популяризация форм семейного устройства детей-сирот и детей оставшихся без попечения родителей;<br>
+•	Сопровождение выпускников интернатных учреждений, семей с детьми, находящихся в трудных жизненных ситуациях, социально опасном положении;<br>
+•	Содействие в формировании здорового образа жизни (в том числе профилактика курения, алкоголизма и наркомании и других форм аддиктивного поведения):<br>
+•	Организация и проведения культурно-досуговых, оздоровительных и спортивных мероприятий;<br>
+•	Создание творческих, интеллектуальных и спортивных клубов, студий, кружков для детей и родителей;<br>
+•	 Организация консультаций, круглых столов, конференций и других мероприятий для родителей и специалистов по работе с детьми по педагогическим, социальным, юридическим, психологическим вопросам в РФ и зарубежом.<br>  
+•	Разработка и внедрение культурных, просветительских, образовательных и иных программ, проектов, акций, направленных на достижение целей Организации;<br>
+•	Оказание всех видов консультационных, социально-психологических, социально-педагогических, социально-правовых и иных услуг, предусмотренных настоящим перечнем, с использованием дистанционных технологий (в форме онлайн-консультаций), включая, но не ограничиваясь: видеоконференцсвязь (Zoom, Skype, VK Звонкии аналоги), телефонные консультации, обмен сообщениями через защищенные мессенджеры и электронную почту, проведение вебинаров и онлайн-семинаров, а также с использованием иных современных средств связи и коммуникации.<br>
+</p>
+        <p style="margin-top: 1rem;"><strong>Специалисты АНО «Надежда» проводят:</strong><br>
+•	работу с семьями «группы риска» (беседы социального педагога, юриста, психологическая помощь);<br>
+•	психолого-педагогическое консультирование детей и родителей (законных представителей);<br>
+•	психокоррекционные, тренинговые и развивающие занятия с детьми и родителями (законными представителями);<br>
+•	родительские собрания и классные часы в образовательных учреждениях области (по запросу учреждения);<br>
+•	выездные семинары в районах Смоленской области (по запросу органов опеки и попечительства муниципальных образований и органов государственной власти);<br>
+•	сопровождение семей в рамках своей компетенции;<br>
+•	помощь родителям (законным представителям) в подборе адекватных средств общения с ребенком.<br>
+</p>
+        <p style="margin-top: 1rem;"><strong>Формы работы с категориями граждан</strong><br>
+•	Индивидуальное консультирование: Классическая работа один на один с психологом (подходит для всех категорий).<br>
+•	Семейное консультирование: Работа с парами, родителями и детьми, несколькими поколениями семьи, для решения конкретных проблем поколений, проработка повторяющихся сценариев. <br>
+•	Групповая терапия: Сбор людей со схожими проблемами (например, группа для людей с тревожностью, группа для родителей подростков, группа поддержки для людей, переживших развод). Это очень эффективный и часто более доступный по цене формат.<br>
+•	Онлайн-консультирование: Дает возможность получить помощь тем, кто не может посетить центр лично (люди с инвалидностью, молодые мамы в декрете, жители отдаленных районов,  городов, стран мира).<br>
+</p>
+        <p style="margin-top: 1rem;"></p>
+    </div>
+    <!-- ГРУППА КНОПОК: Информация (выписка) + Устав (PDF) -->
+    <div class="pdf-button-group">
+        <button id="openPdfBtn" class="pdf-button">
+            <span class="pdf-icon">📄</span> Информация (выписка ОГРН)
+        </button>
+        <button id="openCharterBtn" class="pdf-button">
+            <span class="pdf-icon">📜</span> Устав организации
+        </button>
+    </div>
+    <!-- подсказка для администратора (можно скрыть, но оставим для удобства) -->
+    <div class="pdf-note">
+        ⚡ Для замены PDF-файлов укажите пути в переменных <strong>pdfUrlInfo</strong> и <strong>pdfUrlCharter</strong> в script
+    </div>
+</div>
+
+<!-- СТРАНИЦА КОНТАКТЫ (оставлена для полноты, но на сайте много навигации) -->
+<div id="contacts-page" class="page">
+    <h1>Контакты и связь</h1>
+    <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
+    <div class="regular-text">
+        <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
+        <p>📧 Электронная почта: <strong>info@nadezhda-center.ru</strong></p>
+        <p>📍 Адрес: г. Москва, ул. Добрая, д. 12, стр. 3 (офис 204)</p>
+        <p>💬 Мессенджеры: Telegram / WhatsApp по номеру +7 (999) 123-45-67</p>
+        <p>🕒 График работы: Пн–Пт 10:00–19:00, Сб по предварительной записи.</p>
+        <p style="margin-top: 1rem;">⭐ Следите за нашими новостями и анонсами мероприятий в социальных сетях (ссылки по запросу).</p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+</footer>
+
+<script>
+    // --------------------------------------------------------------
+    // 📌 Укажите здесь ПУТИ К ВАШИМ PDF-ФАЙЛАМ:
+    // --------------------------------------------------------------
+    // PDF с выпиской ЕГРЮЛ / информацией об организации (кнопка "Информация")
+    const pdfUrlInfo = 'VypZapEGRUL_d5ef85179f0f42e98a713691d932dac6.pdf';   // ← замените на реальный путь к вашему PDF-файлу (информация)
+    // PDF с Уставом организации (вторая кнопка)
+    const pdfUrlCharter = 'UchDokum_ed18d4f3b80344c58b906d0e0d4f898f.pdf';    // ← замените на реальный путь к Уставу (например, 'docs/ustav.pdf')
+    
+    // Дополнительно можно оставить fallback-заглушки, если файлы не найдены.
+    // -----------------------------------------------------------------
+
+    // Элементы кнопок
+    const infoBtn = document.getElementById('openPdfBtn');
+    const charterBtn = document.getElementById('openCharterBtn');
+
+    // Функция для открытия PDF в новой вкладке с проверкой существования пути
+    function openPdf(pdfPath, documentType) {
+        if (!pdfPath || pdfPath === '' || pdfPath === 'VypZapEGRUL_d5ef85179f0f42e98a713691d932dac6.pdf' && documentType === 'charter') {
+            // Для устава проверяем, что если путь не изменен — показываем подсказку
+            if (documentType === 'charter' && (pdfPath === 'UchDokum_ed18d4f3b80344c58b906d0e0d4f898f.pdf' || pdfPath === '')) {
+                alert('📄 Файл с Уставом ещё не загружен. Пожалуйста, добавьте PDF-файл устава в папку с сайтом и укажите путь к нему в коде (переменная pdfUrlCharter).');
+                return;
+            }
+            if (documentType === 'info' && (pdfPath === 'VypZapEGRUL_d5ef85179f0f42e98a713691d932dac6.pdf' && pdfPath === pdfUrlInfo)) {
+                // Если путь остался как в примере (или пустой) — уведомление
+                alert('📄 Файл с выпиской ОГРН / информацией временно отсутствует. Пожалуйста, загрузите PDF и обновите переменную pdfUrlInfo в коде сайта.');
+                return;
+            }
+        }
+        // Пытаемся открыть PDF. Если файл недоступен, браузер покажет ошибку.
+        window.open(pdfPath, '_blank', 'noopener,noreferrer');
+    }
+
+    // Обработчики с конкретными типами документов
+    if (infoBtn) {
+        infoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPdf(pdfUrlInfo, 'info');
+        });
+    }
+    if (charterBtn) {
+        charterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPdf(pdfUrlCharter, 'charter');
+        });
+    }
+
+    // Дополнительно: поддержка навигации (если нужно, но у вас на сайте все ссылки ведут на отдельные html,
+    // этот скрипт не переопределяет стандартные переходы, потому что в навигации уже прописаны href="organizah.html" и т.д.
+    // Оставляем как есть, чтобы не нарушать работу.
+    console.log('✅ Сайт Центр "Надежда" готов. Для замены логотипа: измените src у img внутри .logo-placeholder.');
+    console.log('📎 Кнопка "Информация" использует путь:', pdfUrlInfo);
+    console.log('📎 Кнопка "Устав" использует путь:', pdfUrlCharter);
+</script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" | Благотворительный фонд</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f8faff;
+            color: #1e2b3a;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- МАТОВАЯ ПАНЕЛЬ (HEADER) --- */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 12px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(230, 240, 255, 0.6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .logo-placeholder:not(:has(img))::after {
+            content: "\f0a3";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 400;
+            font-size: 28px;
+            color: #1e3a5f;
+            opacity: 0.6;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: #1e3a5f;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ===== ГЛАВНЫЙ БЛОК: ФОТО НА ВСЮ ШИРИНУ + ТЕКСТ + ВИДЖЕТ ===== */
+        .fullscreen-hero {
+            position: relative;
+            width: 100%;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background-color: #1a2a3a;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 45, 0.7) 0%, rgba(5, 15, 30, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 80px 0 100px;
+        }
+
+        .hero-grid-custom {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-text-block {
+            color: white;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        }
+        .hero-text-block h1 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .hero-text-block .hero-sub {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.92;
+            margin-bottom: 1.8rem;
+            border-left: 3px solid #ffcd7e;
+            padding-left: 20px;
+        }
+
+        /* Виджет пожертвования */
+        .donation-widget {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35);
+            padding: 28px 26px;
+            border: 1px solid rgba(255,255,245,0.5);
+            transition: transform 0.2s;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #cbd6e4;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+        }
+        .step-dot.active {
+            width: 32px;
+            background-color: #1e3a5f;
+        }
+
+        .step-content {
+            min-height: 290px;
+        }
+        .step {
+            display: none;
+        }
+        .step.active-step {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .step h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f2c44;
+        }
+
+        .amount-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .amount-btn {
+            background: #f0f4fc;
+            border: 1px solid #d3e0ee;
+            border-radius: 44px;
+            padding: 12px 18px;
+            font-weight: 600;
+            color: #1e3a5f;
+            cursor: pointer;
+            transition: 0.15s;
+            flex: 1 0 auto;
+            font-size: 1rem;
+        }
+        .amount-btn.selected {
+            background: #1e3a5f;
+            color: white;
+            border-color: #1e3a5f;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .custom-amount {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid #d0ddee;
+            border-radius: 44px;
+            font-size: 1rem;
+            margin-bottom: 28px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .custom-amount:focus {
+            border-color: #1e3a5f;
+            box-shadow: 0 0 0 2px rgba(30,58,95,0.2);
+        }
+
+        .next-btn, .prev-btn, .submit-btn {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            border-radius: 44px;
+            padding: 14px 20px;
+            font-weight: 600;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+        .next-btn:hover, .submit-btn:hover {
+            background: #0e2a48;
+            transform: scale(0.98);
+        }
+        .prev-btn {
+            background: transparent;
+            color: #1e3a5f;
+            border: 1px solid #cbd6e4;
+            margin-top: 0;
+        }
+        .prev-btn:hover {
+            background: #f0f5fd;
+            transform: none;
+        }
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .payment-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            border: 1px solid #e2eaf5;
+            border-radius: 28px;
+            background: #fafcff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .payment-card.selected {
+            border-color: #1e3a5f;
+            background: #eef3fc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .payment-card i {
+            font-size: 1.5rem;
+            color: #1e3a5f;
+            width: 32px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #2c4c72;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #dce5f0;
+            border-radius: 28px;
+            font-size: 0.95rem;
+            background: white;
+        }
+        .checkbox-group {
+            margin: 18px 0 16px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group a {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #7f9bc0;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            color: #6c8aab;
+            text-align: center;
+            margin-top: 18px;
+        }
+        .double-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .double-buttons button {
+            margin-top: 0;
+        }
+
+        /* --- ОСНОВНОЙ ФУТЕР --- */
+        .footer {
+            background: #ffffffea;
+            backdrop-filter: blur(4px);
+            border-top: 1px solid rgba(170, 195, 220, 0.5);
+            padding: 48px 0 30px;
+            margin-top: 0;
+        }
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .footer-address, .footer-contacts {
+            flex: 1 1 240px;
+        }
+        .footer h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 16px;
+        }
+        .footer p {
+            color: #3b5672;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .footer-contacts p i {
+            width: 28px;
+            color: #2b6c9e;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 45px;
+            color: #7b95b3;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1000px) {
+            .hero-grid-custom {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-text-block h1 {
+                font-size: 2.7rem;
+            }
+            .fullscreen-hero {
+                min-height: auto;
+            }
+            .hero-content {
+                padding: 60px 0 70px;
+            }
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 24px;
+            }
+            .hero-text-block h1 {
+                font-size: 2.2rem;
+            }
+            .hero-text-block .hero-sub {
+                font-size: 1.1rem;
+            }
+            .nav-links {
+                gap: 14px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+        @media (max-width: 550px) {
+            .donation-widget {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo-area">
+            <div class="logo-placeholder" id="logoPlaceholder">
+                <img src="2026-03-17_15-37-14.png" alt="Логотип">
+            </div>
+            <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="organizah.html">Об организации</a>
+            <a href="team.html">Наша команда</a>
+            <a href="help.html">Кому помогаем</a>
+            <a href="partner.html">Наши партнеры</a>
+            <a href="photo.html">Фотогалерея</a>
+            <a href="what_help.html">Как помочь</a>
+            <a href="contact.html">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="fullscreen-hero">
+        <div class="hero-background" id="heroBackground">
+            <img src="Главная.png" alt="Благотворительность фонд Надежда">
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="container hero-grid-custom">
+                <div class="hero-text-block">
+                    <h1>АНО Центр <br>«Надежда»</h1>
+                    <div class="hero-sub">Помощь там, где она нужнее</div>
+                </div>
+
+                <!-- Виджет пожертвования с интеграцией Robokassa и Formspree -->
+                <div class="donation-widget">
+                    <div class="step-indicator" id="stepIndicator">
+                        <span class="step-dot active"></span>
+                        <span class="step-dot"></span>
+                        <span class="step-dot"></span>
+                    </div>
+
+                    <form id="donationForm" action="https://formspree.io/f/xwvryqla" method="POST">
+                        <div id="step1" class="step active-step">
+                            <h3>Выберите сумму</h3>
+                            <div class="amount-buttons">
+                                <button type="button" class="amount-btn" data-amount="500">500₽</button>
+                                <button type="button" class="amount-btn" data-amount="1000">1 000₽</button>
+                                <button type="button" class="amount-btn" data-amount="3000">3 000₽</button>
+                                <button type="button" class="amount-btn" data-amount="5000">5 000₽</button>
+                            </div>
+                            <input type="number" class="custom-amount" name="donation_amount" placeholder="Другая сумма (₽)" min="50" id="customAmount">
+                            <button type="button" class="next-btn" id="toStep2">Далее</button>
+                        </div>
+
+                        <div id="step2" class="step">
+                            <h3>Способ оплаты</h3>
+                            <div class="payment-options">
+                                <div class="payment-card selected" data-payment="card">
+                                    <i class="fas fa-credit-card"></i> Банковская карта
+                                </div>
+                                <div class="payment-card" data-payment="mobile">
+                                    <i class="fas fa-mobile-alt"></i> Мобильный телефон
+                                </div>
+                                <div class="payment-card" data-payment="sbp">
+                                    <i class="fas fa-university"></i> СБП
+                                </div>
+                            </div>
+                            <div class="double-buttons">
+                                <button type="button" class="prev-btn" id="prevToStep1">Назад</button>
+                                <button type="button" class="next-btn" id="toStep3">Далее</button>
+                            </div>
+                        </div>
+
+                        <div id="step3" class="step">
+                            <h3>Ваши данные</h3>
+                            <div class="form-group">
+                                <label>Имя *</label>
+                                <input type="text" name="name" id="donorName" placeholder="Иван" required>
+                            </div>
+                            <div class="form-group">
+                                <label>E-mail *</label>
+                                <input type="email" name="email" id="donorEmail" placeholder="ivan@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Телефон</label>
+                                <input type="tel" name="phone" id="donorPhone" placeholder="+7 (999) 123-45-67">
+                            </div>
+                            <!-- Скрытые поля для передачи суммы и способа оплаты -->
+                            <input type="hidden" name="final_amount" id="finalAmountHidden">
+                            <input type="hidden" name="payment_method" id="paymentMethodHidden">
+                            
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agree" name="agreement" checked required> 
+                                <label for="agree">Соглашаюсь с <a href="#">политикой конфиденциальности</a> и <a href="#">офертой</a></label>
+                            </div>
+                            <div class="double-buttons">
+                                <button type="button" class="prev-btn" id="prevToStep2">Назад</button>
+                                <button type="submit" class="submit-btn" id="finalSubmit">Пожертвовать</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="footer-note">
+                        <i class="fas fa-lock" style="font-size: 10px;"></i> Безопасное пожертвование через Robokassa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-address">
+            <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+            <p>216456, СМОЛЕНСКАЯ ОБЛАСТЬ, М.О. ПОЧИНКОВСКИЙ, Д ЛУЧЕСА, УЛ САДОВАЯ, Д. 17А</p>
+        </div>
+        <div class="footer-contacts">
+            <h4><i class="fas fa-phone-alt"></i> Контакты</h4>
+            <p><i class="fas fa-phone-alt"></i> +7 (908) 281-36-78</p>
+            <p><i class="fas fa-envelope"></i> lapa0122@yandex.ru</p>
+        </div>
+        <div style="flex: 1; min-width: 180px;">
+            <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
+            <p><i class="fab fa-vk"></i> ВКонтакте | <i class="fab fa-telegram"></i> Telegram</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 АНО Центр «Надежда». Все права защищены.
+    </div>
+</footer>
+
+<script>
+    (function() {
+        // --- Конфигурация Robokassa ---
+        // !!! ВАЖНО: Замените 'your_login' на ваш логин магазина в Robokassa !!!
+        const ROBOKASSA_LOGIN = 'your_login';
+        // URL для редиректа после оплаты (можно указать страницу вашего сайта)
+        const ROBOKASSA_SUCCESS_URL = window.location.origin + '/success.html';
+        const ROBOKASSA_FAIL_URL = window.location.origin + '/fail.html';
+        
+        // Элементы шагов
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const dots = document.querySelectorAll('.step-dot');
+        
+        const toStep2Btn = document.getElementById('toStep2');
+        const toStep3Btn = document.getElementById('toStep3');
+        const prevToStep1 = document.getElementById('prevToStep1');
+        const prevToStep2 = document.getElementById('prevToStep2');
+        
+        // Элементы формы и данных
+        const donationForm = document.getElementById('donationForm');
+        const customAmountInput = document.getElementById('customAmount');
+        const finalAmountHidden = document.getElementById('finalAmountHidden');
+        const paymentMethodHidden = document.getElementById('paymentMethodHidden');
+        
+        let currentAmount = 0;
+        
+        function setActiveStep(stepNumber) {
+            step1.classList.remove('active-step');
+            step2.classList.remove('active-step');
+            step3.classList.remove('active-step');
+            if (stepNumber === 1) step1.classList.add('active-step');
+            if (stepNumber === 2) step2.classList.add('active-step');
+            if (stepNumber === 3) step3.classList.add('active-step');
+            
+            dots.forEach((dot, idx) => {
+                if (idx === stepNumber-1) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+        
+        // Функция для получения выбранной суммы
+        function getSelectedAmount() {
+            const selectedAmountBtn = document.querySelector('.amount-btn.selected');
+            let amount = 0;
+            if (selectedAmountBtn) {
+                amount = parseInt(selectedAmountBtn.getAttribute('data-amount'));
+            }
+            const customAmount = customAmountInput.value;
+            if (customAmount && parseInt(customAmount) > 0) {
+                amount = parseInt(customAmount);
+            }
+            return amount;
+        }
+        
+        // Переход на шаг 2
+        if (toStep2Btn) {
+            toStep2Btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const amount = getSelectedAmount();
+                if (amount <= 0) {
+                    alert('Пожалуйста, выберите или введите сумму пожертвования');
+                    return;
+                }
+                if (amount < 50) {
+                    alert('Минимальная сумма пожертвования 50 ₽');
+                    return;
+                }
+                currentAmount = amount;
+                setActiveStep(2);
+            });
+        }
+        
+        // Переход на шаг 3
+        if (toStep3Btn) {
+            toStep3Btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedPayment = document.querySelector('.payment-card.selected');
+                if (!selectedPayment) {
+                    alert('Выберите способ оплаты');
+                    return;
+                }
+                const paymentMethod = selectedPayment.getAttribute('data-payment');
+                paymentMethodHidden.value = paymentMethod;
+                setActiveStep(3);
+            });
+        }
+        
+        // Назад с шага 2 на 1
+        if (prevToStep1) {
+            prevToStep1.addEventListener('click', (e) => {
+                e.preventDefault();
+                setActiveStep(1);
+            });
+        }
+        
+        // Назад с шага 3 на 2
+        if (prevToStep2) {
+            prevToStep2.addEventListener('click', (e) => {
+                e.preventDefault();
+                setActiveStep(2);
+            });
+        }
+        
+        // Выбор суммы: выделение кнопок
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                amountBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                customAmountInput.value = '';
+            });
+        });
+        
+        // Кастомная сумма: убираем выделение с кнопок
+        if (customAmountInput) {
+            customAmountInput.addEventListener('input', function() {
+                if (this.value && parseInt(this.value) > 0) {
+                    amountBtns.forEach(b => b.classList.remove('selected'));
+                }
+            });
+        }
+        
+        // Выбор способа оплаты
+        const paymentCards = document.querySelectorAll('.payment-card');
+        paymentCards.forEach(card => {
+            card.addEventListener('click', () => {
+                paymentCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
+        
+        // Функция для перенаправления на Robokassa
+        function redirectToRobokassa(amount, name, email, phone) {
+            // Генерируем уникальный номер заказа (например, timestamp + случайное число)
+            const invId = Date.now() + Math.floor(Math.random() * 10000);
+            // Сумма в рублях (без копеек, Robokassa принимает сумму в валюте)
+            const outSum = amount;
+            // Описание платежа
+            const description = `Пожертвование в АНО Центр "Надежда"`;
+            
+            // Формируем параметры для Robokassa
+            // В реальном проекте подпись (SignatureValue) должна формироваться на сервере для безопасности.
+            // Здесь для демонстрации используется упрощенная схема с формированием подписи на клиенте.
+            // ВАЖНО: Для production-использования обязательно перенесите формирование подписи на сервер!
+            const password1 = 'your_password1'; // Замените на ваш пароль #1 из настроек магазина Robokassa
+            const signature = `${ROBOKASSA_LOGIN}:${outSum}:${invId}:${password1}`;
+            const signatureValue = btoa(signature); // простой пример, в реальности используется MD5 или SHA256
+            
+            // Строим URL для редиректа
+            const robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=${ROBOKASSA_LOGIN}&OutSum=${outSum}&InvId=${invId}&Description=${encodeURIComponent(description)}&SignatureValue=${signatureValue}&Culture=ru&Encoding=utf-8&Email=${encodeURIComponent(email)}`;
+            
+            // Перенаправляем пользователя на Robokassa
+            window.location.href = robokassaUrl;
+        }
+        
+        // Обработка отправки формы (Formspree + Robokassa)
+        if (donationForm) {
+            donationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Валидация
+                const name = document.getElementById('donorName')?.value.trim();
+                const email = document.getElementById('donorEmail')?.value.trim();
+                const phone = document.getElementById('donorPhone')?.value.trim();
+                const agreeCheck = document.getElementById('agree');
+                
+                if (!name) {
+                    alert('Укажите ваше имя');
+                    return;
+                }
+                if (!email) {
+                    alert('Укажите E-mail для получения чека');
+                    return;
+                }
+                if (!agreeCheck.checked) {
+                    alert('Пожалуйста, примите условия политики конфиденциальности и оферты');
+                    return;
+                }
+                
+                // Получаем актуальную сумму (может быть изменена на шаге 3)
+                const finalAmount = getSelectedAmount();
+                if (finalAmount <= 0) {
+                    alert('Пожалуйста, выберите сумму пожертвования');
+                    setActiveStep(1);
+                    return;
+                }
+                
+                // Заполняем скрытые поля для Formspree
+                finalAmountHidden.value = finalAmount;
+                
+                // Отправляем данные на Formspree (асинхронно, чтобы не блокировать редирект)
+                try {
+                    const formData = new FormData(donationForm);
+                    // Отправляем запрос на Formspree в фоне
+                    fetch(donationForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            console.log('Данные успешно отправлены на Formspree');
+                        } else {
+                            console.error('Ошибка отправки на Formspree');
+                        }
+                    }).catch(error => {
+                        console.error('Ошибка сети при отправке на Formspree:', error);
+                    });
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                }
+                
+                // Перенаправляем на Robokassa для оплаты
+                redirectToRobokassa(finalAmount, name, email, phone);
+            });
+        }
+    })();
+</script>
+</body>
+</html>
