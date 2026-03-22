@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Добавлен атрибут для корректного масштабирования на всех устройствах -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>АНО Центр "Надежда" | Благотворительный фонд</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +21,7 @@
             background-color: #f8faff;
             color: #1e2b3a;
             line-height: 1.5;
+            overflow-x: hidden;
         }
 
         .container {
@@ -28,6 +30,7 @@
             padding: 0 40px;
             position: relative;
             z-index: 2;
+            width: 100%;
         }
 
         /* --- МАТОВАЯ ПАНЕЛЬ (HEADER) --- */
@@ -49,12 +52,14 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0;
         }
 
         .logo-placeholder {
@@ -68,6 +73,7 @@
             overflow: hidden;
             transition: all 0.2s ease;
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
         .logo-placeholder img {
             width: 100%;
@@ -89,6 +95,7 @@
             font-size: 1.35rem;
             color: #1e3a5f;
             letter-spacing: -0.02em;
+            white-space: nowrap;
         }
         .logo-text span {
             font-weight: 400;
@@ -98,8 +105,9 @@
         .nav-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 20px;
             align-items: center;
+            justify-content: flex-end;
         }
 
         .nav-links a {
@@ -196,6 +204,7 @@
             padding: 28px 26px;
             border: 1px solid rgba(255,255,245,0.5);
             transition: transform 0.2s;
+            width: 100%;
         }
 
         .step-indicator {
@@ -356,6 +365,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         .checkbox-group a {
             color: #1e3a5f;
@@ -405,6 +415,7 @@
             color: #3b5672;
             margin-bottom: 8px;
             font-size: 0.9rem;
+            word-break: break-word;
         }
         .footer-contacts p i {
             width: 28px;
@@ -415,6 +426,17 @@
             margin-top: 45px;
             color: #7b95b3;
             font-size: 0.8rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ ДЛЯ ВСЕХ ГАДЖЕТОВ ========== */
+        /* Планшеты и ноутбуки с меньшим экраном */
+        @media (max-width: 1100px) {
+            .hero-grid-custom {
+                gap: 32px;
+            }
+            .hero-text-block h1 {
+                font-size: 3rem;
+            }
         }
 
         @media (max-width: 1000px) {
@@ -431,10 +453,38 @@
             .hero-content {
                 padding: 60px 0 70px;
             }
+            .donation-widget {
+                max-width: 500px;
+                margin: 0 auto;
+                width: 100%;
+            }
         }
+        
+        @media (max-width: 850px) {
+            .container {
+                padding: 0 30px;
+            }
+            .header .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .logo-area {
+                justify-content: center;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: normal;
+                text-align: center;
+            }
+        }
+        
         @media (max-width: 700px) {
             .container {
-                padding: 0 24px;
+                padding: 0 20px;
             }
             .hero-text-block h1 {
                 font-size: 2.2rem;
@@ -442,16 +492,117 @@
             .hero-text-block .hero-sub {
                 font-size: 1.1rem;
             }
-            .nav-links {
-                gap: 14px;
+            .donation-widget {
+                padding: 24px 18px;
             }
-            .nav-links a {
-                font-size: 0.85rem;
+            .amount-buttons {
+                gap: 8px;
+            }
+            .amount-btn {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            .custom-amount {
+                padding: 10px 16px;
+            }
+            .step h3 {
+                font-size: 1.2rem;
+            }
+            .footer .container {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            .footer-address, .footer-contacts {
+                text-align: center;
+            }
+            .footer-contacts p i {
+                width: auto;
+                margin-right: 6px;
             }
         }
+        
         @media (max-width: 550px) {
             .donation-widget {
-                padding: 20px;
+                padding: 20px 16px;
+            }
+            .hero-text-block h1 {
+                font-size: 1.9rem;
+            }
+            .hero-text-block .hero-sub {
+                font-size: 1rem;
+                padding-left: 12px;
+            }
+            .amount-btn {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+            .payment-card {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+            .double-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .double-buttons button {
+                width: 100%;
+            }
+            .checkbox-group {
+                font-size: 0.75rem;
+            }
+            .nav-links {
+                gap: 8px;
+            }
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+                white-space: normal;
+            }
+        }
+        
+        /* Очень маленькие экраны (до 380px) */
+        @media (max-width: 380px) {
+            .container {
+                padding: 0 14px;
+            }
+            .hero-text-block h1 {
+                font-size: 1.7rem;
+            }
+            .amount-buttons {
+                justify-content: center;
+            }
+            .amount-btn {
+                flex: auto;
+                min-width: 70px;
+            }
+        }
+        
+        /* Горизонтальная ориентация на мобильных */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .fullscreen-hero {
+                min-height: auto;
+            }
+            .hero-content {
+                padding: 40px 0 50px;
+            }
+            .hero-text-block h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Улучшения для touch-устройств */
+        @media (hover: hover) {
+            .amount-btn:hover, .payment-card:hover {
+                transform: translateY(-2px);
+            }
+        }
+        
+        @media (hover: none) {
+            .amount-btn:active, .payment-card:active {
+                opacity: 0.7;
             }
         }
     </style>
@@ -462,7 +613,7 @@
     <div class="container">
         <div class="logo-area">
             <div class="logo-placeholder" id="logoPlaceholder">
-                <img src="2026-03-17_15-37-14.png" alt="Логотип">
+                <img src="2026-03-17_15-37-14.png" alt="Логотип АНО Центр Надежда">
             </div>
             <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
         </div>
@@ -726,25 +877,13 @@
         
         // Функция для перенаправления на Robokassa
         function redirectToRobokassa(amount, name, email, phone) {
-            // Генерируем уникальный номер заказа (например, timestamp + случайное число)
             const invId = Date.now() + Math.floor(Math.random() * 10000);
-            // Сумма в рублях (без копеек, Robokassa принимает сумму в валюте)
             const outSum = amount;
-            // Описание платежа
             const description = `Пожертвование в АНО Центр "Надежда"`;
-            
-            // Формируем параметры для Robokassa
-            // В реальном проекте подпись (SignatureValue) должна формироваться на сервере для безопасности.
-            // Здесь для демонстрации используется упрощенная схема с формированием подписи на клиенте.
-            // ВАЖНО: Для production-использования обязательно перенесите формирование подписи на сервер!
-            const password1 = 'your_password1'; // Замените на ваш пароль #1 из настроек магазина Robokassa
+            const password1 = 'your_password1';
             const signature = `${ROBOKASSA_LOGIN}:${outSum}:${invId}:${password1}`;
-            const signatureValue = btoa(signature); // простой пример, в реальности используется MD5 или SHA256
-            
-            // Строим URL для редиректа
+            const signatureValue = btoa(signature);
             const robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=${ROBOKASSA_LOGIN}&OutSum=${outSum}&InvId=${invId}&Description=${encodeURIComponent(description)}&SignatureValue=${signatureValue}&Culture=ru&Encoding=utf-8&Email=${encodeURIComponent(email)}`;
-            
-            // Перенаправляем пользователя на Robokassa
             window.location.href = robokassaUrl;
         }
         
@@ -753,7 +892,6 @@
             donationForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                // Валидация
                 const name = document.getElementById('donorName')?.value.trim();
                 const email = document.getElementById('donorEmail')?.value.trim();
                 const phone = document.getElementById('donorPhone')?.value.trim();
@@ -772,7 +910,6 @@
                     return;
                 }
                 
-                // Получаем актуальную сумму (может быть изменена на шаге 3)
                 const finalAmount = getSelectedAmount();
                 if (finalAmount <= 0) {
                     alert('Пожалуйста, выберите сумму пожертвования');
@@ -780,33 +917,19 @@
                     return;
                 }
                 
-                // Заполняем скрытые поля для Formspree
                 finalAmountHidden.value = finalAmount;
                 
-                // Отправляем данные на Formspree (асинхронно, чтобы не блокировать редирект)
                 try {
                     const formData = new FormData(donationForm);
-                    // Отправляем запрос на Formspree в фоне
                     fetch(donationForm.action, {
                         method: 'POST',
                         body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    }).then(response => {
-                        if (response.ok) {
-                            console.log('Данные успешно отправлены на Formspree');
-                        } else {
-                            console.error('Ошибка отправки на Formspree');
-                        }
-                    }).catch(error => {
-                        console.error('Ошибка сети при отправке на Formspree:', error);
-                    });
+                        headers: { 'Accept': 'application/json' }
+                    }).catch(error => console.error('Formspree error:', error));
                 } catch (error) {
-                    console.error('Ошибка:', error);
+                    console.error('Error:', error);
                 }
                 
-                // Перенаправляем на Robokassa для оплаты
                 redirectToRobokassa(finalAmount, name, email, phone);
             });
         }
