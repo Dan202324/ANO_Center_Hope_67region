@@ -112,7 +112,7 @@
         /* ========== ОСНОВНОЙ КОНТЕНТ (страницы) ========== */
         .page {
             display: none;
-            max-width: 1100px;
+            max-width: 1400px;
             margin: 2.5rem auto;
             padding: 1.8rem 2rem 3rem;
             background: rgba(255, 255, 245, 0.85);
@@ -152,19 +152,15 @@
             padding-bottom: 0.75rem;
         }
 
-        /* Стили для карточек (два блока) */
+        /* Стили для карточек (все 6 карточек в сетке) */
         .cards-section {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
-            justify-content: center;
             margin: 2rem 0 1rem;
         }
 
         .help-card {
-            flex: 1;
-            min-width: 280px;
-            max-width: 480px;
             background: #fffffffa;
             border-radius: 2rem;
             overflow: hidden;
@@ -173,6 +169,9 @@
             cursor: pointer;
             border: 1px solid #e9dfd1;
             backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .help-card:hover {
@@ -181,7 +180,7 @@
             border-color: #c7d5b0;
         }
 
-        /* Контейнер для изображения - подгоняется под любой размер */
+        /* Контейнер для изображения */
         .card-image {
             width: 100%;
             height: 220px;
@@ -193,10 +192,8 @@
             position: relative;
             background-size: cover;
             background-position: center;
-            transition: transform 0.4s ease;
         }
 
-        /* Стиль для тега img, который вы потом вставите — автоматически подгоняется */
         .card-image img {
             width: 100%;
             height: 100%;
@@ -209,7 +206,7 @@
             transform: scale(1.03);
         }
 
-        /* Заглушка-плейсхолдер, если картинка еще не добавлена */
+        /* Заглушка-плейсхолдер */
         .image-placeholder-text {
             font-size: 1rem;
             color: #7c8f6e;
@@ -221,15 +218,19 @@
             justify-content: center;
             font-weight: 500;
             text-align: center;
-            backdrop-filter: blur(2px);
+            flex-direction: column;
+            gap: 8px;
         }
 
         .card-content {
             padding: 1.6rem 1.8rem 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #2a5c3e;
             margin-bottom: 0.9rem;
@@ -244,6 +245,7 @@
             color: #3a4a3a;
             line-height: 1.55;
             margin-bottom: 1.2rem;
+            flex: 1;
         }
 
         .card-hint {
@@ -301,9 +303,10 @@
                 padding: 1.2rem;
             }
             .card-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             .cards-section {
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
         }
@@ -325,27 +328,26 @@
                 <a href="team.html">Наша команда</a>
                 <a href="help.html">Кому помогаем</a>
                 <a href="partner.html">Наши партнеры</a>
-                <a href="photo.html">Фотогалерея</a>
-                <a href="what_help.html">Как помочь</a>
                 <a href="contact.html">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
             </nav>
         </div>
     </header>
 
-    <!-- СТРАНИЦА "КОМУ ПОМОГАЕМ" (help.html) - именно здесь размещаем две карточки -->
+    <!-- СТРАНИЦА "КОМУ ПОМОГАЕМ" (help.html) - теперь 6 карточек -->
     <div id="help-page" class="page active-page">
         <h1>Кому помогаем</h1>
         <div class="subtitle">Наша миссия — поддержка тех, кто особенно нуждается в заботе и внимании</div>
         
-        <!-- Два блока-карточки с изображениями, заголовками и текстом -->
+        <!-- Шесть карточек в сетке: 2 существующие + 4 новые -->
         <div class="cards-section">
-            <!-- Карточка 1: Помогаем семьям и участникам СВО -->
-            <div class="help-card" id="cardSvo">
+            
+            <!-- ========== КАРТОЧКА 1: Помогаем семьям и участникам СВО ========== -->
+            <div class="help-card" id="cardSvo" data-link="svo_detail.html">
                 <div class="card-image" id="svoImageContainer">
-                    <!-- Здесь вы сможете вставить свою фотографию, заменив src, или просто добавить <img> -->
-                    <!-- По умолчанию стоит placeholder с текстом, но при добавлении реального изображения подгонится автоматически -->
                     <img id="svoImg" src="СВО.jpg" alt="Фото поддержки участников СВО" style="display: none;">
-                    <div id="svoPlaceholder" class="image-placeholder-text">📸 Здесь будет фото<br> поддержки героев</div>
+                    <div id="svoPlaceholder" class="image-placeholder-text">📸 Фото поддержки героев<br><span style="font-size:12px;">(добавьте изображение)</span></div>
                 </div>
                 <div class="card-content">
                     <div class="card-title">Помогаем семьям и участникам СВО</div>
@@ -356,7 +358,6 @@
 Который знает, что он ценен не только как воин, но и как дедушка, отец, муж, сын, друг.<br>
 <strong>Наша миссия — вернуть его обратно. Помочь заново почувствовать вкус мирного неба, тепло родных рук и главное — самого себя. 
 Не сломленного войной, а настоящего, живого, целого героя. Мы не стираем память. Мы исцеляем душу.</strong>
-
                     </div>
                     <div class="card-hint">
                         <span>🔗</span> Нажмите на карточку, чтобы узнать больше
@@ -364,29 +365,102 @@
                 </div>
             </div>
 
-            <!-- Карточка 2: Помогаем детям-сиротам -->
-            <div class="help-card" id="cardOrphans">
+            <!-- ========== КАРТОЧКА 2: Помогаем семьям оказавшихся в трудных ситуациях ========== -->
+            <div class="help-card" id="cardOrphans" data-link="orphans_detail.html">
                 <div class="card-image" id="orphanImageContainer">
-                    <img id="orphanImg" src="" alt="Фото помощи детям-сиротам" style="display: none;">
-                    <div id="orphanPlaceholder" class="image-placeholder-text">🧸 Здесь будет фото<br> заботы о детях</div>
+                    <img id="orphanImg" src="вкладка кому помогаем 1.png" alt="Фото помощи семьям в трудных ситуациях" style="display: none;">
+                    <div id="orphanPlaceholder" class="image-placeholder-text">🏠 Фото заботы о семьях<br><span style="font-size:12px;">(добавьте изображение)</span></div>
                 </div>
                 <div class="card-content">
                     <div class="card-title">Помогаем семьям оказавшихся в трудных ситуациях</div>
                     <div class="card-text">
-                        //написать сюда текст про помагаем семьям оказавшихся в трудных ситуациях//
+                        <!-- Здесь вы сможете заполнить текст позже -->
+                        Семьи, которые столкнулись с потерей работы, жилищными трудностями, кризисными ситуациями, получают от нас комплексную поддержку: продуктовую помощь, юридические консультации, психологическое сопровождение и помощь в восстановлении документов. Мы рядом, чтобы помочь пережить трудный период и вернуть веру в лучшее.
                     </div>
                     <div class="card-hint">
                         <span>🔗</span> Нажмите на карточку, чтобы перейти к подробной информации
                     </div>
                 </div>
             </div>
+
+            <!-- ========== НОВАЯ КАРТОЧКА 3: Помощь пожилым людям ========== -->
+            <div class="help-card" id="cardElderly" data-link="elderly_detail.html">
+                <div class="card-image" id="elderlyImageContainer">
+                    <img id="elderlyImg" src="вкладка кому помогаем 2.png" alt="Фото помощи пожилым" style="display: none;">
+                    <div id="elderlyPlaceholder" class="image-placeholder-text">👴👵 Помощь пожилым людям<br><span style="font-size:12px;">(здесь будет фото)</span></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Семьям на стадии развод</div>
+                    <div class="card-text">
+                        <!-- Текст для заполнения позже -->
+                        ----------------------
+                    </div>
+                    <div class="card-hint">
+                        <span>🔗</span> Нажмите на карточку, чтобы узнать подробности
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== НОВАЯ КАРТОЧКА 4: Помощь людям с инвалидностью ========== -->
+            <div class="help-card" id="cardDisabled" data-link="disabled_detail.html">
+                <div class="card-image" id="disabledImageContainer">
+                    <img id="disabledImg" src="" alt="Фото помощи людям с инвалидностью" style="display: none;">
+                    <div id="disabledPlaceholder" class="image-placeholder-text">Детям, подросткам<br><span style="font-size:12px;">(здесь будет фото)</span></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Детям, продросткам</div>
+                    <div class="card-text">
+                        <!-- Текст для заполнения позже -->
+                        ---------------
+                    </div>
+                    <div class="card-hint">
+                        <span>🔗</span> Нажмите на карточку, чтобы узнать подробности
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== НОВАЯ КАРТОЧКА 5: Помощь многодетным семьям ========== -->
+            <div class="help-card" id="cardLargeFamily" data-link="largefamily_detail.html">
+                <div class="card-image" id="largeFamilyImageContainer">
+                    <img id="largeFamilyImg" src="" alt="Фото помощи многодетным семьям" style="display: none;">
+                    <div id="largeFamilyPlaceholder" class="image-placeholder-text">👨‍👩‍👧‍👦Родителям, законным представителям<br><span style="font-size:12px;">(здесь будет фото)</span></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Родителям, законным представителям</div>
+                    <div class="card-text">
+                        <!-- Текст для заполнения позже -->
+                        --------------------
+                    </div>
+                    <div class="card-hint">
+                        <span>🔗</span> Нажмите на карточку, чтобы узнать подробности
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== НОВАЯ КАРТОЧКА 6: Психологическая помощь ========== -->
+            <div class="help-card" id="cardPsycho" data-link="psycho_detail.html">
+                <div class="card-image" id="psychoImageContainer">
+                    <img id="psychoImg" src="" alt="Фото психологической помощи" style="display: none;">
+                    <div id="psychoPlaceholder" class="image-placeholder-text">Пожелым людям<br><span style="font-size:12px;">(здесь будет фото)</span></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Пожелым людям</div>
+                    <div class="card-text">
+                        <!-- Текст для заполнения позже -->
+                        ---------------------
+                    </div>
+                    <div class="card-hint">
+                        <span>🔗</span> Нажмите на карточку, чтобы узнать подробности
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Дополнительный текст, оставленный из оригинального дизайна, чтобы сохранить атмосферу -->
+        <!-- Дополнительный текст -->
         <div class="regular-text">
             <strong>✨ Наша помощь — это не просто слова.</strong> Каждый день мы работаем для того, чтобы поддержать тех, кто оказался в сложной ситуации. 
             Благодаря вашей поддержке и общим усилиям мы можем делать мир добрее. 
-            Нажмите на карточку, чтобы перейти на страницу с подробным описанием программ помощи.
+            Нажмите на любую карточку, чтобы перейти на страницу с подробным описанием программ помощи.
         </div>
     </div>
 
@@ -395,128 +469,210 @@
     </footer>
 
     <script>
-        // Функция для удобной вставки изображений: вы можете задать реальные пути к картинкам.
-        // Если изображение не задано (src пустой или не установлен), показывается placeholder с текстом.
-        // Но при этом вы сможете легко вставить свою картинку, просто задав атрибут src для img.
-        
-        // Пример того, как вы позже вставите свои изображения:
-        // Для карточки СВО: установите реальный url фотографии
-        // Для карточки детей-сирот: установите реальный url
-        
-        // Получаем элементы изображений и placeholder'ы
-        const svoImgElement = document.getElementById('svoImg');
-        const svoPlaceholderDiv = document.getElementById('svoPlaceholder');
-        const orphanImgElement = document.getElementById('orphanImg');
-        const orphanPlaceholderDiv = document.getElementById('orphanPlaceholder');
-        
-        // ----- ИНСТРУКЦИЯ ДЛЯ ВСТАВКИ ИЗОБРАЖЕНИЙ -----
-        // Чтобы добавить фотографию для первой карточки "Помогаем семьям и участникам СВО", 
-        // раскомментируйте строку ниже и укажите путь к вашему изображению (например, "images/svo_help.jpg").
-        // Изображение автоматически подгонится по размеру (object-fit: cover).
-        // Если вы используете относительный путь, убедитесь, что файл лежит в нужной папке.
-        
-        // svoImgElement.src = "ваш_путь_к_фото_сво.jpg";   // <- РАСКОММЕНТИРУЙТЕ И ВСТАВЬТЕ СВОЙ ПУТЬ
-        
-        // Для второй карточки "Помогаем детям-сиротам" используйте строку ниже:
-        // orphanImgElement.src = "ваш_путь_к_фото_сироты.jpg";
-        
-        // После того как вы назначите src, изображение отобразится, а placeholder автоматически скроется.
-        // Если картинка не загрузится, placeholder останется как запасной вариант.
-        
+        // ========== УПРАВЛЕНИЕ ИЗОБРАЖЕНИЯМИ И ПЛЕЙСХОЛДЕРАМИ ==========
         function updateImageVisibility(imgElement, placeholderElement) {
-            if (imgElement.src && imgElement.src !== "" && !imgElement.src.includes("undefined")) {
-                // проверяем, загрузилось ли изображение успешно
-                imgElement.onload = function() {
-                    imgElement.style.display = "block";
-                    if (placeholderElement) placeholderElement.style.display = "none";
-                };
-                imgElement.onerror = function() {
-                    // если картинка не загрузилась, оставляем placeholder
-                    imgElement.style.display = "none";
-                    if (placeholderElement) placeholderElement.style.display = "flex";
-                };
-                // если src уже установлен, но изображение может быть в процессе загрузки
-                if (imgElement.complete) {
-                    if (imgElement.naturalWidth > 0) {
-                        imgElement.style.display = "block";
-                        if (placeholderElement) placeholderElement.style.display = "none";
+            if (!imgElement || !placeholderElement) return;
+            
+            const checkImage = () => {
+                if (imgElement.src && imgElement.src !== "" && !imgElement.src.includes("undefined")) {
+                    if (imgElement.complete) {
+                        if (imgElement.naturalWidth > 0) {
+                            imgElement.style.display = "block";
+                            placeholderElement.style.display = "none";
+                        } else {
+                            imgElement.style.display = "none";
+                            placeholderElement.style.display = "flex";
+                        }
                     } else {
-                        imgElement.style.display = "none";
-                        if (placeholderElement) placeholderElement.style.display = "flex";
+                        imgElement.style.display = "block";
+                        placeholderElement.style.display = "none";
+                        imgElement.onload = () => {
+                            imgElement.style.display = "block";
+                            placeholderElement.style.display = "none";
+                        };
+                        imgElement.onerror = () => {
+                            imgElement.style.display = "none";
+                            placeholderElement.style.display = "flex";
+                        };
                     }
                 } else {
-                    // ожидаем загрузки
-                    imgElement.style.display = "block";
-                    if (placeholderElement) placeholderElement.style.display = "none";
+                    imgElement.style.display = "none";
+                    placeholderElement.style.display = "flex";
                 }
-            } else {
-                imgElement.style.display = "none";
-                if (placeholderElement) placeholderElement.style.display = "flex";
-            }
+            };
+            
+            checkImage();
+            imgElement.addEventListener('load', checkImage);
+            imgElement.addEventListener('error', checkImage);
         }
+
+        // Получаем все элементы для существующих и новых карточек
+        // Карточка 1 (СВО)
+        const svoImg = document.getElementById('svoImg');
+        const svoPlaceholder = document.getElementById('svoPlaceholder');
+        if (svoImg && svoPlaceholder) updateImageVisibility(svoImg, svoPlaceholder);
         
-        // Инициализация отображения для СВО карточки
-        if (svoImgElement) {
-            updateImageVisibility(svoImgElement, svoPlaceholderDiv);
-            // дополнительно при изменении src (если вы добавите позже через консоль или динамически)
-            svoImgElement.addEventListener('load', function() {
-                updateImageVisibility(svoImgElement, svoPlaceholderDiv);
-            });
-            svoImgElement.addEventListener('error', function() {
-                updateImageVisibility(svoImgElement, svoPlaceholderDiv);
-            });
-        }
+        // Карточка 2 (Семьи в трудной ситуации)
+        const orphanImg = document.getElementById('orphanImg');
+        const orphanPlaceholder = document.getElementById('orphanPlaceholder');
+        if (orphanImg && orphanPlaceholder) updateImageVisibility(orphanImg, orphanPlaceholder);
         
-        // Инициализация отображения для карточки детей-сирот
-        if (orphanImgElement) {
-            updateImageVisibility(orphanImgElement, orphanPlaceholderDiv);
-            orphanImgElement.addEventListener('load', function() {
-                updateImageVisibility(orphanImgElement, orphanPlaceholderDiv);
-            });
-            orphanImgElement.addEventListener('error', function() {
-                updateImageVisibility(orphanImgElement, orphanPlaceholderDiv);
-            });
-        }
+        // Карточка 3 (Пожилые)
+        const elderlyImg = document.getElementById('elderlyImg');
+        const elderlyPlaceholder = document.getElementById('elderlyPlaceholder');
+        if (elderlyImg && elderlyPlaceholder) updateImageVisibility(elderlyImg, elderlyPlaceholder);
+        
+        // Карточка 4 (Инвалиды)
+        const disabledImg = document.getElementById('disabledImg');
+        const disabledPlaceholder = document.getElementById('disabledPlaceholder');
+        if (disabledImg && disabledPlaceholder) updateImageVisibility(disabledImg, disabledPlaceholder);
+        
+        // Карточка 5 (Многодетные)
+        const largeFamilyImg = document.getElementById('largeFamilyImg');
+        const largeFamilyPlaceholder = document.getElementById('largeFamilyPlaceholder');
+        if (largeFamilyImg && largeFamilyPlaceholder) updateImageVisibility(largeFamilyImg, largeFamilyPlaceholder);
+        
+        // Карточка 6 (Психологическая помощь)
+        const psychoImg = document.getElementById('psychoImg');
+        const psychoPlaceholder = document.getElementById('psychoPlaceholder');
+        if (psychoImg && psychoPlaceholder) updateImageVisibility(psychoImg, psychoPlaceholder);
         
         // ========== ПЕРЕНАПРАВЛЕНИЕ ПРИ КЛИКЕ НА КАРТОЧКУ ==========
-        // При клике на первую карточку (СВО) перенаправляем на страницу svo_detail.html (вы можете изменить имя файла)
-        // При клике на вторую карточку (Дети-сироты) перенаправляем на orphans_detail.html
-        // Если нужно указать другие HTML страницы — просто замените пути.
-        
-        const cardSvo = document.getElementById('cardSvo');
-        const cardOrphans = document.getElementById('cardOrphans');
-        
-        if (cardSvo) {
-            cardSvo.addEventListener('click', function(e) {
-                // Можно добавить проверку, чтобы клик по внутренним ссылкам (если появятся) не мешал
-                // Перенаправляем на страницу с подробной информацией о помощи семьям и участникам СВО
-                // Укажите здесь точное название вашего html-файла (например, "svo_details.html" или "podrobno_svo.html")
-                window.location.href = "svo_detail.html";  // Замените на нужный путь к странице
+        // Функция для назначения обработчиков на все карточки с data-link
+        const setupCardNavigation = () => {
+            const cards = document.querySelectorAll('.help-card');
+            cards.forEach(card => {
+                // Убираем старые обработчики, если были, и добавляем новый
+                const newCard = card.cloneNode(true);
+                card.parentNode.replaceChild(newCard, card);
+                
+                const link = newCard.getAttribute('data-link');
+                if (link) {
+                    newCard.style.cursor = 'pointer';
+                    newCard.addEventListener('click', (e) => {
+                        // Предотвращаем всплытие, если клик по внутренним элементам
+                        e.stopPropagation();
+                        window.location.href = link;
+                    });
+                }
             });
-        }
+        };
         
-        if (cardOrphans) {
-            cardOrphans.addEventListener('click', function(e) {
-                // Перенаправляем на страницу с подробной информацией о помощи детям-сиротам
-                window.location.href = "orphans_detail.html";  // Замените на нужный путь к странице
-            });
-        }
+        // Инициализируем навигацию
+        setupCardNavigation();
         
-        // ========== Сохраняем логику изначальной навигации (если потребуется в будущем) ==========
-        // На данной странице help.html активна одна страница (help-page). Если у вас будет 
-        // переключение между страницами на одной html — можно оставить, но поскольку это отдельный файл,
-        // дополнительная логика не требуется. Тем не менее, код ниже оставлен для совместимости,
-        // но теперь он не мешает.
+        // Обновляем ссылки для карточек, так как после клонирования элементы могли измениться
+        // Переопределяем переменные для возможного динамического обновления изображений
+        const refreshImageHandlers = () => {
+            const newSvoImg = document.getElementById('svoImg');
+            const newSvoPlaceholder = document.getElementById('svoPlaceholder');
+            if (newSvoImg && newSvoPlaceholder) updateImageVisibility(newSvoImg, newSvoPlaceholder);
+            
+            const newOrphanImg = document.getElementById('orphanImg');
+            const newOrphanPlaceholder = document.getElementById('orphanPlaceholder');
+            if (newOrphanImg && newOrphanPlaceholder) updateImageVisibility(newOrphanImg, newOrphanPlaceholder);
+            
+            const newElderlyImg = document.getElementById('elderlyImg');
+            const newElderlyPlaceholder = document.getElementById('elderlyPlaceholder');
+            if (newElderlyImg && newElderlyPlaceholder) updateImageVisibility(newElderlyImg, newElderlyPlaceholder);
+            
+            const newDisabledImg = document.getElementById('disabledImg');
+            const newDisabledPlaceholder = document.getElementById('disabledPlaceholder');
+            if (newDisabledImg && newDisabledPlaceholder) updateImageVisibility(newDisabledImg, newDisabledPlaceholder);
+            
+            const newLargeFamilyImg = document.getElementById('largeFamilyImg');
+            const newLargeFamilyPlaceholder = document.getElementById('largeFamilyPlaceholder');
+            if (newLargeFamilyImg && newLargeFamilyPlaceholder) updateImageVisibility(newLargeFamilyImg, newLargeFamilyPlaceholder);
+            
+            const newPsychoImg = document.getElementById('psychoImg');
+            const newPsychoPlaceholder = document.getElementById('psychoPlaceholder');
+            if (newPsychoImg && newPsychoPlaceholder) updateImageVisibility(newPsychoImg, newPsychoPlaceholder);
+        };
         
-        // Для любых возможных кнопок навигации (на случай если будете расширять)
-        // на данной странице не нужно прятать другие блоки, так как мы только help-page активная.
-        // Но на случай, если вы объедините несколько страниц в одном файле, оставим небольшой каркас.
-        // Однако мы добавили две карточки, и теперь help.html — полноценная страница.
+        // Небольшая задержка для корректной работы после клонирования
+        setTimeout(refreshImageHandlers, 50);
         
-        // Дополнительная функция, чтобы при загрузке проверить, что help-page активна
-        document.addEventListener('DOMContentLoaded', function() {
-            // Убедимся, что наша help-page видна, а другие возможные страницы (если бы были) скрыты.
-            // У нас в разметке только одна страница с id="help-page", но на всякий случай.
+        // ========== ИНСТРУКЦИЯ ДЛЯ ЗАПОЛНЕНИЯ ==========
+        console.log('===== ИНСТРУКЦИЯ ДЛЯ ЗАПОЛНЕНИЯ =====');
+        console.log('Добавлено 4 новые карточки:');
+        console.log('1. Помощь пожилым людям (id="cardElderly") → страница elderly_detail.html');
+        console.log('2. Поддержка людей с инвалидностью (id="cardDisabled") → страница disabled_detail.html');
+        console.log('3. Поддержка многодетных семей (id="cardLargeFamily") → страница largefamily_detail.html');
+        console.log('4. Психологическая помощь (id="cardPsycho") → страница psycho_detail.html');
+        console.log('');
+        console.log('Чтобы добавить текст в карточки, найдите в HTML блоки с class="card-text" внутри нужной карточки и замените текст.');
+        console.log('');
+        console.log('Чтобы добавить изображения:');
+        console.log('- Для карточки "Пожилые": document.getElementById("elderlyImg").src = "путь/к/фото.jpg";');
+        console.log('- Для карточки "Инвалиды": document.getElementById("disabledImg").src = "путь/к/фото.jpg";');
+        console.log('- Для карточки "Многодетные": document.getElementById("largeFamilyImg").src = "путь/к/фото.jpg";');
+        console.log('- Для карточки "Психологическая": document.getElementById("psychoImg").src = "путь/к/фото.jpg";');
+        console.log('');
+        console.log('Также не забудьте создать соответствующие HTML-страницы (elderly_detail.html, disabled_detail.html, largefamily_detail.html, psycho_detail.html) или изменить атрибуты data-link на нужные адреса.');
+        
+        // ========== ДОПОЛНИТЕЛЬНО: удобные глобальные функции для заполнения ==========
+        window.updateHelpCards = {
+            // Текст для карточек
+            setElderlyText: (text) => {
+                const card = document.querySelector('#cardElderly .card-text');
+                if (card) card.innerHTML = text;
+            },
+            setDisabledText: (text) => {
+                const card = document.querySelector('#cardDisabled .card-text');
+                if (card) card.innerHTML = text;
+            },
+            setLargeFamilyText: (text) => {
+                const card = document.querySelector('#cardLargeFamily .card-text');
+                if (card) card.innerHTML = text;
+            },
+            setPsychoText: (text) => {
+                const card = document.querySelector('#cardPsycho .card-text');
+                if (card) card.innerHTML = text;
+            },
+            // Изображения для карточек
+            setElderlyImage: (src) => {
+                const img = document.getElementById('elderlyImg');
+                if (img) img.src = src;
+            },
+            setDisabledImage: (src) => {
+                const img = document.getElementById('disabledImg');
+                if (img) img.src = src;
+            },
+            setLargeFamilyImage: (src) => {
+                const img = document.getElementById('largeFamilyImg');
+                if (img) img.src = src;
+            },
+            setPsychoImage: (src) => {
+                const img = document.getElementById('psychoImg');
+                if (img) img.src = src;
+            },
+            // Изменение ссылок (куда ведет карточка)
+            setElderlyLink: (url) => {
+                const card = document.getElementById('cardElderly');
+                if (card) card.setAttribute('data-link', url);
+                setupCardNavigation(); // переназначаем обработчики
+            },
+            setDisabledLink: (url) => {
+                const card = document.getElementById('cardDisabled');
+                if (card) card.setAttribute('data-link', url);
+                setupCardNavigation();
+            },
+            setLargeFamilyLink: (url) => {
+                const card = document.getElementById('cardLargeFamily');
+                if (card) card.setAttribute('data-link', url);
+                setupCardNavigation();
+            },
+            setPsychoLink: (url) => {
+                const card = document.getElementById('cardPsycho');
+                if (card) card.setAttribute('data-link', url);
+                setupCardNavigation();
+            }
+        };
+        
+        console.log('Глобальные функции для заполнения: window.updateHelpCards.setElderlyText("..."), setElderlyImage("...") и т.д.');
+        
+        // Проверяем активную страницу
+        document.addEventListener('DOMContentLoaded', () => {
             const allPages = document.querySelectorAll('.page');
             allPages.forEach(page => {
                 if (page.id === 'help-page') {
@@ -526,36 +682,10 @@
                 }
             });
             
-            // Также добавим обработчик для логотипа (необязательно)
-            // Если пользователь захочет вставить другие картинки через консоль или позже, все подстроится.
-            
-            // Небольшое уведомление для разработчика (можно удалить, но полезно):
-            console.log('Страница help.html готова. Добавьте свои изображения, указав src для #svoImg и #orphanImg.');
-            console.log('Пример: document.getElementById("svoImg").src = "images/my_photo.jpg";');
-        });
-        
-        // Экспонируем вспомогательные функции для удобной замены изображений через консоль (например, для тестирования)
-        window.updateCardImages = function(svoUrl, orphanUrl) {
-            if (svoUrl) {
-                svoImgElement.src = svoUrl;
-            }
-            if (orphanUrl) {
-                orphanImgElement.src = orphanUrl;
-            }
-        };
-        
-        // Убираем стандартное поведение ссылок, чтобы клик по карточке не конфликтовал с вложенными элементами,
-        // но внутри карточки нет ссылок, поэтому всё корректно.
-        
-        // Также обработаем возможные стили для курсора: карточки выглядят кликабельными
-        const allCards = document.querySelectorAll('.help-card');
-        allCards.forEach(card => {
-            card.style.cursor = 'pointer';
-        });
-        
-        // КОД ДЛЯ АВТОМАТИЧЕСКОЙ ПОДГОНКИ ИЗОБРАЖЕНИЙ ПРИ ИЗМЕНЕНИИ РАЗМЕРА ЭКРАНА (для красоты)
-        window.addEventListener('resize', function() {
-            // просто перерисовка не требуется, CSS справляется
+            // Убеждаемся, что все карточки имеют pointer
+            document.querySelectorAll('.help-card').forEach(card => {
+                card.style.cursor = 'pointer';
+            });
         });
     </script>
 </body>
