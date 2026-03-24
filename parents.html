@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда"</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        /* Гамбургер-меню для мобильных */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .page {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        .page.active-page {
+            display: block;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        h1, .page h2 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-weight: 400;
+            color: #6f825e;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddcfbc;
+            padding-bottom: 0.6rem;
+        }
+
+        .regular-text {
+            font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+            color: #2c3e2f;
+            background: #fffff2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 0 1px #f3ebdf, 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.65;
+        }
+
+        .regular-text p {
+            margin-bottom: 0.85rem;
+        }
+        .regular-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .regular-text strong {
+            color: black;
+            font-weight: 600;
+        }
+
+        /* группа кнопок PDF */
+        .pdf-button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .pdf-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            border: 1px solid #dac9b2;
+            padding: 0.8rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3e6840;
+            background-color: #fcf9f3;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            font-family: inherit;
+        }
+        .pdf-button:hover {
+            background: #eef3e9;
+            border-color: #b7cfaa;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 18px -8px rgba(0,0,0,0.1);
+        }
+        .pdf-icon {
+            font-size: 1.3rem;
+        }
+        .pdf-note {
+            font-size: 0.7rem;
+            color: #a49780;
+            margin-top: 0.8rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УЛУЧШЕНИЯ) ========== */
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            .logo-placeholder {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .header .container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover {
+                background: #e5dfd1;
+                border-bottom-color: transparent;
+                color: #1e3a5f;
+            }
+            .logo-area {
+                flex: 1;
+            }
+            .page {
+                margin: 1.2rem 1rem;
+                padding: 1.2rem 1.2rem 2rem;
+            }
+            .pdf-button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .pdf-button {
+                justify-content: center;
+            }
+            .regular-text {
+                padding: 1rem 1.2rem;
+                margin: 1.2rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+            .logo-text span {
+                display: inline-block;
+            }
+            .page {
+                padding: 1rem;
+                margin: 0.8rem;
+            }
+            .regular-text {
+                padding: 0.9rem 1rem;
+            }
+            h1, .page h2 {
+                padding-left: 0.8rem;
+            }
+        }
+
+        /* Планшеты и большие телефоны в альбомной */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="contact.html">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА (активная по умолчанию) -->
+    <div id="home-page" class="page active-page">
+        <h3>АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h3>
+        <div class="subtitle">Какую помощь оказывает психолог родителям</div>
+        <div class="regular-text">
+            <p>Быть родителем — одна из самых важных и одновременно самых сложных ролей. На нее нет инструкции, не выдают дипломов, но при этом она требует колоссальных ресурсов: эмоциональных, физических, временных. 
+Психологическая помощь родителям — это не «лечение» и не признание того, что вы «плохой родитель». Это поддержка человека, который взял на себя огромную ответственность, и помощь в том, чтобы справляться с этой ролью без истощения.</p>
+
+<p><strong>Когда родителям может понадобиться психолог</strong><br>
+Родители обращаются к психологу не только когда «ребенок делает что-то не так». 
+Часто поводом становится собственное состояние мамы или папы. Потерян ресурс, родители находятся в своих переживаниях, травмах, испытывают свои трудности.
+Запросы могут быть разными:</p>
+
+<p><strong>Связанные с ребенком:</strong><br>
+• ребенок не слушается, агрессивен, замкнут;<br>
+• трудности в школе, проблемы с успеваемостью;<br>
+• ребенок переживает травму (развод, утрата, буллинг);<br>
+• сложности в отношениях между детьми (сиблинговые конфликты);<br>
+• подросток уходит из-под контроля, грубит, не делится своей жизнью.</p>
+
+<p><strong>Связанные с родительским состоянием:</strong><br>
+• постоянная усталость, выгорание;<br>
+• тревога за ребенка, страх что-то упустить или сделать не так;<br>
+• чувство вины перед детьми;<br>
+• гнев на ребенка, который потом сменяется стыдом;<br>
+• невозможность выдержать истерики, капризы, провокации;<br>
+• ощущение, что «я не справляюсь».</p>
+
+<p><strong>Связанные с семейной системой:</strong><br>
+• разногласия с партнером в вопросах воспитания;<br>
+• давление со стороны старшего поколения (бабушек, дедушек);<br>
+• ситуация развода и необходимость выстраивать совместное родительство.</p>
+
+<p><strong>Что конкретно делает психолог в работе с родителями</strong></p>
+
+<p><strong>1. Помогает справляться с родительским выгоранием</strong><br>
+Родительство — это круглосуточная работа без выходных. Постоянное напряжение, недостаток сна, необходимость всегда быть «на связи» приводят к истощению.
+Психолог:<br>
+• помогает распознать признаки выгорания, пока оно не перешло в тяжелую форму;<br>
+• возвращает право на отдых, слабость, собственные потребности;<br>
+• учит восстанавливать ресурс, не чувствуя при этом вины.</p>
+
+<p><strong>2. Работает с чувством вины</strong><br>
+Чувство вины — постоянный спутник многих родителей. «Я мало времени уделяю», «я сорвалась и накричала», «я слишком мягкая», «я слишком строгая» — вариантов бесконечное множество.
+Психолог:<br>
+• помогает отделить реальные ошибки от преувеличенного чувства вины;<br>
+• учит различать «я сделал(а) плохо» и «я плохой(ая) родитель»;<br>
+• поддерживает в том, чтобы признавать ошибки, не разрушая себя.</p>
+
+<p><strong>3. Помогает выдерживать детские эмоции</strong><br>
+Истерики у малышей, грубость у подростков, слезы, гнев, замкнутость — детские эмоции часто становятся триггером для родителя. Хочется либо остановить («перестань сейчас же!»), либо спасти, либо убежать.
+Психолог:<br>
+• учит не принимать детские эмоции на свой счет;<br>
+• показывает, как оставаться рядом с ребенком в его сильных чувствах, не сливаясь с ними;<br>
+• помогает понять, что стоит за поведением ребенка (что он на самом деле пытается сказать).</p>
+
+<p><strong>4. Помогает выстраивать границы</strong><br>
+Родители часто балансируют между жестким контролем и попустительством. Ни то, ни другое не дает устойчивости ни ребенку, ни взрослому.
+Психолог:<br>
+• помогает найти баланс между любовью и правилами;<br>
+• учит устанавливать границы без криков и насилия;<br>
+• поддерживает в том, чтобы выдерживать сопротивление ребенка при установлении границ.</p>
+
+<p><strong>5. Помогает понимать возрастные особенности</strong><br>
+Многие конфликты возникают из-за того, что родитель ожидает от ребенка того, к чему он еще не готов (или, наоборот, уже готов, но родитель этого не замечает).
+Психолог:<br>
+• рассказывает о возрастных кризисах и нормах развития;<br>
+• помогает скорректировать ожидания, снижая напряжение;<br>
+• подсказывает, что в поведении ребенка — «норма», а на что стоит обратить внимание.</p>
+
+<p><strong>6. Помогает наладить диалог с подростком</strong><br>
+Подростковый возраст — один из самых сложных для родителей. Ребенок отдаляется, грубит, скрывает свою жизнь. Родитель чувствует потерю контроля и близости.
+Психолог:<br>
+• объясняет, что сепарация — это нормальный и необходимый этап;<br>
+• учит общаться так, чтобы подросток не закрывался;<br>
+• помогает сохранить отношения, даже когда они проходят через кризис.</p>
+
+<p><strong>7. Поддерживает в ситуациях развода или неполной семьи</strong><br>
+Развод — стресс не только для детей, но и для родителей. Особенно тяжело, когда приходится выстраивать совместное родительство с бывшим партнером.
+Психолог:<br>
+• помогает пережить собственные эмоции, чтобы они не влияли на общение с ребенком;<br>
+• учит выстраивать конструктивный диалог с бывшим супругом в формате «родитель — родитель»;<br>
+• поддерживает в чувстве вины перед детьми за распавшуюся семью.</p>
+
+<p><strong>8. Помогает справляться с тревогой за ребенка</strong><br>
+Тревога — естественная часть родительства, но иногда она становится навязчивой, мешает жить и передается ребенку.
+Психолог:<br>
+• помогает отделить реальные риски от преувеличенных страхов;<br>
+• учит способам саморегуляции;<br>
+• поддерживает в доверии к себе и к ребенку.</p>
+
+<p><strong>9. Поддерживает в сложных ситуациях</strong><br>
+Особенно важна помощь психолога, когда семья сталкивается с серьезными трудностями:<br>
+• диагноз у ребенка (ОВЗ, РАС, ДЦП и др.);<br>
+• травматический опыт (насилие, потеря близкого, буллинг);<br>
+• психические или поведенческие расстройства у ребенка.
+В этих случаях психолог работает в связке с другими специалистами (неврологами, психиатрами, дефектологами), помогая родителям сохранять ресурс и не оставаться в одиночестве.</p>
+
+<p><strong>Чего психолог НЕ делает в работе с родителями</strong><br>
+• Не оценивает, хороший вы родитель или плохой.<br>
+• Не дает готовых рецептов «как правильно воспитывать».<br>
+• Не становится «третьим родителем» и не встает на сторону ребенка против родителей.<br>
+• Не обещает, что ребенок «исправится», если родитель будет делать всё, что скажет психолог.<br>
+• Не заменяет психиатра или невролога при необходимости медицинской помощи.</p>
+
+<p><strong>Как понять, что помощь работает</strong><br>
+Вы на правильном пути, если:<br>
+• вы стали меньше кричать, чаще замечаете моменты, когда удается оставаться спокойным;<br>
+• чувство вины перестало быть фоновым состоянием;<br>
+• вы чаще можете отдохнуть без ощущения, что «предаете» ребенка;<br>
+• диалог с ребенком стал легче, даже если конфликты не исчезли полностью;<br>
+• вы чувствуете, что не одиноки в своих трудностях;<br>
+• у вас появилась энергия на что-то кроме родительства.</p>
+
+<p>Психолог не учит «как правильно». Он помогает родителю:<br>
+• справляться с выгоранием и виной;<br>
+• понимать своего ребенка;<br>
+• выстраивать устойчивые, теплые отношения;<br>
+• оставаться собой — не только мамой или папой, но и человеком.
+Обратиться за помощью — это не признание своей несостоятельности.</p>
+        </div>
+        <!-- ГРУППА КНОПОК: Информация (выписка) + Устав (PDF) -->
+
+    </div>
+
+    <!-- СТРАНИЦА КОНТАКТЫ (оставлена для полноты, но на сайте много навигации) -->
+    <div id="contacts-page" class="page">
+        <h1>Контакты и связь</h1>
+        <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
+        <div class="regular-text">
+            <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
+            <p>📧 Электронная почта: <strong>info@nadezhda-center.ru</strong></p>
+            <p>📍 Адрес: г. Москва, ул. Добрая, д. 12, стр. 3 (офис 204)</p>
+            <p>💬 Мессенджеры: Telegram / WhatsApp по номеру +7 (999) 123-45-67</p>
+            <p>🕒 График работы: Пн–Пт 10:00–19:00, Сб по предварительной записи.</p>
+            <p style="margin-top: 1rem;">⭐ Следите за нашими новостями и анонсами мероприятий в социальных сетях (ссылки по запросу).</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <script>
+  // Замените на путь к Уставу
+        const pdfUrlInfo = '';   // при желании укажите путь к выписке
+        const pdfUrlCharter = ''; // при желании укажите путь к Уставу
+        
+        // Элементы кнопок
+        const infoBtn = document.getElementById('openPdfBtn');
+        const charterBtn = document.getElementById('openCharterBtn');
+
+        // Функция для открытия PDF с проверкой заглушки
+        function openPdf(pdfPath, docType) {
+            if (!pdfPath || pdfPath.trim() === '') {
+                alert(`📄 Файл ${docType === 'info' ? 'с выпиской' : 'Устава'} не указан. Пожалуйста, добавьте PDF-файл и укажите путь в коде (переменная pdfUrl${docType === 'info' ? 'Info' : 'Charter'}).`);
+                return;
+            }
+            // Защита от дефолтных заглушек (если пользователь не поменял)
+
+            window.open(pdfPath, '_blank', 'noopener,noreferrer');
+        }
+
+        if (infoBtn) {
+            infoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPdf(pdfUrlInfo, 'info');
+            });
+        }
+        if (charterBtn) {
+            charterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPdf(pdfUrlCharter, 'charter');
+            });
+        }
+
+        // ========== АДАПТИВНОЕ МОБИЛЬНОЕ МЕНЮ ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                // меняем иконку для лучшего UX
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+
+            // Закрывать меню при клике на ссылку (удобство на мобильных)
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            // Закрывать при клике вне меню (на body)
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Логотип: если картинка не загрузилась, покажем символ
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+
+        console.log('✅ Адаптивная версия Центр "Надежда" готова. Текст обновлён: психологическая помощь родителям.');
+        console.log('📎 Кнопка "Информация" путь:', pdfUrlInfo);
+        console.log('📎 Кнопка "Устав" путь:', pdfUrlCharter);
+    </script>
+</body>
+</html>
