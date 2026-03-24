@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Добавлен атрибут для корректного масштабирования на всех устройствах -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>АНО Центр "Надежда"</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,7 +98,7 @@
         }
         .logo-text span {
             font-weight: 400;
-            color: #5f7d9c;
+            color: #1e3a5f;
         }
 
         .nav-links {
@@ -459,7 +458,6 @@
         .social-links a:hover i {
             transform: scale(1.05);
         }
-        /* Иконки мессенджеров и соцсетей */
         .footer-bottom {
             text-align: center;
             margin-top: 45px;
@@ -662,7 +660,7 @@
             <div class="logo-placeholder" id="logoPlaceholder">
                 <img src="Логотип с подсветкой.png" alt="Логотип АНО Центр Надежда">
             </div>
-            <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            <div class="logo-text">АНО Центр «Надежда»</div>
         </div>
         <nav class="nav-links">
             <a href="index.html">Главная</a>
@@ -687,11 +685,11 @@
         <div class="hero-content">
             <div class="container hero-grid-custom">
                 <div class="hero-text-block">
-                    <h1>АНО Центр <br>«Надежда»</h1>
+                    <h1>АНО «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h1>
                     <div class="hero-sub">Помощь там, где она нужнее</div>
                 </div>
 
-                <!-- Виджет пожертвования с интеграцией Robokassa и Formspree -->
+                <!-- Виджет пожертвования с интеграцией Robokassa -->
                 <div class="donation-widget">
                     <div class="step-indicator" id="stepIndicator">
                         <span class="step-dot active"></span>
@@ -699,67 +697,60 @@
                         <span class="step-dot"></span>
                     </div>
 
-                    <form id="donationForm" action="https://formspree.io/f/xwvryqla" method="POST">
-                        <div id="step1" class="step active-step">
-                            <h3>Выберите сумму</h3>
-                            <div class="amount-buttons">
-                                <button type="button" class="amount-btn" data-amount="500">500₽</button>
-                                <button type="button" class="amount-btn" data-amount="1000">1 000₽</button>
-                                <button type="button" class="amount-btn" data-amount="3000">3 000₽</button>
-                                <button type="button" class="amount-btn" data-amount="5000">5 000₽</button>
-                            </div>
-                            <input type="number" class="custom-amount" name="donation_amount" placeholder="Другая сумма (₽)" min="50" id="customAmount">
-                            <button type="button" class="next-btn" id="toStep2">Далее</button>
+                    <div id="step1" class="step active-step">
+                        <h3>Выберите сумму</h3>
+                        <div class="amount-buttons">
+                            <button type="button" class="amount-btn" data-amount="500">500₽</button>
+                            <button type="button" class="amount-btn" data-amount="1000">1 000₽</button>
+                            <button type="button" class="amount-btn" data-amount="3000">3 000₽</button>
+                            <button type="button" class="amount-btn" data-amount="5000">5 000₽</button>
                         </div>
+                        <input type="number" class="custom-amount" id="customAmount" placeholder="Другая сумма (₽)" min="50">
+                        <button type="button" class="next-btn" id="toStep2">Далее</button>
+                    </div>
 
-                        <div id="step2" class="step">
-                            <h3>Способ оплаты</h3>
-                            <div class="payment-options">
-                                <div class="payment-card selected" data-payment="card">
-                                    <i class="fas fa-credit-card"></i> Банковская карта
-                                </div>
-                                <div class="payment-card" data-payment="mobile">
-                                    <i class="fas fa-mobile-alt"></i> Мобильный телефон
-                                </div>
-                                <div class="payment-card" data-payment="sbp">
-                                    <i class="fas fa-university"></i> СБП
-                                </div>
+                    <div id="step2" class="step">
+                        <h3>Способ оплаты</h3>
+                        <div class="payment-options">
+                            <div class="payment-card selected" data-payment="card">
+                                <i class="fas fa-credit-card"></i> Банковская карта
                             </div>
-                            <div class="double-buttons">
-                                <button type="button" class="prev-btn" id="prevToStep1">Назад</button>
-                                <button type="button" class="next-btn" id="toStep3">Далее</button>
+                            <div class="payment-card" data-payment="mobile">
+                                <i class="fas fa-mobile-alt"></i> Мобильный телефон
+                            </div>
+                            <div class="payment-card" data-payment="sbp">
+                                <i class="fas fa-university"></i> СБП
                             </div>
                         </div>
+                        <div class="double-buttons">
+                            <button type="button" class="prev-btn" id="prevToStep1">Назад</button>
+                            <button type="button" class="next-btn" id="toStep3">Далее</button>
+                        </div>
+                    </div>
 
-                        <div id="step3" class="step">
-                            <h3>Ваши данные</h3>
-                            <div class="form-group">
-                                <label>Имя *</label>
-                                <input type="text" name="name" id="donorName" placeholder="Иван" required>
-                            </div>
-                            <div class="form-group">
-                                <label>E-mail *</label>
-                                <input type="email" name="email" id="donorEmail" placeholder="ivan@example.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Телефон</label>
-                                <input type="tel" name="phone" id="donorPhone" placeholder="+7 (999) 123-45-67">
-                            </div>
-                            <!-- Скрытые поля для передачи суммы и способа оплаты -->
-                            <input type="hidden" name="final_amount" id="finalAmountHidden">
-                            <input type="hidden" name="payment_method" id="paymentMethodHidden">
-                            
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="agree" name="agreement" checked required> 
-                                <label for="agree">Соглашаюсь с <a href="#">политикой конфиденциальности</a> и <a href="#">офертой</a></label>
-                            </div>
-                            <div class="double-buttons">
-                                <button type="button" class="prev-btn" id="prevToStep2">Назад</button>
-                                <button type="submit" class="submit-btn" id="finalSubmit">Пожертвовать</button>
-                            </div>
+                    <div id="step3" class="step">
+                        <h3>Ваши данные</h3>
+                        <div class="form-group">
+                            <label>Имя *</label>
+                            <input type="text" id="donorName" placeholder="Иван">
                         </div>
-                    </form>
-                    
+                        <div class="form-group">
+                            <label>E-mail *</label>
+                            <input type="email" id="donorEmail" placeholder="ivan@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="donorPhone" placeholder="+7 (999) 123-45-67">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="agree" checked> 
+                            <label for="agree">Соглашаюсь с <a href="#">политикой конфиденциальности</a> и <a href="#">офертой</a></label>
+                        </div>
+                        <div class="double-buttons">
+                            <button type="button" class="prev-btn" id="prevToStep2">Назад</button>
+                            <button type="button" class="submit-btn" id="finalSubmit">Пожертвовать</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -775,32 +766,21 @@
         <div class="footer-contacts">
             <h4><i class="fas fa-phone-alt"></i> Контакты</h4>
             <p><i class="fas fa-phone-alt"></i> +7 (908) 281-36-78</p>
+            <p><i class="fas fa-phone-alt"></i> +7 (991) 519-89-87</p>
             <p><i class="fas fa-envelope"></i> lapa0122@yandex.ru</p>
         </div>
         <div class="footer-social">
             <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
             <div class="social-links">
-                <!-- VK (ВКонтакте) -->
-                <a href="https://vk.com/your_center" target="_blank" rel="noopener noreferrer">
+                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-vk"></i> VK
                 </a>
-                <!-- Одноклассники -->
                 <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-odnoklassniki"></i> Одноклассники
                 </a>
-                <!-- Telegram (мессенджер) -->
-                <!-- MAX — популярный мессенджер/соцсеть? Указан как MAX, используем иконку "fa-bolt" или "fa-message", но по заданию добавим стилизованную ссылку -->
-                <!-- Дополнительно, чтобы точно отразить мессенджер MAX (если имеется в виду другое приложение, добавим с иконкой "fa-comment-dots" как универсальный мессенджер) 
-                но по просьбе "MAX, однокласники, вк" — добавляем ссылку MAX как мессенджер (например, ссылка на Viber/Telegram, но чтобы было аккуратно) 
-                Явно выделим мессенджер MAX с иконкой "fa-comment" по желанию, но чтобы соответствовать списку, ниже добавим ещё одну ссылку с подписью MAX, используя иконку сообщения -->
                 <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer">
-                    <i class=""></i> MAX
+                    <i class="fab fa-telegram"></i> MAX
                 </a>
-                <!-- Пояснение: MAX вероятно мессенджер (WhatsApp или др.), но для полноты используем WhatsApp как популярный мессенджер -->
-            </div>
-            <!-- Дополнительный блок с мессенджерами для полного охвата: чтобы были именно значки мессенджеров (Telegram, WhatsApp уже выше) -->
-            <div style="margin-top: 12px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-start;">
-                <!-- Явно дублируем для читаемости: Telegram и Viber для разнообразия, но оставляем акцент на MAX -->
             </div>
         </div>
     </div>
@@ -812,10 +792,12 @@
 <script>
     (function() {
         // --- Конфигурация Robokassa ---
-        const ROBOKASSA_LOGIN = 'your_login';
-        const ROBOKASSA_SUCCESS_URL = window.location.origin + '/success.html';
-        const ROBOKASSA_FAIL_URL = window.location.origin + '/fail.html';
+        const ROBOKASSA_LOGIN = 'Ano_center_hope';
+        const ROBOKASSA_PASSWORD1 = 'lapa-0133';  // Password #1 для формирования подписи
+        const ROBOKASSA_SUCCESS_URL = window.location.origin + window.location.pathname; // Возврат на эту же страницу
+        const ROBOKASSA_FAIL_URL = window.location.origin + window.location.pathname;
         
+        // DOM элементы
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
@@ -825,11 +807,9 @@
         const toStep3Btn = document.getElementById('toStep3');
         const prevToStep1 = document.getElementById('prevToStep1');
         const prevToStep2 = document.getElementById('prevToStep2');
+        const finalSubmitBtn = document.getElementById('finalSubmit');
         
-        const donationForm = document.getElementById('donationForm');
         const customAmountInput = document.getElementById('customAmount');
-        const finalAmountHidden = document.getElementById('finalAmountHidden');
-        const paymentMethodHidden = document.getElementById('paymentMethodHidden');
         
         let currentAmount = 0;
         
@@ -851,15 +831,16 @@
             const selectedAmountBtn = document.querySelector('.amount-btn.selected');
             let amount = 0;
             if (selectedAmountBtn) {
-                amount = parseInt(selectedAmountBtn.getAttribute('data-amount'));
+                amount = parseInt(selectedAmountBtn.getAttribute('data-amount'), 10);
             }
             const customAmount = customAmountInput.value;
-            if (customAmount && parseInt(customAmount) > 0) {
-                amount = parseInt(customAmount);
+            if (customAmount && parseInt(customAmount, 10) > 0) {
+                amount = parseInt(customAmount, 10);
             }
             return amount;
         }
         
+        // Обработчики переходов
         if (toStep2Btn) {
             toStep2Btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -885,8 +866,6 @@
                     alert('Выберите способ оплаты');
                     return;
                 }
-                const paymentMethod = selectedPayment.getAttribute('data-payment');
-                paymentMethodHidden.value = paymentMethod;
                 setActiveStep(3);
             });
         }
@@ -905,6 +884,7 @@
             });
         }
         
+        // Выбор суммы
         const amountBtns = document.querySelectorAll('.amount-btn');
         amountBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -916,12 +896,13 @@
         
         if (customAmountInput) {
             customAmountInput.addEventListener('input', function() {
-                if (this.value && parseInt(this.value) > 0) {
+                if (this.value && parseInt(this.value, 10) > 0) {
                     amountBtns.forEach(b => b.classList.remove('selected'));
                 }
             });
         }
         
+        // Выбор способа оплаты
         const paymentCards = document.querySelectorAll('.payment-card');
         paymentCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -930,19 +911,59 @@
             });
         });
         
-        function redirectToRobokassa(amount, name, email, phone) {
-            const invId = Date.now() + Math.floor(Math.random() * 10000);
-            const outSum = amount;
-            const description = `Пожертвование в АНО Центр "Надежда"`;
-            const password1 = 'your_password1';
-            const signature = `${ROBOKASSA_LOGIN}:${outSum}:${invId}:${password1}`;
-            const signatureValue = btoa(signature);
-            const robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=${ROBOKASSA_LOGIN}&OutSum=${outSum}&InvId=${invId}&Description=${encodeURIComponent(description)}&SignatureValue=${signatureValue}&Culture=ru&Encoding=utf-8&Email=${encodeURIComponent(email)}`;
+        // Функция формирования подписи для Robokassa
+        function calculateSignature(login, outSum, invId, password) {
+            // Формат: "MerchantLogin:OutSum:InvId:Password1"
+            const signatureString = `${login}:${outSum}:${invId}:${password}`;
+            // MD5 хэш в верхнем регистре
+            return CryptoJS.MD5(signatureString).toString().toUpperCase();
+        }
+        
+        // Функция перенаправления на Robokassa
+        function redirectToRobokassa(amount, name, email, phone, paymentMethod) {
+            const invId = Date.now() + Math.floor(Math.random() * 100000);
+            const outSum = amount.toFixed(2);
+            const description = `Пожертвование в АНО Центр "Надежда" от ${name}`;
+            
+            // Вычисляем подпись
+            const signature = calculateSignature(ROBOKASSA_LOGIN, outSum, invId, ROBOKASSA_PASSWORD1);
+            
+            // Формируем URL для перехода на Robokassa
+            let robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?` +
+                `MerchantLogin=${encodeURIComponent(ROBOKASSA_LOGIN)}` +
+                `&OutSum=${encodeURIComponent(outSum)}` +
+                `&InvId=${encodeURIComponent(invId)}` +
+                `&Description=${encodeURIComponent(description)}` +
+                `&SignatureValue=${encodeURIComponent(signature)}` +
+                `&Culture=ru` +
+                `&Encoding=utf-8` +
+                `&Email=${encodeURIComponent(email)}` +
+                `&Shp_name=${encodeURIComponent(name)}` +
+                `&Shp_phone=${encodeURIComponent(phone || '')}` +
+                `&Shp_payment_method=${encodeURIComponent(paymentMethod)}` +
+                `&SuccessURL=${encodeURIComponent(ROBOKASSA_SUCCESS_URL)}` +
+                `&FailURL=${encodeURIComponent(ROBOKASSA_FAIL_URL)}`;
+            
+            // Перенаправляем пользователя на Robokassa
             window.location.href = robokassaUrl;
         }
         
-        if (donationForm) {
-            donationForm.addEventListener('submit', async (e) => {
+        // Отправка данных в Formspree (для сбора статистики, не блокирует оплату)
+        async function sendToFormspree(formData) {
+            try {
+                await fetch('https://formspree.io/f/xwvryqla', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+            } catch (error) {
+                console.error('Formspree error:', error);
+            }
+        }
+        
+        // Обработка финальной отправки (пожертвование)
+        if (finalSubmitBtn) {
+            finalSubmitBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 
                 const name = document.getElementById('donorName')?.value.trim();
@@ -958,6 +979,11 @@
                     alert('Укажите E-mail для получения чека');
                     return;
                 }
+                // Простая проверка email
+                if (!email.includes('@') || !email.includes('.')) {
+                    alert('Введите корректный E-mail адрес');
+                    return;
+                }
                 if (!agreeCheck.checked) {
                     alert('Пожалуйста, примите условия политики конфиденциальности и оферты');
                     return;
@@ -970,23 +996,36 @@
                     return;
                 }
                 
-                finalAmountHidden.value = finalAmount;
+                const selectedPaymentCard = document.querySelector('.payment-card.selected');
+                const paymentMethod = selectedPaymentCard ? selectedPaymentCard.getAttribute('data-payment') : 'card';
                 
-                try {
-                    const formData = new FormData(donationForm);
-                    fetch(donationForm.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: { 'Accept': 'application/json' }
-                    }).catch(error => console.error('Formspree error:', error));
-                } catch (error) {
-                    console.error('Error:', error);
-                }
+                // Отправляем данные в Formspree для статистики (асинхронно, не ждем)
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('phone', phone || '');
+                formData.append('donation_amount', finalAmount.toString());
+                formData.append('payment_method', paymentMethod);
+                formData.append('agreement', 'on');
+                sendToFormspree(formData);
                 
-                redirectToRobokassa(finalAmount, name, email, phone);
+                // Перенаправляем на Robokassa для оплаты
+                redirectToRobokassa(finalAmount, name, email, phone, paymentMethod);
             });
         }
+        
+        // Инициализация: выбираем сумму по умолчанию
+        const defaultAmountBtn = document.querySelector('.amount-btn');
+        if (defaultAmountBtn && !document.querySelector('.amount-btn.selected')) {
+            defaultAmountBtn.classList.add('selected');
+        }
+        
+        // Выбираем способ оплаты по умолчанию (карта уже выбрана)
     })();
 </script>
+
+<!-- Подключаем CryptoJS для MD5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
 </body>
 </html>
