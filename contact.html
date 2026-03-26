@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+        <!-- FAVICON для компьютера и смартфона (вкладка браузера) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Логотип с подсветкой.png">
+    <link rel="apple-touch-icon" href="Логотип с подсветкой.png">
+    <link rel="shortcut icon" href="Логотип с подсветкой.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" | Руководство</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        /* Гамбургер-меню для мобильных */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .page {
+            display: block;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Секция с фото + текстом: гибкий современный макет */
+        .director-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .photo-block {
+            flex: 1.2;
+            min-width: 260px;
+            max-width: 460px;
+            background: #fffdf9;
+            border-radius: 32px;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            border: 1px solid #ede3d4;
+            transition: transform 0.25s ease;
+        }
+        .photo-block:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-frame {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background: #f3efe8;
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .photo-frame img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Заглушка если картинка не загружена */
+        .photo-placeholder-text {
+            font-size: 1rem;
+            color: #a7947a;
+            text-align: center;
+            background: #e9e2d6;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-block {
+            flex: 1;
+            min-width: 260px;
+            background: rgba(255, 253, 245, 0.7);
+            border-radius: 32px;
+            padding: 28px 24px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #9bc18b;
+        }
+
+        .director-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #7c6b4f;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .director-name {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            color: #3f5e38;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            border-left: 4px solid #c0daad;
+            padding-left: 20px;
+        }
+
+        .director-desc {
+            font-size: 1.08rem;
+            color: #2c4b2f;
+            background: #fffff2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            margin-top: 0.5rem;
+            box-shadow: inset 0 0 0 1px #f3ebdf, 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.65;
+        }
+
+        .director-desc p {
+            margin-bottom: 0.8rem;
+        }
+        .director-desc p:last-child {
+            margin-bottom: 0;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+            margin-right: 6px;
+        }
+
+        /* дополнительная подпись */
+        .subnote {
+            text-align: right;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: #b7a483;
+            border-top: 1px dashed #e2d5c4;
+            padding-top: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) ========== */
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            .logo-placeholder {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .header .container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover {
+                background: #e5dfd1;
+                border-bottom-color: transparent;
+                color: #1e3a5f;
+            }
+            .logo-area {
+                flex: 1;
+            }
+            .page {
+                margin: 1.2rem 1rem;
+                padding: 1.5rem 1.2rem 2rem;
+            }
+            .director-section {
+                gap: 28px;
+                flex-direction: column;
+            }
+            .photo-block {
+                max-width: 100%;
+            }
+            .info-block {
+                width: 100%;
+                padding: 24px 20px;
+            }
+            .director-name {
+                padding-left: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+            .page {
+                padding: 1.2rem;
+                margin: 0.8rem;
+            }
+            .director-name {
+                font-size: 1.8rem;
+            }
+            .director-desc {
+                padding: 1rem;
+            }
+        }
+
+        /* планшеты */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="contact.html">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ: фотография (слева/адаптивно) + информация о директоре справа -->
+    <main class="page">
+        <div class="director-section">
+            <!-- БЛОК ФОТОГРАФИИ: вставьте свою фотографию, заменив 'photo_director.jpg' -->
+            <div class="photo-block">
+                <div class="photo-frame" id="directorPhotoFrame">
+                    <img id="directorImage" src="Рководство.png" 
+                         alt="Генеральный директор Сидоренкова Наталья Юрьевна" 
+                         onerror="handleImageError(this)">
+                </div>
+                <div style="text-align: center; margin-top: 12px; font-size: 0.75rem; color: #9b8a6e;">
+                  
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ СТОРОНА: информация о руководителе -->
+            <div class="info-block">
+                <div class="director-title">Руководство</div>
+                <div class="director-name">
+                    Генеральный директор<br>
+                    Сидоренкова Наталья Юрьевна
+                </div>
+
+                <div class="subnote">
+                    <span>✨ «Сила в единстве и заботе — каждый человек заслуживает опору»</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // ========== МОБИЛЬНОЕ МЕНЮ (гамбургер, закрытие, адаптив) ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Логотип: заглушка если не загрузился
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+
+        // ----- ОБРАБОТКА ФОТОГРАФИИ: если изображение не загружено — показываем красивую заглушку с текстом -----
+        function handleImageError(imgElement) {
+            // Если фото отсутствует, заменяем на placeholder с подсказкой
+            const parentFrame = imgElement.closest('.photo-frame');
+            if (parentFrame) {
+                // создаем замещающий элемент с приятным дизайном
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'photo-placeholder-text';
+                fallbackDiv.style.cssText = 'display: flex; flex-direction: column; align-items: center; justify-content: center; width:100%; height:100%; background: #f0ebdf; color: #6e5e48; font-family: inherit; text-align: center; padding: 20px;';
+                fallbackDiv.innerHTML = `
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8f7b5c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <p style="margin-top: 12px; font-weight: 500;">Фото руководителя</p>
+                    <p style="font-size: 0.75rem;">Поместите изображение<br>с именем photo_director.jpg<br>или измените путь в коде</p>
+                    <p style="font-size: 0.7rem; margin-top: 8px;">👇 формат: jpg/png, соотношение 4:5</p>
+                `;
+                // скрываем сломанную картинку и показываем заглушку
+                imgElement.style.display = 'none';
+                parentFrame.appendChild(fallbackDiv);
+                // также можно добавить инструкцию в консоль
+                console.warn('⚠️ Фотография директора не найдена. Убедитесь, что файл photo_director.jpg присутствует в той же папке, что и HTML, либо укажите верный путь в атрибуте src изображения.');
+            } else {
+                // fallback если что-то пошло не так
+                imgElement.alt = "Изображение временно недоступно. Добавьте photo_director.jpg";
+                imgElement.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23f2ebdf'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%238c7b60' font-size='16'%3EФото Натальи Юрьевны%3C/text%3E%3C/svg%3E";
+            }
+        }
+
+        // Инициализация: проверяем, загружена ли картинка директора, если нет — вызываем заглушку (событие load/error)
+        const directorImg = document.getElementById('directorImage');
+        if (directorImg) {
+            // Если изображение уже не загрузилось (кэш или сразу ошибка)
+            directorImg.onerror = function() {
+                handleImageError(this);
+            };
+            // дополнительно, если src пустой или невалидный - тоже сработает onerror.
+            // Принудительная проверка: если картинка уже загрузилась и имеет нулевую ширину? 
+            // но в любом случае onerror отработает
+            if (directorImg.complete && directorImg.naturalWidth === 0) {
+                directorImg.onerror();
+            }
+        }
+
+        // Небольшая помощь: если пользователь хочет сменить фото легко — можно добавить понятный лог
+        console.log('✅ Центр "Надежда" — страница с фотографией и информацией о генеральном директоре.');
+        console.log('📌 Чтобы вставить свою фотографию, замените файл "photo_director.jpg" в папке с сайтом, либо отредактируйте src у <img id="directorImage"> в HTML.');
+        console.log('💡 Рекомендуемый размер фото: ширина от 400px, соотношение сторон ~4:5 для лучшего отображения.');
+    </script>
+</body>
+</html>
