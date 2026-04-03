@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" — Команда</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .page {
+            display: block;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        h1, .page h2 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-weight: 400;
+            color: #6f825e;
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #ddcfbc;
+            padding-bottom: 0.6rem;
+        }
+
+        /* ===== БЛОКИ "ФОТО + ИНФО" ===== */
+        .team-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: #fffff8;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #f0e5d8;
+        }
+
+        .team-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+        }
+
+        /* Левая часть — фото с анимацией движения */
+        .card-photo {
+            flex: 1.1;
+            min-width: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 800px;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 1 / 1;
+            background: #f3efe7;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
+            border: 2px solid #e2d8ca;
+            will-change: transform;
+        }
+
+        /* Анимация движения: легкое покачивание при наведении + плавающий эффект при скролле */
+        .photo-frame {
+            animation: floatSoft 5s ease-in-out infinite;
+        }
+
+        .team-card:hover .photo-frame {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.2);
+            animation: none;
+        }
+
+        @keyframes floatSoft {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover .photo-frame img {
+            transform: scale(1.03);
+        }
+
+        .photo-placeholder-text {
+            font-size: 3rem;
+            color: #b4a68c;
+            background: #e9e2d6;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+        }
+
+        /* Правая часть */
+        .card-info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .position {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c5530;
+            letter-spacing: -0.3px;
+            border-left: 4px solid #9bc18b;
+            padding-left: 1rem;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #3a4a3c;
+            line-height: 1.6;
+            background: #fefaf2;
+            padding: 1rem 1.2rem;
+            border-radius: 24px;
+            margin-top: 0.25rem;
+            box-shadow: inset 0 0 0 1px #f1e9de, 0 2px 6px rgba(0,0,0,0.02);
+            max-height: 350px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .description::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .description::-webkit-scrollbar-track {
+            background: #ede5d8;
+            border-radius: 10px;
+        }
+
+        .description::-webkit-scrollbar-thumb {
+            background: #b8aa94;
+            border-radius: 10px;
+        }
+
+        .description p {
+            margin-bottom: 0.8rem;
+        }
+
+        .description p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Стиль кнопки "Мои сертификаты" */
+        .certificate-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #e8f0e4 0%, #d9e5d1 100%);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c5530;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-top: 0.5rem;
+            width: fit-content;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #cbdbb8;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .certificate-btn:hover {
+            background: linear-gradient(135deg, #d1e2c8 0%, #c2d6b7 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(100, 70, 40, 0.1);
+            border-color: #a9bf96;
+            color: #1d3e21;
+        }
+
+        .certificate-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 780px) {
+            .team-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            .card-info {
+                align-items: center;
+            }
+            .position {
+                border-left: none;
+                padding-left: 0;
+                border-bottom: 3px solid #9bc18b;
+                padding-bottom: 0.3rem;
+                display: inline-block;
+            }
+            .description {
+                text-align: left;
+                max-height: 280px;
+            }
+            .photo-frame {
+                max-width: 220px;
+            }
+            .header .container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+            }
+            .nav-links a:hover {
+                background: #e5dfd1;
+            }
+            .page {
+                margin: 1.2rem 1rem;
+                padding: 1.2rem 1.2rem 2rem;
+            }
+            .certificate-btn {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+            .page {
+                padding: 1rem;
+            }
+            .position {
+                font-size: 1.4rem;
+            }
+            .description {
+                font-size: 0.9rem;
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        @media (max-width: 880px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="contact.html">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page">
+        <h1>Наша команда</h1>
+        <div class="subtitle">Сердце центра — люди, которые каждый день дарят заботу и поддержку</div>
+
+        <div class="team-grid">
+            <!-- БЛОК 1: ГЕНЕРАЛЬНЫЙ ДИРЕКТОР -->
+            <div class="team-card">
+                <div class="card-photo">
+                    <div class="photo-frame" id="photoDirContainer">
+                        <img src="general.png" alt="Фото генерального директора" id="directorPhoto" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Генеральный директор</div>
+                    <div class="description">
+                        <p><strong>Сидоренкова Наталья Юрьевна</strong></p>
+                        <p>«Где родился, там и пригодился»</p>
+                        <p>Наталья Юрьевна родилась в небольшом, но уютном городе Починок Смоленской области. Это место с богатой историей и особой, исконно русской душой, которое навсегда осталось отправной точкой её жизненного пути.</p>
+                        <p><strong>Образование и квалификация:</strong><br>
+                        🎓 2006 — Смоленский промышленно-экономический колледж, квалификация «Юрист».<br>
+                        🎓 2010 — Московский новый юридический институт, квалификация «Юрист».<br>
+                        📖 2015 — Диплом педагога-психолога (право ведения профессиональной деятельности в сфере психолого-педагогического сопровождения).<br>
+                        📖 2020 — Институт практической психологии «ИМАТОН» (краткосрочная системная терапия).<br>
+                        📖 2021 — Институт практической психологии «ИМАТОН» (телесно-ориентированная терапия).<br>
+                        📖 2022 — Международная академия «Мастер разборов» (программа глубинного анализа жизненных ситуаций).<br>
+                        📖 2022–2026 — более 20 курсов повышения квалификации.</p>
+                        <p>Сегодня в работе объединяет юридическую компетентность, психолого-педагогическое сопровождение и современные терапевтические подходы.</p>
+                    </div>
+                    <button class="certificate-btn" data-person="director">📜 Мои сертификаты</button>
+                </div>
+            </div>
+
+            <!-- БЛОК 2: ГЛАВНЫЙ БУХГАЛТЕР -->
+            <div class="team-card">
+                <div class="card-photo">
+                    <div class="photo-frame">
+                        <img src="бухгалтер.png" alt="Фото бухгалтера" id="accountantPhoto" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Главный бухгалтер</div>
+                    <div class="description">
+                        <p><strong>Бичикова Ирина Ростиславовна</strong> — эксперт по налогообложению с углубленной подготовкой. Человек, который знает о налогах и отчётах всё.</p>
+                        <p>Ирина Ростиславовна родилась в небольшом поселке Хиславичи. Именно там, вдали от столичной суеты, сформировалось её главное профессиональное качество — ответственность за каждую цифру и внимательное отношение к деталям.</p>
+                        <p>В 2010 году с отличием окончила Московский государственный университет путей сообщения, также прошла курс «Оператор ЭВ и ВМ. Углубленное изучение программы 1С: Бухгалтерия» с отличием.</p>
+                        <p>Более 15 лет работы в сфере бухгалтерии и налогообложения. Сотни успешно сданных отчётов, пройденных проверок, завершение проектов грантовой деятельности.</p>
+                    </div>
+                    <button class="certificate-btn" data-person="accountant">📜 Мои сертификаты</button>
+                </div>
+            </div>
+
+            <!-- БЛОК 3: ФОТОГРАФ -->
+            <div class="team-card">
+                <div class="card-photo">
+                    <div class="photo-frame">
+                        <img src="фотограф.png" alt="Фото фотографа" id="photographerPhoto" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Фотограф</div>
+                    <div class="description">
+                        <p><strong>Поляков Юрий Геннадьевич</strong></p>
+                        <p>Фотография вошла в жизнь Юрия не случайно. Его отец — опытный фотограф — открыл для него удивительный мир снимков, научил видеть кадр, чувствовать свет и понимать, что настоящая фотография — это разговор без слов.</p>
+                        <p>Юрий продолжил дело отца. Для него фотография — не работа, а способ оставаться собой, быть близко к людям и сохранять для них самые важные моменты. С особым трепетом относится к съёмкам мероприятий, где царит живая атмосфера.</p>
+                        <p>Важное направление — сотрудничество с Центром помощи «Надежда». Здесь его камера служит инструментом, чтобы рассказать истории людей, показать их силу, тепло и человечность.</p>
+                    </div>
+                    <button class="certificate-btn" data-person="photographer">📜 Мои сертификаты</button>
+                </div>
+            </div>
+
+            <!-- БЛОК 4: СОЦИАЛЬНЫЙ КООРДИНАТОР (дополнительный) -->
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // ========== УПРАВЛЕНИЕ ФОТО: заглушки, анимация, подгрузка ==========
+        function setupImageWithPlaceholder(imgElement, altText, defaultEmoji = '👤') {
+            if (!imgElement) return;
+            if (!imgElement.src || imgElement.src === "" || imgElement.src === window.location.href || imgElement.src.includes('undefined')) {
+                triggerPlaceholder(imgElement, altText, defaultEmoji);
+            } else {
+                imgElement.onerror = function() {
+                    triggerPlaceholder(imgElement, altText, defaultEmoji);
+                };
+            }
+        }
+
+        function triggerPlaceholder(imgElement, altText, defaultEmoji) {
+            const parentFrame = imgElement.closest('.photo-frame');
+            if (parentFrame && !parentFrame.querySelector('.photo-placeholder-text')) {
+                const placeholderDiv = document.createElement('div');
+                placeholderDiv.className = 'photo-placeholder-text';
+                let icon = defaultEmoji;
+                if (altText.includes('директор') || altText.includes('Генеральный')) icon = '👩‍💼';
+                else if (altText.includes('бухгалтер')) icon = '🧾';
+                else if (altText.includes('фотограф')) icon = '📸';
+                else if (altText.includes('координатор') || altText.includes('Психолог')) icon = '🤝';
+                placeholderDiv.innerHTML = `${icon}<br><span style="font-size:0.8rem; margin-top:8px; display:block;">Фото сотрудника</span>`;
+                placeholderDiv.style.fontSize = '2.8rem';
+                placeholderDiv.style.flexDirection = 'column';
+                placeholderDiv.style.display = 'flex';
+                placeholderDiv.style.alignItems = 'center';
+                placeholderDiv.style.justifyContent = 'center';
+                placeholderDiv.style.background = '#ece3d7';
+                placeholderDiv.style.color = '#8b7a64';
+                placeholderDiv.style.textAlign = 'center';
+                imgElement.style.display = 'none';
+                parentFrame.appendChild(placeholderDiv);
+            }
+        }
+
+        // Получаем элементы фото
+        const directorImg = document.getElementById('directorPhoto');
+        const accountantImg = document.getElementById('accountantPhoto');
+        const photographerImg = document.getElementById('photographerPhoto');
+        const fourthImg = document.getElementById('fourthPhoto');
+        
+        // ★★★ ЗДЕСЬ ВЫ ВСТАВЛЯЕТЕ СВОИ ПУТИ К ФОТОГРАФИЯМ ★★★
+        // Если фото нет — покажутся красивые заглушки с анимацией
+        directorImg.src = "general.png";           // замените на свой путь, например "images/director.jpg"
+        accountantImg.src = "бухгалтер.png";       // замените на свой путь
+        photographerImg.src = "фотограф.png";      // замените на свой путь
+        fourthImg.src = "координатор.png";         // замените на свой путь
+        
+        // Заглушки если фото не загрузились
+        setupImageWithPlaceholder(directorImg, 'Генеральный директор', '👩‍💼');
+        setupImageWithPlaceholder(accountantImg, 'Главный бухгалтер', '🧾');
+        setupImageWithPlaceholder(photographerImg, 'Фотограф', '📸');
+        setupImageWithPlaceholder(fourthImg, 'Социальный координатор', '🤝');
+        
+        // Логотип fallback
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+        
+        // ========== МОБИЛЬНОЕ МЕНЮ ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+        
+        // ========== КНОПКИ "МОИ СЕРТИФИКАТЫ" ==========
+        // Каждая кнопка ведёт на отдельную HTML-страницу (можно создать страницы: certificates_director.html и т.д.)
+        // Если страницы не существуют — откроется в этой же вкладке, но вы можете создать их позже.
+        // Для удобства: каждой персоне соответствует своя html страница.
+        const certPages = {
+            director: 'certificate_general.html',
+            accountant: 'certificate_accountant.html',
+            photographer: 'certificates_photographer.html',
+        };
+        
+        const allCertBtns = document.querySelectorAll('.certificate-btn');
+        allCertBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const person = btn.getAttribute('data-person');
+                if (person && certPages[person]) {
+                    // Переход на страницу сертификатов (откроется в текущей вкладке)
+                    window.location.href = certPages[person];
+                } else {
+                    // fallback: если вдруг data-person не совпадает, покажем уведомление (можно заменить на универсальную страницу)
+                    alert('Страница с сертификатами в разработке. Скоро мы добавим все достижения!');
+                }
+            });
+        });
+        
+        // Дополнительно: при скролле добавляем плавное появление теней (для эффекта движения фото, но анимация уже есть)
+        // Небольшой эффект: чтобы фото "дышали" даже при скролле, оставляем ключевые кадры floatSoft
+        
+        console.log('✅ Сайт команды обновлён: фото плавно двигаются, текст аккуратно оформлен, добавлены кнопки "Мои сертификаты".');
+    </script>
+</body>
+</html>
