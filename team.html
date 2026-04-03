@@ -496,7 +496,7 @@
 
         <div class="team-grid">
             <!-- БЛОК 1: ГЕНЕРАЛЬНЫЙ ДИРЕКТОР -->
-            <div class="team-card">
+            <div class="team-card" data-person="director" data-cert-page="certificate_general.html">
                 <div class="card-photo">
                     <div class="photo-frame" id="photoDirContainer">
                         <img src="general.png" alt="Фото генерального директора" id="directorPhoto" style="width:100%; height:100%; object-fit:cover;">
@@ -518,12 +518,12 @@
                         📖 2022–2026 — более 20 курсов повышения квалификации.</p>
                         <p>Сегодня в работе объединяет юридическую компетентность, психолого-педагогическое сопровождение и современные терапевтические подходы.</p>
                     </div>
-                    <button class="certificate-btn" data-person="director">📜 Мои сертификаты</button>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
                 </div>
             </div>
 
             <!-- БЛОК 2: ГЛАВНЫЙ БУХГАЛТЕР -->
-            <div class="team-card">
+            <div class="team-card" data-person="accountant" data-cert-page="certificate_accountant.html">
                 <div class="card-photo">
                     <div class="photo-frame">
                         <img src="бухгалтер.png" alt="Фото бухгалтера" id="accountantPhoto" style="width:100%; height:100%; object-fit:cover;">
@@ -537,12 +537,12 @@
                         <p>В 2010 году с отличием окончила Московский государственный университет путей сообщения, также прошла курс «Оператор ЭВ и ВМ. Углубленное изучение программы 1С: Бухгалтерия» с отличием.</p>
                         <p>Более 15 лет работы в сфере бухгалтерии и налогообложения. Сотни успешно сданных отчётов, пройденных проверок, завершение проектов грантовой деятельности.</p>
                     </div>
-                    <button class="certificate-btn" data-person="accountant">📜 Мои сертификаты</button>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
                 </div>
             </div>
 
             <!-- БЛОК 3: ФОТОГРАФ -->
-            <div class="team-card">
+            <div class="team-card" data-person="photographer" data-cert-page="certificates_photographer.html">
                 <div class="card-photo">
                     <div class="photo-frame">
                         <img src="фотограф.png" alt="Фото фотографа" id="photographerPhoto" style="width:100%; height:100%; object-fit:cover;">
@@ -556,12 +556,29 @@
                         <p>Юрий продолжил дело отца. Для него фотография — не работа, а способ оставаться собой, быть близко к людям и сохранять для них самые важные моменты. С особым трепетом относится к съёмкам мероприятий, где царит живая атмосфера.</p>
                         <p>Важное направление — сотрудничество с Центром помощи «Надежда». Здесь его камера служит инструментом, чтобы рассказать истории людей, показать их силу, тепло и человечность.</p>
                     </div>
-                    <button class="certificate-btn" data-person="photographer">📜 Мои сертификаты</button>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
                 </div>
             </div>
 
             <!-- БЛОК 4: СОЦИАЛЬНЫЙ КООРДИНАТОР (дополнительный) -->
-            
+            <div class="team-card" data-person="coordinator" data-cert-page="certificate_coordinator.html">
+                <div class="card-photo">
+                    <div class="photo-frame">
+                        <img src="координатор.png" alt="Фото координатора" id="fourthPhoto" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Социальный координатор</div>
+                    <div class="description">
+                        <p><strong>Ермакова Ольга Сергеевна</strong></p>
+                        <p>Ольга Сергеевна — душа нашего центра, человек, который связывает подопечных, волонтеров и партнеров в единую сеть поддержки. Благодаря её чуткости и организаторским способностям ни одна просьба о помощи не остается без ответа.</p>
+                        <p>Окончила Смоленский государственный университет по специальности «Социальная работа». Постоянно повышает квалификацию в сфере социального проектирования и кризисной психологии.</p>
+                        <p>Ольга координирует работу с обращениями, организует выдачу гуманитарной помощи и поддерживает связь с семьями, оказавшимися в трудной жизненной ситуации. «Каждый человек заслуживает того, чтобы его услышали», — её главный принцип.</p>
+                        <p>За плечами Ольги более 5 лет успешной координации благотворительных программ и проектов помощи пожилым людям и малообеспеченным семьям.</p>
+                    </div>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -614,10 +631,10 @@
         
         // ★★★ ЗДЕСЬ ВЫ ВСТАВЛЯЕТЕ СВОИ ПУТИ К ФОТОГРАФИЯМ ★★★
         // Если фото нет — покажутся красивые заглушки с анимацией
-        directorImg.src = "general.png";           // замените на свой путь, например "images/director.jpg"
-        accountantImg.src = "бухгалтер.png";       // замените на свой путь
-        photographerImg.src = "фотограф.png";      // замените на свой путь
-        fourthImg.src = "координатор.png";         // замените на свой путь
+        if (directorImg) directorImg.src = "general.png";           // замените на свой путь, например "images/director.jpg"
+        if (accountantImg) accountantImg.src = "бухгалтер.png";       // замените на свой путь
+        if (photographerImg) photographerImg.src = "фотограф.png";      // замените на свой путь
+        if (fourthImg) fourthImg.src = "координатор.png";         // замените на свой путь
         
         // Заглушки если фото не загрузились
         setupImageWithPlaceholder(directorImg, 'Генеральный директор', '👩‍💼');
@@ -668,34 +685,30 @@
         }
         
         // ========== КНОПКИ "МОИ СЕРТИФИКАТЫ" ==========
-        // Каждая кнопка ведёт на отдельную HTML-страницу (можно создать страницы: certificates_director.html и т.д.)
-        // Если страницы не существуют — откроется в этой же вкладке, но вы можете создать их позже.
-        // Для удобства: каждой персоне соответствует своя html страница.
-        const certPages = {
-            director: 'certificate_general.html',
-            accountant: 'certificate_accountant.html',
-            photographer: 'certificates_photographer.html',
-        };
-        
+        // Теперь ссылки на страницы сертификатов хранятся в data-атрибутах родительского div (team-card)
+        // JavaScript только считывает эти значения и выполняет переход.
         const allCertBtns = document.querySelectorAll('.certificate-btn');
         allCertBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const person = btn.getAttribute('data-person');
-                if (person && certPages[person]) {
-                    // Переход на страницу сертификатов (откроется в текущей вкладке)
-                    window.location.href = certPages[person];
+                // Ищем родительскую карточку team-card, у которой есть атрибут data-cert-page
+                const teamCard = btn.closest('.team-card');
+                if (teamCard) {
+                    const certPage = teamCard.getAttribute('data-cert-page');
+                    if (certPage && certPage.trim() !== "") {
+                        // Переход на страницу сертификатов
+                        window.location.href = certPage;
+                    } else {
+                        alert('Страница с сертификатами в разработке. Скоро мы добавим все достижения!');
+                    }
                 } else {
-                    // fallback: если вдруг data-person не совпадает, покажем уведомление (можно заменить на универсальную страницу)
                     alert('Страница с сертификатами в разработке. Скоро мы добавим все достижения!');
                 }
             });
         });
         
-        // Дополнительно: при скролле добавляем плавное появление теней (для эффекта движения фото, но анимация уже есть)
         // Небольшой эффект: чтобы фото "дышали" даже при скролле, оставляем ключевые кадры floatSoft
-        
-        console.log('✅ Сайт команды обновлён: фото плавно двигаются, текст аккуратно оформлен, добавлены кнопки "Мои сертификаты".');
+        console.log('✅ Сайт команды обновлён: ссылки на сертификаты вынесены в data-атрибуты HTML, JavaScript только управляет переходами.');
     </script>
 </body>
 </html>
