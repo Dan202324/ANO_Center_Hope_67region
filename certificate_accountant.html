@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" | Мои сертификаты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        /* Гамбургер-меню для мобильных */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ (галерея сертификатов) ========== */
+        .page {
+            display: none;
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        .page.active-page {
+            display: block;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Стили для блока "Мои сертификаты" */
+        .certificates-header {
+            text-align: left;
+            margin-bottom: 1.8rem;
+        }
+        .certificates-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .certificates-sub {
+            font-size: 1rem;
+            color: #6f825e;
+            padding-left: 1.2rem;
+            border-bottom: 1px dashed #ddcfbc;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Сетка для сертификатов — аккуратные карточки */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 28px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            background: #fffef9;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.25s ease;
+            border: 1px solid #f0e2d2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 32px -16px rgba(0, 0, 0, 0.15);
+            border-color: #dacfbc;
+        }
+
+        /* Блок для изображения */
+        .cert-image {
+            width: 100%;
+            aspect-ratio: 3 / 4; /* классическое соотношение для сертификата/диплома */
+            background-color: #f8f4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid #ece1d2;
+        }
+
+        .cert-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .cert-card:hover .cert-image img {
+            transform: scale(1.02);
+        }
+
+        /* Заглушка если картинка не загрузилась */
+        .cert-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eae3d6;
+            color: #a48e72;
+            font-size: 2rem;
+            font-weight: 400;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+            padding: 20px;
+        }
+        .cert-placeholder span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .cert-caption {
+            padding: 1rem 1rem 1.2rem;
+            text-align: center;
+            background: #fffdf9;
+        }
+        .cert-caption p {
+            font-weight: 500;
+            color: #2c5530;
+            font-size: 0.9rem;
+            letter-spacing: -0.2px;
+        }
+
+        /* дополнительный текст (можно опционально) */
+        .info-note {
+            margin-top: 2.5rem;
+            padding: 1rem 1.5rem;
+            background: #ecf3e7;
+            border-radius: 32px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4c6b41;
+            border: 1px solid #d9e2ce;
+        }
+
+        /* страница контактов (сохранилась для навигации, но главная изменена) */
+        .regular-text {
+            font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+            color: #2c3e2f;
+            background: #fffff2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 0 1px #f3ebdf, 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.65;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УЛУЧШЕНИЯ) ========== */
+        @media (max-width: 880px) {
+            .container { padding: 0 20px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.85rem; white-space: nowrap; }
+            .logo-text { font-size: 1.1rem; }
+            .logo-placeholder { width: 46px; height: 46px; }
+        }
+
+        @media (max-width: 780px) {
+            .header .container { flex-wrap: nowrap; justify-content: space-between; }
+            .menu-toggle { display: block; order: 3; }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+            }
+            .nav-links a:hover { background: #e5dfd1; color: #1e3a5f; }
+            .page { margin: 1.2rem 1rem; padding: 1.2rem 1.2rem 2rem; }
+            .cert-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder { width: 42px; height: 42px; }
+            .logo-text { font-size: 0.95rem; }
+            .page { padding: 1rem; margin: 0.8rem; }
+            .cert-grid { gap: 16px; grid-template-columns: 1fr; }
+            .cert-image { aspect-ratio: 4 / 3; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#" data-page="home">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="#" data-page="contacts">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА (новая: Мои сертификаты) -->
+    <div id="home-page" class="page active-page">
+        <div class="certificates-header">
+            <h1>📜 Мои сертификаты</h1>
+            <div class="certificates-sub">Документы, подтверждающие квалификацию и достижения</div>
+        </div>
+
+        <!-- Сетка сертификатов: вы можете легко вставить свои изображения, заменив src -->
+        <div class="cert-grid" id="certificatesGrid">
+            <!-- Пример карточки 1 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Сертификат бухгалтера 1.png" alt="Сертификат 1" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №1');">
+                </div>
+                <div class="cert-caption">
+                    <p></p>
+                </div>
+            </div>
+            <!-- Пример карточки 2 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Сертификат бухгалтера 2.png" alt="Сертификат 2" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №2');">
+                </div>
+                <div class="cert-caption">
+                    <p></p>
+                </div>
+            </div>
+            <!-- Пример карточки 3 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Сертификат бухгалтера 3.png" alt="Сертификат 3" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №3');">
+                </div>
+
+            </div>
+            <!-- Пример карточки 4 -->
+
+            <!-- Добавьте сколько нужно карточек, можно копировать блок .cert-card -->
+        </div>
+
+    </div>
+
+
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Функция для генерации заглушки, если изображение не загружено
+        function getPlaceholderHTML(title) {
+            return `<div class="cert-placeholder">🖼️<span>${title}</span><span style="font-size:0.7rem;">добавьте фото</span></div>`;
+        }
+
+        // Инициализация: пройти по всем картинкам сертификатов, на случай если onerror не сработал динамически 
+        function initCertImages() {
+            const certImages = document.querySelectorAll('.cert-image img');
+            certImages.forEach(img => {
+                img.addEventListener('error', function(e) {
+                    if (!this.parentElement.querySelector('.cert-placeholder')) {
+                        const altText = this.alt || 'Сертификат';
+                        this.parentElement.innerHTML = getPlaceholderHTML(altText);
+                    }
+                });
+                // если src пустой или битый, вызываем error принудительно
+                if (!img.complete) {
+                    img.addEventListener('load', () => {});
+                    img.addEventListener('error', () => {
+                        if (!img.parentElement.querySelector('.cert-placeholder')) {
+                            const altText = img.alt || 'Сертификат';
+                            img.parentElement.innerHTML = getPlaceholderHTML(altText);
+                        }
+                    });
+                } else if (img.naturalWidth === 0 && img.naturalHeight === 0) {
+                    // картинка не загрузилась
+                    const altText = img.alt || 'Сертификат';
+                    img.parentElement.innerHTML = getPlaceholderHTML(altText);
+                }
+            });
+        }
+
+        // ========== УПРАВЛЕНИЕ СТРАНИЦАМИ (SINGLE PAGE LOGIC) ==========
+        // Чтобы сохранить навигацию (ссылки "Главная" и "Контакты" работали без перезагрузки)
+        // А остальные ссылки (Об организации, Наша команда и т.д.) ведут на отдельные html файлы, как и было.
+        // На странице есть ссылки с data-page (Главная, Контакты) и обычные href на другие файлы.
+        const pages = {
+            home: document.getElementById('home-page'),
+            contacts: document.getElementById('contacts-page')
+        };
+
+        function showPage(pageId) {
+            // Скрыть все страницы
+            Object.values(pages).forEach(page => {
+                if (page) page.classList.remove('active-page');
+            });
+            if (pages[pageId]) {
+                pages[pageId].classList.add('active-page');
+                // Обновить состояние активной ссылки (по желанию)
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.style.borderBottomColor = '#2b6c9e';
+                        link.style.color = '#1e3a5f';
+                    } else if (link.getAttribute('data-page')) {
+                        link.style.borderBottomColor = 'transparent';
+                        link.style.color = '#1e3a5f';
+                    }
+                });
+            } else {
+                // если страница не найдена (такого не должно быть)
+                if(pages.home) pages.home.classList.add('active-page');
+            }
+        }
+
+        // Обработчик для внутренних ссылок с data-page (без перезагрузки)
+        document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId && pages[pageId]) {
+                    showPage(pageId);
+                    // Закрыть мобильное меню при клике
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                } else {
+                    // fallback если страницы нет
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+
+        // Для ссылок без data-page (внешние файлы) ничего не меняем, они ведут на другие html.
+        // Чтобы корректно работала кнопка "Главная" при переходе с другого html? на этой странице будет работать.
+        // Также обрабатываем "Контакты", "Главная" из меню.
+
+        // ========== МОБИЛЬНОЕ МЕНЮ ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Логотип: если картинка не загрузилась, покажем символ
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+
+        // Инициализация заглушек для картинок сертификатов
+        initCertImages();
+
+        // Дополнительно: если нужно динамически добавлять сертификаты, можно использовать функцию addCertificate
+        window.addCertificate = function(imageSrc, captionText) {
+            const grid = document.getElementById('certificatesGrid');
+            if (!grid) return;
+            const card = document.createElement('div');
+            card.className = 'cert-card';
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'cert-image';
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.alt = captionText || 'Сертификат';
+            img.onerror = function() {
+                if (!imgDiv.querySelector('.cert-placeholder')) {
+                    imgDiv.innerHTML = getPlaceholderHTML(captionText || 'Сертификат');
+                }
+            };
+            imgDiv.appendChild(img);
+            const captionDiv = document.createElement('div');
+            captionDiv.className = 'cert-caption';
+            const p = document.createElement('p');
+            p.textContent = captionText || 'Сертификат';
+            captionDiv.appendChild(p);
+            card.appendChild(imgDiv);
+            card.appendChild(captionDiv);
+            grid.appendChild(card);
+        };
+
+        console.log('✅ Сайт обновлён: главная страница — "Мои сертификаты". Верхняя панель сохранена, блоки сертификатов — компактные карточки.');
+    </script>
+</body>
+</html>
