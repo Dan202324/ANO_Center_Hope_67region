@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>АНО Центр "Надежда"</title>
+    <title>АНО Центр "Надежда" - Пожертвование через СБП</title>
     
-    <!-- FAVICON для компьютера и смартфона (вкладка браузера) -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Логотип с подсветкой.png">
     <link rel="apple-touch-icon" href="Логотип с подсветкой.png">
-    <link rel="shortcut icon" href="Логотип с подсветкой.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -87,14 +87,6 @@
             object-fit: cover;
             display: block;
         }
-        .logo-placeholder:not(:has(img))::after {
-            content: "\f0a3";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 400;
-            font-size: 28px;
-            color: #1e3a5f;
-            opacity: 0.6;
-        }
 
         .logo-text {
             font-weight: 700;
@@ -102,10 +94,6 @@
             color: #1e3a5f;
             letter-spacing: -0.02em;
             white-space: nowrap;
-        }
-        .logo-text span {
-            font-weight: 400;
-            color: #1e3a5f;
         }
 
         .nav-links {
@@ -132,7 +120,7 @@
             border-bottom-color: #2b6c9e;
         }
 
-        /* ===== ГЛАВНЫЙ БЛОК: ФОТО НА ВСЮ ШИРИНУ + ТЕКСТ + ВИДЖЕТ ===== */
+        /* ===== ГЛАВНЫЙ БЛОК ===== */
         .fullscreen-hero {
             position: relative;
             width: 100%;
@@ -176,7 +164,7 @@
 
         .hero-grid-custom {
             display: grid;
-            grid-template-columns: 1fr 380px;
+            grid-template-columns: 1fr 420px;
             gap: 48px;
             align-items: center;
         }
@@ -186,7 +174,7 @@
             text-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
         .hero-text-block h1 {
-            font-size: 3.6rem;
+            font-size: 2.8rem;
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -232,7 +220,7 @@
         }
 
         .step-content {
-            min-height: 290px;
+            min-height: 320px;
         }
         .step {
             display: none;
@@ -319,34 +307,96 @@
             background: #f0f5fd;
             transform: none;
         }
-        .payment-options {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin: 20px 0;
+        
+        .qr-block {
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 16px;
+            text-align: center;
+            margin: 20px 0 18px;
+            border: 1px solid #e2edf7;
+            transition: all 0.2s;
         }
-        .payment-card {
+        .qr-placeholder {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 12px;
+            display: inline-block;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            border: 1px solid #eef3fc;
+        }
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .qr-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            margin-top: 8px;
+            background: #eef3fc;
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 40px;
+        }
+        .qr-note {
+            font-size: 0.75rem;
+            color: #6c8aab;
+            margin-top: 12px;
+        }
+        
+        /* Кнопка оплаты (ссылка) под QR-кодом */
+        .pay-link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #21a67a;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            width: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .pay-link-button i {
+            font-size: 1.1rem;
+        }
+        .pay-link-button:hover {
+            background: #1a8b64;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+        .payment-info {
+            background: #f0f7fe;
+            border-radius: 20px;
+            padding: 14px;
+            margin: 15px 0 10px;
+            font-size: 0.85rem;
+            color: #2c577c;
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 14px 20px;
-            border: 1px solid #e2eaf5;
-            border-radius: 28px;
-            background: #fafcff;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        .payment-card.selected {
-            border-color: #1e3a5f;
-            background: #eef3fc;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        .payment-info i {
+            font-size: 1.3rem;
+            color: #2b6c9e;
         }
-        .payment-card i {
-            font-size: 1.5rem;
-            color: #1e3a5f;
-            width: 32px;
-        }
+        
         .form-group {
             margin-bottom: 18px;
         }
@@ -393,8 +443,28 @@
         .double-buttons button {
             margin-top: 0;
         }
-
-        /* --- ОСНОВНОЙ ФУТЕР --- */
+        
+        /* стили для карточек оплаты - убрали второй способ, оставили только СБП */
+        .payment-info-sbp {
+            background: #f0f7fe;
+            border-radius: 20px;
+            padding: 14px;
+            margin: 0 0 18px 0;
+            font-size: 0.85rem;
+            color: #2c577c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        .payment-info-sbp i {
+            font-size: 1.3rem;
+            color: #2b6c9e;
+        }
+        
+        /* --- ФУТЕР --- */
         .footer {
             background: #ffffffea;
             backdrop-filter: blur(4px);
@@ -430,7 +500,6 @@
             width: 28px;
             color: #2b6c9e;
         }
-        /* Блок соцсетей: ссылки с иконками */
         .social-links {
             display: flex;
             flex-wrap: wrap;
@@ -462,9 +531,6 @@
             border-color: #1e3a5f;
             transform: translateY(-2px);
         }
-        .social-links a:hover i {
-            transform: scale(1.05);
-        }
         .footer-bottom {
             text-align: center;
             margin-top: 45px;
@@ -474,188 +540,41 @@
             padding-top: 25px;
         }
 
-        /* ========== АДАПТИВНОСТЬ ДЛЯ ВСЕХ ГАДЖЕТОВ ========== */
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 1100px) {
-            .hero-grid-custom {
-                gap: 32px;
-            }
-            .hero-text-block h1 {
-                font-size: 3rem;
-            }
+            .hero-grid-custom { gap: 32px; }
+            .hero-text-block h1 { font-size: 2.5rem; }
         }
-
         @media (max-width: 1000px) {
-            .hero-grid-custom {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .hero-text-block h1 {
-                font-size: 2.7rem;
-            }
-            .fullscreen-hero {
-                min-height: auto;
-            }
-            .hero-content {
-                padding: 60px 0 70px;
-            }
-            .donation-widget {
-                max-width: 500px;
-                margin: 0 auto;
-                width: 100%;
-            }
+            .hero-grid-custom { grid-template-columns: 1fr; gap: 40px; }
+            .hero-text-block h1 { font-size: 2.3rem; }
+            .fullscreen-hero { min-height: auto; }
+            .hero-content { padding: 60px 0 70px; }
+            .donation-widget { max-width: 500px; margin: 0 auto; width: 100%; }
         }
-        
         @media (max-width: 850px) {
-            .container {
-                padding: 0 30px;
-            }
-            .header .container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .logo-area {
-                justify-content: center;
-            }
-            .nav-links {
-                justify-content: center;
-                gap: 12px;
-            }
-            .nav-links a {
-                font-size: 0.85rem;
-                white-space: normal;
-                text-align: center;
-            }
+            .container { padding: 0 30px; }
+            .header .container { flex-direction: column; align-items: stretch; }
+            .logo-area { justify-content: center; }
+            .nav-links { justify-content: center; gap: 12px; }
+            .nav-links a { font-size: 0.85rem; white-space: normal; text-align: center; }
         }
-        
         @media (max-width: 700px) {
-            .container {
-                padding: 0 20px;
-            }
-            .hero-text-block h1 {
-                font-size: 2.2rem;
-            }
-            .hero-text-block .hero-sub {
-                font-size: 1.1rem;
-            }
-            .donation-widget {
-                padding: 24px 18px;
-            }
-            .amount-buttons {
-                gap: 8px;
-            }
-            .amount-btn {
-                padding: 10px 12px;
-                font-size: 0.9rem;
-            }
-            .custom-amount {
-                padding: 10px 16px;
-            }
-            .step h3 {
-                font-size: 1.2rem;
-            }
-            .footer .container {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-            .footer-address, .footer-contacts, .footer-social {
-                text-align: center;
-            }
-            .footer-contacts p i {
-                width: auto;
-                margin-right: 6px;
-            }
-            .social-links {
-                justify-content: center;
-            }
+            .container { padding: 0 20px; }
+            .hero-text-block h1 { font-size: 2rem; }
+            .hero-text-block .hero-sub { font-size: 1.1rem; }
+            .donation-widget { padding: 24px 18px; }
+            .amount-btn { padding: 10px 12px; font-size: 0.9rem; }
+            .footer .container { flex-direction: column; gap: 30px; text-align: center; }
+            .social-links { justify-content: center; }
+            .qr-placeholder { width: 150px; height: 150px; }
         }
-        
         @media (max-width: 550px) {
-            .donation-widget {
-                padding: 20px 16px;
-            }
-            .hero-text-block h1 {
-                font-size: 1.9rem;
-            }
-            .hero-text-block .hero-sub {
-                font-size: 1rem;
-                padding-left: 12px;
-            }
-            .amount-btn {
-                padding: 8px 10px;
-                font-size: 0.85rem;
-            }
-            .payment-card {
-                padding: 10px 14px;
-                font-size: 0.9rem;
-            }
-            .double-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .double-buttons button {
-                width: 100%;
-            }
-            .checkbox-group {
-                font-size: 0.75rem;
-            }
-            .nav-links {
-                gap: 8px;
-            }
-            .nav-links a {
-                font-size: 0.75rem;
-            }
-            .logo-text {
-                font-size: 1.1rem;
-                white-space: normal;
-            }
-            .social-links a {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-        }
-        
-        @media (max-width: 380px) {
-            .container {
-                padding: 0 14px;
-            }
-            .hero-text-block h1 {
-                font-size: 1.7rem;
-            }
-            .amount-buttons {
-                justify-content: center;
-            }
-            .amount-btn {
-                flex: auto;
-                min-width: 70px;
-            }
-            .social-links {
-                gap: 12px;
-            }
-        }
-        
-        @media (max-height: 600px) and (orientation: landscape) {
-            .fullscreen-hero {
-                min-height: auto;
-            }
-            .hero-content {
-                padding: 40px 0 50px;
-            }
-            .hero-text-block h1 {
-                font-size: 1.8rem;
-            }
-        }
-        
-        @media (hover: hover) {
-            .amount-btn:hover, .payment-card:hover {
-                transform: translateY(-2px);
-            }
-        }
-        
-        @media (hover: none) {
-            .amount-btn:active, .payment-card:active {
-                opacity: 0.7;
-            }
+            .hero-text-block h1 { font-size: 1.7rem; }
+            .amount-btn { padding: 8px 10px; font-size: 0.85rem; }
+            .double-buttons { flex-direction: column; gap: 10px; }
+            .logo-text { font-size: 1.1rem; white-space: normal; }
+            .qr-placeholder { width: 130px; height: 130px; }
         }
     </style>
 </head>
@@ -664,8 +583,8 @@
 <header class="header">
     <div class="container">
         <div class="logo-area">
-            <div class="logo-placeholder" id="logoPlaceholder">
-                <img src="Логотип с подсветкой.png" alt="Логотип АНО Центр Надежда">
+            <div class="logo-placeholder">
+                <img src="Логотип с подсветкой.png" alt="Логотип АНО Центр Надежда" onerror="this.src='https://placehold.co/60x60?text=Logo'">
             </div>
             <div class="logo-text">АНО Центр «Надежда»</div>
         </div>
@@ -684,8 +603,8 @@
 
 <main>
     <section class="fullscreen-hero">
-        <div class="hero-background" id="heroBackground">
-            <img src="Главная.png" alt="Благотворительность фонд Надежда">
+        <div class="hero-background">
+            <img src="Главная.png" alt="Благотворительность фонд Надежда" onerror="this.style.display='none'">
         </div>
         <div class="hero-overlay"></div>
 
@@ -696,7 +615,7 @@
                     <div class="hero-sub">Помощь там, где она нужнее</div>
                 </div>
 
-                <!-- Виджет пожертвования с интеграцией Robokassa -->
+                <!-- Виджет пожертвования с ручным QR-кодом и ссылкой -->
                 <div class="donation-widget">
                     <div class="step-indicator" id="stepIndicator">
                         <span class="step-dot active"></span>
@@ -716,18 +635,12 @@
                         <button type="button" class="next-btn" id="toStep2">Далее</button>
                     </div>
 
+                    <!-- Шаг 2: теперь просто информационный блок, без выбора способа оплаты (только СБП) -->
                     <div id="step2" class="step">
                         <h3>Способ оплаты</h3>
-                        <div class="payment-options">
-                            <div class="payment-card selected" data-payment="card">
-                                <i class="fas fa-credit-card"></i> Банковская карта
-                            </div>
-                            <div class="payment-card" data-payment="mobile">
-                                <i class="fas fa-mobile-alt"></i> Мобильный телефон
-                            </div>
-                            <div class="payment-card" data-payment="sbp">
-                                <i class="fas fa-university"></i> СБП
-                            </div>
+                        <div class="payment-info-sbp">
+                            <i class="fas fa-qrcode fa-lg"></i>
+                            <span>Пожертвование через Систему быстрых платежей (СБП)</span>
                         </div>
                         <div class="double-buttons">
                             <button type="button" class="prev-btn" id="prevToStep1">Назад</button>
@@ -749,13 +662,35 @@
                             <label>Телефон</label>
                             <input type="tel" id="donorPhone" placeholder="+7 (999) 123-45-67">
                         </div>
+                        
+                        <!-- Блок с QR-кодом СБП (ручная вставка) и кнопка оплаты -->
+                        <div class="qr-block" id="qrBlock" style="display: none;">
+                            <div class="qr-placeholder">
+                                <!-- ИЗОБРАЖЕНИЕ QR-КОДА: замените ссылку на ваш реальный QR-код -->
+                                <img id="sbpQrImage" src="pastedImage.png" alt="QR-код СБП для пожертвования" style="width:100%; height:100%; object-fit:contain;">
+                            </div>
+                            <div class="qr-label">
+                                <i class="fas fa-mobile-alt"></i> Сканируйте QR-код СБП
+                            </div>
+                            <!-- КНОПКА ОПЛАТЫ (ССЫЛКА) - замените YOUR_PAYMENT_LINK на реальную платёжную ссылку СБП -->
+                            <a href="#" id="paymentActionLink" class="pay-link-button" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-credit-card"></i> Оплатить через СБП
+                            </a>
+                            <div class="qr-note">
+                                Откроется приложение вашего банка для перевода
+                            </div>
+                        </div>
+                        
                         <div class="checkbox-group">
                             <input type="checkbox" id="agree" checked> 
                             <label for="agree">Соглашаюсь с <a href="Политика-по-обработке-персональных-данных.pdf">политикой конфиденциальности</a> и <a href="Договор-оферты.pdf">офертой</a></label>
                         </div>
                         <div class="double-buttons">
                             <button type="button" class="prev-btn" id="prevToStep2">Назад</button>
-                            <button type="button" class="submit-btn" id="finalSubmit">Пожертвовать</button>
+                            <button type="button" class="submit-btn" id="finalSubmit">Показать реквизиты / QR</button>
+                        </div>
+                        <div class="footer-note">
+                            После заполнения анкеты вы увидите QR-код СБП и ссылку для оплаты
                         </div>
                     </div>
                 </div>
@@ -779,15 +714,9 @@
         <div class="footer-social">
             <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
             <div class="social-links">
-                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-vk"></i> VK
-                </a>
-                <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-odnoklassniki"></i> Одноклассники
-                </a>
-                <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-telegram"></i> MAX
-                </a>
+                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer"><i class="fab fa-vk"></i> VK</a>
+                <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer"><i class="fab fa-odnoklassniki"></i> Одноклассники</a>
+                <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> MAX</a>
             </div>
         </div>
     </div>
@@ -798,13 +727,18 @@
 
 <script>
     (function() {
-        // --- Конфигурация Robokassa ---
-        const ROBOKASSA_LOGIN = 'Ano_center_hope';
-        const ROBOKASSA_PASSWORD1 = 'lapa-0133';  // Password #1 для формирования подписи
-        const ROBOKASSA_SUCCESS_URL = window.location.origin + window.location.pathname; // Возврат на эту же страницу
-        const ROBOKASSA_FAIL_URL = window.location.origin + window.location.pathname;
+        // ========== НАСТРОЙКА: ЗАМЕНИТЕ НИЖЕ ВАШИ ДАННЫЕ ДЛЯ ОПЛАТЫ ==========
+        // 1. Ссылка на платёжную страницу / кнопку СБП (обязательно)
+        const PAYMENT_LINK = "https://sberbank.com/sms/mybill?cs=7514888322583";   // <-- ЗАМЕНИТЕ НА РЕАЛЬНУЮ ССЫЛКУ ОПЛАТЫ
         
-        // DOM элементы
+        // 2. QR-код уже вставлен вручную через тег img, ссылка на изображение в атрибуте src у #sbpQrImage.
+        //    Пожалуйста, отредактируйте атрибут src изображения в HTML выше (id="sbpQrImage") на путь к вашему QR-коду.
+        //    Например: <img id="sbpQrImage" src="images/my_qr_code.png" ...>
+        //    Либо вставьте data:image/png, если хотите, но проще — загрузите картинку QR в папку и укажите путь.
+        
+        // Если хотите динамически менять ссылку в кнопке, раскомментируйте строку ниже, но лучше сразу в HTML вставить src у img.
+        // Скрипт автоматически подставит PAYMENT_LINK в кнопку при показе блока.
+        
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
@@ -817,6 +751,8 @@
         const finalSubmitBtn = document.getElementById('finalSubmit');
         
         const customAmountInput = document.getElementById('customAmount');
+        const qrBlock = document.getElementById('qrBlock');
+        const paymentLinkBtn = document.getElementById('paymentActionLink');
         
         let currentAmount = 0;
         
@@ -832,6 +768,11 @@
                 if (idx === stepNumber-1) dot.classList.add('active');
                 else dot.classList.remove('active');
             });
+            
+            if (stepNumber === 3) {
+                // при переходе на шаг 3 скрываем QR-блок, чтобы показать его только после нажатия "Показать"
+                if (qrBlock) qrBlock.style.display = 'none';
+            }
         }
         
         function getSelectedAmount() {
@@ -847,7 +788,6 @@
             return amount;
         }
         
-        // Обработчики переходов
         if (toStep2Btn) {
             toStep2Btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -868,11 +808,6 @@
         if (toStep3Btn) {
             toStep3Btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const selectedPayment = document.querySelector('.payment-card.selected');
-                if (!selectedPayment) {
-                    alert('Выберите способ оплаты');
-                    return;
-                }
                 setActiveStep(3);
             });
         }
@@ -891,7 +826,6 @@
             });
         }
         
-        // Выбор суммы
         const amountBtns = document.querySelectorAll('.amount-btn');
         amountBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -909,53 +843,6 @@
             });
         }
         
-        // Выбор способа оплаты
-        const paymentCards = document.querySelectorAll('.payment-card');
-        paymentCards.forEach(card => {
-            card.addEventListener('click', () => {
-                paymentCards.forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-            });
-        });
-        
-        // Функция формирования подписи для Robokassa
-        function calculateSignature(login, outSum, invId, password) {
-            // Формат: "MerchantLogin:OutSum:InvId:Password1"
-            const signatureString = `${login}:${outSum}:${invId}:${password}`;
-            // MD5 хэш в верхнем регистре
-            return CryptoJS.MD5(signatureString).toString().toUpperCase();
-        }
-        
-        // Функция перенаправления на Robokassa
-        function redirectToRobokassa(amount, name, email, phone, paymentMethod) {
-            const invId = Date.now() + Math.floor(Math.random() * 100000);
-            const outSum = amount.toFixed(2);
-            const description = `Пожертвование в АНО Центр "Надежда" от ${name}`;
-            
-            // Вычисляем подпись
-            const signature = calculateSignature(ROBOKASSA_LOGIN, outSum, invId, ROBOKASSA_PASSWORD1);
-            
-            // Формируем URL для перехода на Robokassa
-            let robokassaUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?` +
-                `MerchantLogin=${encodeURIComponent(ROBOKASSA_LOGIN)}` +
-                `&OutSum=${encodeURIComponent(outSum)}` +
-                `&InvId=${encodeURIComponent(invId)}` +
-                `&Description=${encodeURIComponent(description)}` +
-                `&SignatureValue=${encodeURIComponent(signature)}` +
-                `&Culture=ru` +
-                `&Encoding=utf-8` +
-                `&Email=${encodeURIComponent(email)}` +
-                `&Shp_name=${encodeURIComponent(name)}` +
-                `&Shp_phone=${encodeURIComponent(phone || '')}` +
-                `&Shp_payment_method=${encodeURIComponent(paymentMethod)}` +
-                `&SuccessURL=${encodeURIComponent(ROBOKASSA_SUCCESS_URL)}` +
-                `&FailURL=${encodeURIComponent(ROBOKASSA_FAIL_URL)}`;
-            
-            // Перенаправляем пользователя на Robokassa
-            window.location.href = robokassaUrl;
-        }
-        
-        // Отправка данных в Formspree (для сбора статистики, не блокирует оплату)
         async function sendToFormspree(formData) {
             try {
                 await fetch('https://formspree.io/f/xwvryqla', {
@@ -968,7 +855,6 @@
             }
         }
         
-        // Обработка финальной отправки (пожертвование)
         if (finalSubmitBtn) {
             finalSubmitBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
@@ -986,7 +872,6 @@
                     alert('Укажите E-mail для получения чека');
                     return;
                 }
-                // Простая проверка email
                 if (!email.includes('@') || !email.includes('.')) {
                     alert('Введите корректный E-mail адрес');
                     return;
@@ -1003,36 +888,47 @@
                     return;
                 }
                 
-                const selectedPaymentCard = document.querySelector('.payment-card.selected');
-                const paymentMethod = selectedPaymentCard ? selectedPaymentCard.getAttribute('data-payment') : 'card';
-                
-                // Отправляем данные в Formspree для статистики (асинхронно, не ждем)
+                // Отправка данных в formspree
                 const formData = new FormData();
                 formData.append('name', name);
                 formData.append('email', email);
                 formData.append('phone', phone || '');
                 formData.append('donation_amount', finalAmount.toString());
-                formData.append('payment_method', paymentMethod);
+                formData.append('payment_method', 'sbp_qr');
                 formData.append('agreement', 'on');
                 sendToFormspree(formData);
                 
-                // Перенаправляем на Robokassa для оплаты
-                redirectToRobokassa(finalAmount, name, email, phone, paymentMethod);
+                // Показываем блок с QR-кодом (который уже вставлен вручную)
+                if (qrBlock) {
+                    qrBlock.style.display = 'block';
+                }
+                
+                // Устанавливаем реальную ссылку для оплаты в кнопку
+                if (paymentLinkBtn) {
+                    paymentLinkBtn.href = PAYMENT_LINK;
+                    paymentLinkBtn.style.display = 'inline-flex';
+                }
+                
+                // Прокрутка к виджету
+                const widget = document.querySelector('.donation-widget');
+                if (widget) widget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                alert('Спасибо! Ваша анкета сохранена. Пожалуйста, выполните перевод по QR-коду или нажмите кнопку оплаты.');
             });
         }
         
-        // Инициализация: выбираем сумму по умолчанию
+        // Выбираем сумму по умолчанию
         const defaultAmountBtn = document.querySelector('.amount-btn');
         if (defaultAmountBtn && !document.querySelector('.amount-btn.selected')) {
             defaultAmountBtn.classList.add('selected');
         }
         
-        // Выбираем способ оплаты по умолчанию (карта уже выбрана)
+        // ВНИМАНИЕ: QR-код и ссылка должны быть отредактированы вручную:
+        // 1. Найдите в HTML элемент <img id="sbpQrImage" src="YOUR_QR_CODE_IMAGE.png">
+        //    Замените YOUR_QR_CODE_IMAGE.png на путь к вашему изображению QR-кода.
+        // 2. В коде выше переменная PAYMENT_LINK - замените на реальную ссылку СБП.
+        // 3. Убедитесь, что кнопка оплаты ведёт на нужный адрес.
     })();
 </script>
-
-<!-- Подключаем CryptoJS для MD5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
 </body>
 </html>
