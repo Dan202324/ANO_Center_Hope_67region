@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>АНО Центр "Надежда" - Пожертвование через СБП</title>
+    <title>АНО Центр "Надежда"</title>
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
@@ -671,7 +671,7 @@
                             </div>
                             <!-- КНОПКА ОПЛАТЫ (ССЫЛКА) - замените YOUR_PAYMENT_LINK на реальную платёжную ссылку СБП -->
                             <a href="#" id="paymentActionLink" class="pay-link-button" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-credit-card"></i> Оплатить через СБП
+                                <i class="fas fa-credit-card"></i> Оплатить картой
                             </a>
                             <div class="qr-note">
                                 Откроется приложение вашего банка для перевода
@@ -727,15 +727,6 @@
         // ========== НАСТРОЙКА: ЗАМЕНИТЕ НИЖЕ ВАШИ ДАННЫЕ ДЛЯ ОПЛАТЫ ==========
         // 1. Ссылка на платёжную страницу / кнопку СБП (обязательно)
         const PAYMENT_LINK = "https://sberbank.com/sms/mybill?cs=7514888322583";   // <-- ЗАМЕНИТЕ НА РЕАЛЬНУЮ ССЫЛКУ ОПЛАТЫ
-        
-        // 2. QR-код уже вставлен вручную через тег img, ссылка на изображение в атрибуте src у #sbpQrImage.
-        //    Пожалуйста, отредактируйте атрибут src изображения в HTML выше (id="sbpQrImage") на путь к вашему QR-коду.
-        //    Например: <img id="sbpQrImage" src="images/my_qr_code.png" ...>
-        //    Либо вставьте data:image/png, если хотите, но проще — загрузите картинку QR в папку и укажите путь.
-        
-        // Если хотите динамически менять ссылку в кнопке, раскомментируйте строку ниже, но лучше сразу в HTML вставить src у img.
-        // Скрипт автоматически подставит PAYMENT_LINK в кнопку при показе блока.
-        
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
@@ -919,12 +910,6 @@
         if (defaultAmountBtn && !document.querySelector('.amount-btn.selected')) {
             defaultAmountBtn.classList.add('selected');
         }
-        
-        // ВНИМАНИЕ: QR-код и ссылка должны быть отредактированы вручную:
-        // 1. Найдите в HTML элемент <img id="sbpQrImage" src="YOUR_QR_CODE_IMAGE.png">
-        //    Замените YOUR_QR_CODE_IMAGE.png на путь к вашему изображению QR-кода.
-        // 2. В коде выше переменная PAYMENT_LINK - замените на реальную ссылку СБП.
-        // 3. Убедитесь, что кнопка оплаты ведёт на нужный адрес.
     })();
 </script>
 </body>
