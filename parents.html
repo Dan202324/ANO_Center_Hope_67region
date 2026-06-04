@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>АНО Центр "Надежда"</title>
+    <title>АНО Центр "Надежда" - Родителям</title>
     <style>
         * {
             margin: 0;
@@ -152,14 +152,58 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        h1, .page h2 {
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
+        /* Стили для заголовка + кнопки рядом */
+        .title-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 0.5rem;
+        }
+        .title-row h1, 
+        .title-row h2, 
+        .title-row h3 {
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+            margin-bottom: 0;
+            flex: 1;
+        }
+        .recommend-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffffec;
+            border: 1px solid #cbdbb8;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3e6840;
+            background-color: #f9faf5;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-family: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .recommend-btn:hover {
+            background: #eef3e9;
+            border-color: #9bc18b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px -8px rgba(0,0,0,0.12);
+        }
+        .recommend-icon {
+            font-size: 1.2rem;
+        }
+
+        h1, .page h2, .page h3 {
+            font-size: clamp(1.6rem, 5vw, 2.6rem);
             font-weight: 700;
             margin-bottom: 0.75rem;
             color: #3f5e38;
             letter-spacing: -0.02em;
-            border-left: 6px solid #9bc18b;
-            padding-left: 1rem;
         }
 
         .subtitle {
@@ -194,49 +238,6 @@
             font-weight: 600;
         }
 
-        /* группа кнопок PDF */
-        .pdf-button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            align-items: center;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .pdf-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #ffffff;
-            border: 1px solid #dac9b2;
-            padding: 0.8rem 1.8rem;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #3e6840;
-            background-color: #fcf9f3;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            font-family: inherit;
-        }
-        .pdf-button:hover {
-            background: #eef3e9;
-            border-color: #b7cfaa;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 18px -8px rgba(0,0,0,0.1);
-        }
-        .pdf-icon {
-            font-size: 1.3rem;
-        }
-        .pdf-note {
-            font-size: 0.7rem;
-            color: #a49780;
-            margin-top: 0.8rem;
-            display: inline-block;
-            width: 100%;
-        }
-
         footer {
             text-align: center;
             padding: 2rem 1rem 2rem;
@@ -246,7 +247,7 @@
             margin-top: 2rem;
         }
 
-        /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УЛУЧШЕНИЯ) ========== */
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 880px) {
             .container {
                 padding: 0 20px;
@@ -324,12 +325,17 @@
                 margin: 1.2rem 1rem;
                 padding: 1.2rem 1.2rem 2rem;
             }
-            .pdf-button-group {
+            .title-row {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 12px;
             }
-            .pdf-button {
+            .recommend-btn {
                 justify-content: center;
+                white-space: normal;
+                text-align: center;
+                width: fit-content;
+                align-self: flex-start;
             }
             .regular-text {
                 padding: 1rem 1.2rem;
@@ -345,9 +351,6 @@
             .logo-text {
                 font-size: 0.95rem;
             }
-            .logo-text span {
-                display: inline-block;
-            }
             .page {
                 padding: 1rem;
                 margin: 0.8rem;
@@ -355,12 +358,12 @@
             .regular-text {
                 padding: 0.9rem 1rem;
             }
-            h1, .page h2 {
-                padding-left: 0.8rem;
+            .recommend-btn {
+                font-size: 0.85rem;
+                padding: 0.5rem 1.2rem;
             }
         }
 
-        /* Планшеты и большие телефоны в альбомной */
         @media (max-width: 1024px) and (orientation: landscape) {
             .nav-links {
                 gap: 12px;
@@ -395,9 +398,15 @@
         </div>
     </header>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА (активная по умолчанию) -->
+    <!-- ГЛАВНАЯ СТРАНИЦА (активная) — теперь это страница для родителей с полезным контентом -->
     <div id="home-page" class="page active-page">
-        <h3>АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h3>
+        <!-- Строка заголовка + кнопка перехода на страницу "Полезные рекомендации" -->
+        <div class="title-row">
+            <h4>АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h4>
+            <a href="useful_tips.html" class="recommend-btn" id="recommendPageBtn">
+                <span class="recommend-icon">📘</span> Полезные рекомендации
+            </a>
+        </div>
         <div class="subtitle">Какую помощь оказывает психолог родителям</div>
         <div class="regular-text">
             <p>Быть родителем — одна из самых важных и одновременно самых сложных ролей. На нее нет инструкции, не выдают дипломов, но при этом она требует колоссальных ресурсов: эмоциональных, физических, временных. 
@@ -516,13 +525,16 @@
 • оставаться собой — не только мамой или папой, но и человеком.
 Обратиться за помощью — это не признание своей несостоятельности.</p>
         </div>
-        <!-- ГРУППА КНОПОК: Информация (выписка) + Устав (PDF) -->
-
     </div>
 
-    <!-- СТРАНИЦА КОНТАКТЫ (оставлена для полноты, но на сайте много навигации) -->
+    <!-- СТРАНИЦА КОНТАКТЫ (оставлена для полноты функционала, если потребуется переключение) -->
     <div id="contacts-page" class="page">
-        <h1>Контакты и связь</h1>
+        <div class="title-row">
+            <h1>Контакты и связь</h1>
+            <a href="useful_tips.html" class="recommend-btn">
+                <span class="recommend-icon">📘</span> Полезные рекомендации
+            </a>
+        </div>
         <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
         <div class="regular-text">
             <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
@@ -539,39 +551,7 @@
     </footer>
 
     <script>
-  // Замените на путь к Уставу
-        const pdfUrlInfo = '';   // при желании укажите путь к выписке
-        const pdfUrlCharter = ''; // при желании укажите путь к Уставу
-        
-        // Элементы кнопок
-        const infoBtn = document.getElementById('openPdfBtn');
-        const charterBtn = document.getElementById('openCharterBtn');
-
-        // Функция для открытия PDF с проверкой заглушки
-        function openPdf(pdfPath, docType) {
-            if (!pdfPath || pdfPath.trim() === '') {
-                alert(`📄 Файл ${docType === 'info' ? 'с выпиской' : 'Устава'} не указан. Пожалуйста, добавьте PDF-файл и укажите путь в коде (переменная pdfUrl${docType === 'info' ? 'Info' : 'Charter'}).`);
-                return;
-            }
-            // Защита от дефолтных заглушек (если пользователь не поменял)
-
-            window.open(pdfPath, '_blank', 'noopener,noreferrer');
-        }
-
-        if (infoBtn) {
-            infoBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPdf(pdfUrlInfo, 'info');
-            });
-        }
-        if (charterBtn) {
-            charterBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPdf(pdfUrlCharter, 'charter');
-            });
-        }
-
-        // ========== АДАПТИВНОЕ МОБИЛЬНОЕ МЕНЮ ==========
+        // ========== МОБИЛЬНОЕ МЕНЮ (гамбургер) ==========
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -579,11 +559,9 @@
             menuToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 navLinks.classList.toggle('show');
-                // меняем иконку для лучшего UX
                 menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
             });
 
-            // Закрывать меню при клике на ссылку (удобство на мобильных)
             const allNavLinks = navLinks.querySelectorAll('a');
             allNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -594,7 +572,6 @@
                 });
             });
 
-            // Закрывать при клике вне меню (на body)
             document.addEventListener('click', (event) => {
                 if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
                     navLinks.classList.remove('show');
@@ -603,7 +580,7 @@
             });
         }
 
-        // Логотип: если картинка не загрузилась, покажем символ
+        // Обработка логотипа, если картинка не загрузилась
         const logoImg = document.querySelector('.logo-placeholder img');
         if (logoImg) {
             logoImg.onerror = function() {
@@ -619,9 +596,10 @@
             };
         }
 
-        console.log('✅ Адаптивная версия Центр "Надежда" готова. Текст обновлён: психологическая помощь родителям.');
-        console.log('📎 Кнопка "Информация" путь:', pdfUrlInfo);
-        console.log('📎 Кнопка "Устав" путь:', pdfUrlCharter);
+        // Небольшая проверка для страницы "Полезные рекомендации" — если нужно, можно добавить предупреждение
+        // Но кнопка уже ссылается на useful_tips.html. При желании можно перехватывать клик и создавать страницу,
+        // но лучше просто создать рядом в проекте файл useful_tips.html. 
+        console.log("✅ Страница готова. Кнопка 'Полезные рекомендации' ведёт на useful_tips.html");
     </script>
 </body>
 </html>
