@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" — Документы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /*ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название)*/
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        /* Гамбургер-меню для мобильных */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /*ОСНОВНОЙ КОНТЕНТ (только список документов)*/
+        .documents-page {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        .documents-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+            color: #6f825e;
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #ddcfbc;
+            padding-bottom: 0.6rem;
+            font-weight: 400;
+        }
+
+        /* Список документов в стиле карточек-файлов */
+        .documents-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #fffff2;
+            border-radius: 60px;
+            padding: 0.9rem 1.5rem;
+            transition: all 0.2s ease;
+            border: 1px solid #ece1d2;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            cursor: pointer;
+        }
+        .doc-item:hover {
+            background: #fefaf2;
+            border-color: #c8ddb9;
+            transform: translateX(4px);
+            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .doc-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
+        }
+
+        .doc-info {
+            flex: 1;
+        }
+
+        .doc-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1e3a5f;
+            letter-spacing: -0.2px;
+        }
+
+        .doc-meta {
+            font-size: 0.75rem;
+            color: #9e8f78;
+            margin-top: 4px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .download-badge {
+            background: #eef3e9;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #3f6838;
+        }
+
+        .empty-list-message {
+            background: #fef5ea;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 48px;
+            color: #9b8264;
+            font-size: 1rem;
+            margin-top: 1rem;
+            border: 1px dashed #dac9b2;
+        }
+        .empty-list-message span {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* footer такой же */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* Адаптивность для документальной страницы */
+        @media (max-width: 780px) {
+            .documents-page {
+                margin: 1.2rem 1rem;
+                padding: 1.2rem 1.2rem 2rem;
+            }
+            .doc-item {
+                padding: 0.7rem 1.2rem;
+                border-radius: 40px;
+            }
+            .doc-icon {
+                font-size: 1.6rem;
+            }
+            .doc-name {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .documents-page {
+                padding: 1rem;
+                margin: 0.8rem;
+            }
+            .doc-item {
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                border-radius: 28px;
+            }
+            .doc-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Мобильное меню (повтор стилей из оригинала, не трогаем шапку) */
+        @media (max-width: 780px) {
+            .header .container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover {
+                background: #e5dfd1;
+                border-bottom-color: transparent;
+                color: #1e3a5f;
+            }
+            .logo-area {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="contact.html">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- СТРАНИЦА ДОКУМЕНТОВ (вместо текста) — только перечень PDF + надпись "Документы" -->
+    <main class="documents-page" id="documentsMain">
+        <div class="documents-header">
+            <h2>📄 Документы</h2>
+            <div class="subtitle">Полезные рекомендации</div>
+        </div>
+
+
+        <div class="documents-list" id="pdfListContainer">
+        </div>
+        <div class="pdf-note" style="margin-top: 0.8rem; font-size: 0.75rem; color:#a49780; text-align: center;">
+            📌 Нажмите на любой документ — он откроется в новой вкладке.
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <script>
+        
+        const filesList = [
+            { 
+                name: "Как подружиться со своим ребёнком", 
+                url: "Родителям/Как подружиться со своим ребёнком.pdf",   
+                description: ""
+            },
+            { 
+                name: "Подросток все время в телефоне", 
+                url: "Родителям/Подросток все время в телефоне.pdf",
+                description: ""
+            },
+            { 
+                name: "Проведем лето с пользой", 
+                url: "Родителям/Проведем лето с пользой.pdf",  
+                description: ""
+            },
+            { 
+                name: "Самоорганизация и самоконтроль у детей", 
+                url: "Родителям/Самоорганизация и самоконтроль у детей.pdf",
+                description: ""
+            },
+        ];
+
+        // Функция для открытия PDF (с проверкой существования пути и предупреждениями)
+        function openPdfDocument(pdfUrl, docName) {
+            if (!pdfUrl || pdfUrl.trim() === "") {
+                alert(`⚠️ Файл "${docName}" не указан. Пожалуйста, добавьте корректный путь к PDF-файлу в список документов.`);
+                return;
+            }
+            // Дополнительная проверка: если ссылка выглядит как заглушка (примеры из демо, но пользователь не заменил)
+            // Чтобы не мучать предупреждениями, просто пробуем открыть. Но если файл физически отсутствует, браузер покажет 404.
+            // Для удобства предупредим о возможной ошибке навигации только для дефолтных заглушек.
+            const isDefaultStub = (pdfUrl.includes("UchDokum_ed18d4f3b80344c58b906d0e0d4f898f.pdf") && docName.includes("Устав")) || 
+                                  (pdfUrl.includes("VypZapEGRUL_d5ef85179f0f42e98a713691d932dac6.pdf") && docName.includes("Выписка"));
+            if (isDefaultStub) {
+                if (confirm(`📄 Файл "${docName}" возможно ещё не заменён на актуальный PDF. Открыть по текущему пути? Если файл отсутствует, браузер покажет ошибку.\nХотите продолжить?`)) {
+                    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+                }
+                return;
+            }
+            // Стандартное открытие
+            window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Отрисовка списка документов
+        function renderDocumentsList() {
+            const container = document.getElementById('pdfListContainer');
+            if (!container) return;
+
+            // Если массив пуст — показываем уведомление и кнопки-подсказки, как добавить PDF
+            if (!filesList || filesList.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-list-message">
+                        <span>📁</span>
+                        В данный момент список документов пуст.<br>
+                        Пожалуйста, добавьте PDF‑файлы в раздел «Документы» (отредактируйте массив filesList в коде).
+                        <div style="margin-top: 1rem; font-size: 0.8rem;">✨ Инструкция: найдите в коде переменную <strong>filesList</strong> и укажите путь к вашим PDF.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Генерируем элементы списка
+            let itemsHtml = '';
+            for (let i = 0; i < filesList.length; i++) {
+                const doc = filesList[i];
+                const docName = doc.name || 'Документ';
+                const docUrl = doc.url || '';
+                const description = doc.description || 'PDF документ';
+                // Безопасный ID для accessibility
+                itemsHtml += `
+                    <div class="doc-item" data-doc-index="${i}" data-url="${docUrl}" data-name="${escapeHtml(docName)}">
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <div class="doc-name">${escapeHtml(docName)}</div>
+                            <div class="doc-meta">
+                                <span class="download-badge">📎 PDF-файл</span>
+                                <span>${escapeHtml(description)}</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 1.2rem; opacity:0.6;">↗️</div>
+                    </div>
+                `;
+            }
+            container.innerHTML = itemsHtml;
+
+            // Навешиваем обработчики на каждый doc-item
+            const docItems = document.querySelectorAll('.doc-item');
+            docItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // Не даём событию всплыть куда-либо лишний раз
+                    e.stopPropagation();
+                    const url = item.getAttribute('data-url');
+                    const name = item.getAttribute('data-name') || 'Документ';
+                    if (url) {
+                        openPdfDocument(url, name);
+                    } else {
+                        alert(`Файл "${name}" не имеет ссылки. Пожалуйста, укажите корректный url в массиве filesList.`);
+                    }
+                });
+            });
+        }
+
+        // вспомогательная функция для защиты от XSS (экранирование)
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+
+        // ========== МОБИЛЬНОЕ МЕНЮ (скопировано с оригинальной логики, шапку не трогаем) ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Обработка логотипа (при отсутствии картинки)
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+
+        // Инициализация списка документов после загрузки DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDocumentsList();
+            // Дополнительно: можно вывести в консоль список путей для проверки
+            console.log("📁 Документы загружены, количество PDF:", filesList.length);
+            if (filesList.length > 0) {
+                console.log("Пути к файлам:", filesList.map(f => f.url));
+            } else {
+                console.log("ℹ️ Список документов пуст. Добавьте PDF в массив filesList в коде страницы.");
+            }
+        });
+    </script>
+</body>
+</html>
