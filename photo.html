@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" — Хроника помощи с галереей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #1e2f21;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.88);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.7);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ БЛОК — ХРОНИКА ========== */
+        .timeline-section {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem 3rem;
+        }
+
+        .year-category {
+            margin-bottom: 3.5rem;
+        }
+
+        .year-badge {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(115deg, #3f6838, #5f8b4b);
+            display: inline-block;
+            padding: 0.3rem 2rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+            box-shadow: 0 8px 14px rgba(0,0,0,0.05);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Карточка со слайдером */
+        .merged-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            border: 1px solid #efe5d8;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .merged-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Слайдер-контейнер — фиксированное соотношение 4/3 для идеального отображения фото */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #e7ddd0;
+            overflow: hidden;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            height: 100%;
+            width: 100%;
+        }
+
+        .slider-slide {
+            flex: 0 0 100%;
+            height: 100%;
+        }
+
+        .slider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #cfc6b6;
+        }
+
+        /* Кнопки навигации слайдера */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 45, 35, 0.65);
+            backdrop-filter: blur(6px);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 12;
+            opacity: 0.8;
+        }
+        .slider-btn:hover {
+            background: #2b6c4e;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.02);
+        }
+        .slider-prev {
+            left: 12px;
+        }
+        .slider-next {
+            right: 12px;
+        }
+
+        /* индикаторы точек */
+        .slider-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 12;
+        }
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(250, 245, 225, 0.75);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            padding: 0;
+        }
+        .slider-dot.active {
+            background-color: #f9e0a0;
+            transform: scale(1.25);
+            width: 11px;
+            height: 11px;
+            box-shadow: 0 0 6px #ffefb0;
+        }
+
+        /* Контент карточки — выравнивание и читаемость */
+        .card-content {
+            padding: 1.6rem 1.5rem 2rem;
+            background: #fffff8;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2a3b2c;
+            margin-bottom: 0.6rem;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        .card-content strong {
+            color: #2d6a4f;
+            font-weight: 700;
+            background: transparent;
+        }
+
+        /* Дополнительная жирность для важных фраз */
+        .card-content p strong.emphasis {
+            font-size: 1.02rem;
+            letter-spacing: -0.2px;
+        }
+        
+        /* будущий раздел */
+        .empty-future {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(245, 240, 230, 0.7);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            border: 1px dashed #c2b59e;
+            margin-top: 1rem;
+        }
+        .empty-future p {
+            font-size: 1.2rem;
+            color: #7f6e54;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 780px) {
+            .container {
+                padding: 0 20px;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding: 20px 24px 30px;
+                border-radius: 0 0 28px 28px;
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.6);
+                border-bottom: none;
+                width: 100%;
+            }
+            .logo-text {
+                font-size: 1rem;
+            }
+            .year-badge {
+                font-size: 1.8rem;
+                padding: 0.2rem 1.4rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+            .card-content {
+                padding: 1.3rem;
+            }
+            .slider-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 1.7rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.9rem;
+            }
+            .card-content p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Анимация появления карточек */
+        .merged-card {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: cardFadeIn 0.5s ease forwards;
+        }
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cards-grid .merged-card:nth-child(1) { animation-delay: 0.02s; }
+        .cards-grid .merged-card:nth-child(2) { animation-delay: 0.07s; }
+        .cards-grid .merged-card:nth-child(3) { animation-delay: 0.12s; }
+        .cards-grid .merged-card:nth-child(4) { animation-delay: 0.17s; }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* скрываем исходные галереи */
+        .gallery-images {
+            display: none;
+        }
+        
+        /* Небольшая стилизация для текста — жирные акценты */
+        .card-content p strong:first-child {
+            display: inline-block;
+            margin-bottom: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="logo-area">
+            <div class="logo-placeholder" id="logoPlaceholder">
+                <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+            </div>
+            <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Главная</a>
+            <a href="organizah.html">Об организации</a>
+            <a href="team.html">Наша команда</a>
+            <a href="help.html">Кому помогаем</a>
+            <a href="partner.html">Наши партнеры</a>
+            <a href="contact.html">Отзывы</a>
+            <a href="what_help.html">Как помочь</a>
+            <a href="photo.html">Фотогалерея</a>
+        </nav>
+    </div>
+</header>
+
+<main class="timeline-section">
+    <!-- 2026 год: карточки с фотографиями. Все изображения автоматически станут полноценным слайдером с соотношением 4:3 -->
+    <div class="year-category">
+        <div class="year-badge">2026</div>
+        <div class="cards-grid" id="cards2026Grid">
+
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="Photo_010.jpg" alt="Команда Центра Надежда за работой">
+                    <img src="Photo_011.jpg" alt="Уютный офис Центра Надежда">
+                    <img src="Photo_012.jpg" alt="Уютный офис Центра Надежда">
+                    <img src="Photo_013.jpg" alt="Уютный офис Центра Надежда">
+                </div>
+                <div class="card-content">
+                    <p>1 июня прошло мероприятие для женского клуба женщин, которые на сегодняшний день в поиске работы  «Древо рода» как инструмент профориентации.
+
+Снятие «синдрома самозванца»
+
+В условиях жесткого рынка труда многие специалисты теряют уверенность. Они видят только свои текущие недостатки, но упускают из виду фундамент, на котором стоят.
+В ходе мероприятия мы предложили участникам (соискателям и действующим сотрудникам) не просто нарисовать схему родственников, а проанализировать, какие архетипы поведения, профессиональные династии и ценности передаются в семье.
+
+Результат: Участники осознали, что их стрессоустойчивость, трудоголизм или талант к переговорам — это не просто строчки в резюме, а часть родовой истории. Это дало мощный эмоциональный ресурс для прохождения сложных собеседований.
+«Древо рода» — это не эзотерика. Это метод стратегического планирования карьеры, который помогает собрать воедино разрозненные навыки и превратить их в мощное личное бренд-сообщение.
+Все ушли в хорошем настроении получив новые знания  ❤️</p>
+                </div>
+            </div>
+
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="Photo_001.jpg" alt="Команда Центра Надежда за работой">
+                    <img src="Photo_002.jpg" alt="Уютный офис Центра Надежда">
+                </div>
+                <div class="card-content">
+                    <p><strong>«Консультация с ветераном СВО: поиск себя и новая опора» — опора на себя.</strong></p>
+                    <p>За столом напротив — мужчина. Участник СВО. За плечами — колоссальный опыт выживания, ответственности, принятия решений там, где цена ошибки — жизнь.
+А сегодня он говорит мне: «Я не знаю, кто я на гражданке. Ищу себя. И боюсь, что никому не нужен на работе». Нет понимания, куда двигаться дальше, но очень хочется его найти.</p>
+                    <p>1. «Ищу себя» — это не слабость. Это честность после того, как старые роли перестали работать, а новые ещё не родились.
+2. Трудоустройство для него — это не про деньги. Это про «как найти себя, где стать нужным и востребованным специалистом».</p>
+                    <p>Ветеран СВО приходит на консультацию не за готовыми ответами — он приходит за направлением. Его главный ресурс — уже не броня и оружие, а честность перед самим собой. И первый шаг к новой опоре — мы смогли построить вместе!❣️</p>
+                </div>
+            </div>
+            
+            
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="Photo_01.png" alt="Команда Центра Надежда за работой">
+                    <img src="Photo_02.png" alt="Уютный офис Центра Надежда">
+                </div>
+                <div class="card-content">
+                    <p><strong>🍀 Познакомимся? Мы — АНО Центр «Надежда» г. Починок 🍀</strong><br>
+Имя выбрано не случайно, в память о моей бабушке Надежде, как самая дорогая реликвия нашего рода. Почему открылся этот "Центр Надежда"? Потому что с уходом бабушки в нашей семье обнаружилась пустота. Не просто горечь потери, а отсутствие того тепла, к которому все привыкли. И я решила, что в память о ней я сделаю что-то важное и очень хорошее! ♥</p>
+                    <p><strong>♥ Я хорошо помню её руки и её любовь.</strong> Когда-то бабушка держала меня за руку и учила быть доброй, любящей, открытой сердцем к людям. Помогать — не на словах, а на деле, даже когда самой трудно! Эти уроки остались со мной навсегда, но долгое время жили только внутри...</p>
+                    <p><strong>✅ И вот однажды я поняла: этого мало.</strong> Просто помнить и просто быть добрым человеком — недостаточно. Нужно дело, в котором эти уроки обретут форму. ❣️ Так родился центр. Не как памятник из камня, а как живое продолжение её рук и её сердца. Теперь всё, чему она меня учила, осуществилось — не во мне одной, а в работе «Надежды».</p>
+                    <p>Мы открылись, чтобы делать ровно то, что делала она: поддерживать тех, кто оказался в трудной ситуации. Без громких фраз, без показухи — по-семейному, по-настоящему ❤️. Для нас «Надежда» — это не просто бренд. Это наша фамильная ответственность. Добро пожаловать в место, где помогают так, как учила бабушка Надежда. Пока мы работаем — она продолжает жить. ❣️</p>
+                    <p><strong>Генеральный директор центра: Сидоренкова Наталья Юрьевна<br>📞 8 908 2813678</strong></p>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 2: Участие в слёте «Объединяя усилия» (4 фото) -->
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="Photo_21.png" alt="Выступление на слёте Объединяя усилия">
+                    <img src="Photo_22.png" alt="Круглый стол с коллегами из Витебска">
+                    <img src="Photo_23.png" alt="Обсуждение ранней помощи детям">
+                    <img src="Photo_24.png" alt="Сертификат участника слёта">
+                </div>
+                <div class="card-content">
+                    <p><strong>🌟 Я, Сидоренкова Наталья Юрьевна, приняла участие в практикоориентированной обучающей программе областного методического слёта с международным участием «Объединяя усилия».</strong></p>
+                    <p>Ключевая тема нашего фокуса — ранняя помощь детям и семьям. Мы говорили о том, что:<br>
+· возраст — не барьер, а ресурс;<br>
+· с каждым годом открываются новые возможности в возрасте;<br>
+· чем раньше начинается поддержка, тем больше шансов у ребёнка и семьи на комфортное развитие.</p>
+                    <p>В ходе слёта состоялся живой обмен опытом между Смоленском и учреждениями Витебска, и я получила реальные, практические знания, которые можно внедрять уже завтра. Когда мы соединяем раннюю помощь, уважение к возрасту и международное сотрудничество — рождаются настоящие новые возможности.</p>
+                    <p><strong>👶 Ранняя помощь детям и семьям — это не просто метод, это философия.</strong><br>
+📆 Возраст — это не ступор, а этап с огромным потенциалом.<br>
+⭐ Новые возможности в возрасте есть всегда, если знать, как их увидеть.<br>
+Благодарю коллег из Смоленска и Витебска за обмен опытом и глубокие практические знания.</p>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 3: Гуманитарная миссия / помощь СВО -->
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="Photo_31.png" alt="Сбор гуманитарной помощи для бойцов">
+                    <img src="Photo_32.png" alt="Коробки с теплыми вещами и письмами">
+                </div>
+                <div class="card-content">
+                    <p><strong>❣️ Когда сердце отзывается помочь, помогите сердцем ❣️</strong></p>
+                    <p>На днях АНО ЦЕНТР ПОМОЩИ "НАДЕЖДА" г.Починок собрала и отправила очередную партию посылок для наших ребят — участников СВО. Это не просто «гуманитарка». За каждой коробкой — забота и желание сказать: <strong>«Мы вас ждём. Вы не одни, Мы рядом!»</strong></p>
+                    <p>Что внутри? Самое нужное: тёплые вещи, окопные свечи, медикаменты, письма с родными словами. Если вы тоже хотите быть причастными — не проходите мимо.</p>
+                    <p>👉 Наведите камеру на QR-код и отправьте частичку тепла ❤️<br>А я даю гарантии и все фото/видео отчёты! Всё дойдёт адресам в первые руки 🥰</p>
+                    <p><strong>#СвоихНеБросаем #Мырядом</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2027 год: ожидаемые события -->
+    <div class="year-category">
+        <div class="year-badge">2027</div>
+        <div class="empty-future">
+            <p>✨ Новый этап впереди ✨<br>События и фото 2027 года пополнятся совсем скоро. Следите за нашими новостями!</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+</footer>
+
+<script>
+    (function() {
+        // ------------------------------------------------------------------
+        // УНИВЕРСАЛЬНЫЙ СЛАЙДЕР из img внутри .gallery-images.
+        // ВАЖНО: теперь фотографии идеально вписываются в соотношение 4:3 и полностью видны.
+        // Скрипт автоматически создаёт кнопки, точки, автопрокрутку.
+        // ------------------------------------------------------------------
+
+        function buildSliderFromGallery(galleryContainer, cardElement) {
+            const imgElements = Array.from(galleryContainer.querySelectorAll('img'));
+            if (imgElements.length === 0) return;
+
+            const slidesData = imgElements.map((img, idx) => ({
+                src: img.getAttribute('src'),
+                alt: img.getAttribute('alt') || `Фото ${idx+1}`
+            }));
+
+            // скрываем исходный контейнер
+            galleryContainer.style.display = 'none';
+
+            const sliderContainer = document.createElement('div');
+            sliderContainer.className = 'slider-container';
+
+            const track = document.createElement('div');
+            track.className = 'slider-track';
+
+            slidesData.forEach((slide) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slider-slide';
+                const img = document.createElement('img');
+                img.src = slide.src;
+                img.alt = slide.alt;
+                img.loading = "lazy";
+                img.onerror = function() {
+                    if (!this.dataset.fallback) {
+                        this.dataset.fallback = 'true';
+                        this.src = "https://picsum.photos/id/104/600/450";
+                        this.alt = "фото временно недоступно";
+                    }
+                };
+                slideDiv.appendChild(img);
+                track.appendChild(slideDiv);
+            });
+
+            sliderContainer.appendChild(track);
+
+            // Кнопки
+            const btnPrev = document.createElement('button');
+            btnPrev.className = 'slider-btn slider-prev';
+            btnPrev.innerHTML = '‹';
+            const btnNext = document.createElement('button');
+            btnNext.className = 'slider-btn slider-next';
+            btnNext.innerHTML = '›';
+            sliderContainer.appendChild(btnPrev);
+            sliderContainer.appendChild(btnNext);
+
+            // Точки
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'slider-dots';
+            for (let i = 0; i < slidesData.length; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'slider-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.setAttribute('data-index', i);
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const currentSlider = dot.closest('.slider-container');
+                    if (currentSlider) {
+                        const trackElem = currentSlider.querySelector('.slider-track');
+                        const newIndex = i;
+                        const slideWidth = trackElem.parentElement.clientWidth;
+                        trackElem.style.transform = `translateX(-${newIndex * slideWidth}px)`;
+                        updateDotsActive(currentSlider, newIndex);
+                        if (currentSlider.sliderCurrentIndex !== undefined) currentSlider.sliderCurrentIndex = newIndex;
+                        resetAutoPlayForSlider(currentSlider);
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            }
+            sliderContainer.appendChild(dotsContainer);
+
+            let currentIndex = 0;
+            let slideWidth = sliderContainer.clientWidth;
+            let autoInterval = null;
+
+            function updateSlideWidth() {
+                if (!sliderContainer.isConnected) return;
+                slideWidth = sliderContainer.clientWidth;
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            }
+
+            function updateDotsActive(sliderC, activeIdx) {
+                const dots = sliderC.querySelectorAll('.slider-dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === activeIdx) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
+
+            function goToSlide(index, skipSmooth = false) {
+                const maxIndex = slidesData.length - 1;
+                if (index < 0) index = 0;
+                if (index > maxIndex) index = maxIndex;
+                currentIndex = index;
+                if (sliderContainer.sliderCurrentIndex !== undefined) sliderContainer.sliderCurrentIndex = currentIndex;
+                const translateValue = -currentIndex * slideWidth;
+                if (skipSmooth) {
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(${translateValue}px)`;
+                    setTimeout(() => { track.style.transition = ''; }, 50);
+                } else {
+                    track.style.transform = `translateX(${translateValue}px)`;
+                }
+                updateDotsActive(sliderContainer, currentIndex);
+            }
+
+            function nextSlide() {
+                if (currentIndex + 1 < slidesData.length) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(0);
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex - 1 >= 0) {
+                    goToSlide(currentIndex - 1);
+                } else {
+                    goToSlide(slidesData.length - 1);
+                }
+            }
+
+            btnNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextSlide();
+                resetAutoPlayForSlider(sliderContainer);
+            });
+            btnPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevSlide();
+                resetAutoPlayForSlider(sliderContainer);
+            });
+
+            window.addEventListener('resize', () => {
+                if (sliderContainer.isConnected) {
+                    slideWidth = sliderContainer.clientWidth;
+                    goToSlide(currentIndex, true);
+                }
+            });
+
+            sliderContainer.sliderCurrentIndex = 0;
+
+            // Автопрокрутка
+            function startAutoPlay() {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(() => {
+                    if (document.hasFocus() && sliderContainer.isConnected && sliderContainer.closest('.merged-card')) {
+                        nextSlide();
+                    }
+                }, 5000);
+            }
+            function resetAutoPlayForSlider(sliderC) {
+                if (sliderC.autoInterval) clearInterval(sliderC.autoInterval);
+                sliderC.autoInterval = setInterval(() => {
+                    if (document.hasFocus() && sliderC.isConnected && sliderC.closest('.merged-card')) {
+                        const nextBtn = sliderC.querySelector('.slider-next');
+                        if (nextBtn) nextBtn.click();
+                    }
+                }, 5000);
+            }
+            startAutoPlay();
+            sliderContainer.autoInterval = autoInterval;
+
+            sliderContainer.addEventListener('mouseenter', () => {
+                if (sliderContainer.autoInterval) {
+                    clearInterval(sliderContainer.autoInterval);
+                    sliderContainer.autoInterval = null;
+                }
+            });
+            sliderContainer.addEventListener('mouseleave', () => {
+                if (!sliderContainer.autoInterval) {
+                    sliderContainer.autoInterval = setInterval(() => {
+                        if (document.hasFocus() && sliderContainer.isConnected) {
+                            const nextBtn = sliderContainer.querySelector('.slider-next');
+                            if (nextBtn) nextBtn.click();
+                        }
+                    }, 5000);
+                }
+            });
+
+            setTimeout(() => {
+                if (sliderContainer.clientWidth) {
+                    slideWidth = sliderContainer.clientWidth;
+                    goToSlide(currentIndex, true);
+                }
+            }, 80);
+
+            const contentDiv = cardElement.querySelector('.card-content');
+            if (contentDiv) {
+                cardElement.insertBefore(sliderContainer, contentDiv);
+            } else {
+                cardElement.appendChild(sliderContainer);
+            }
+        }
+
+        function initAllImgBasedSliders() {
+            const cards = document.querySelectorAll('.merged-card');
+            cards.forEach(card => {
+                if (card.querySelector('.slider-container')) return;
+                const galleryDiv = card.querySelector('.gallery-images');
+                if (galleryDiv && galleryDiv.querySelectorAll('img').length > 0) {
+                    buildSliderFromGallery(galleryDiv, card);
+                }
+            });
+        }
+
+        initAllImgBasedSliders();
+
+        const observer = new MutationObserver(() => {
+            const cardsWithoutSlider = document.querySelectorAll('.merged-card:not(.slider-initialized)');
+            cardsWithoutSlider.forEach(card => {
+                if (!card.querySelector('.slider-container')) {
+                    const gallery = card.querySelector('.gallery-images');
+                    if (gallery && gallery.querySelectorAll('img').length > 0) {
+                        card.classList.add('slider-initialized');
+                        buildSliderFromGallery(gallery, card);
+                    }
+                } else {
+                    card.classList.add('slider-initialized');
+                }
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+    })();
+</script>
+</body>
+</html>
