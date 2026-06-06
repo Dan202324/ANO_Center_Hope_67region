@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>АНО Центр "Надежда" | Мои сертификаты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .page {
+            display: none;
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+        }
+
+        .page.active-page {
+            display: block;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        .certificates-header {
+            text-align: left;
+            margin-bottom: 1.8rem;
+        }
+        .certificates-header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .certificates-sub {
+            font-size: 1rem;
+            color: #6f825e;
+            padding-left: 1.2rem;
+            border-bottom: 1px dashed #ddcfbc;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Сетка для сертификатов — карточки с полноразмерными изображениями */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-card {
+            background: #fffef9;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.25s ease;
+            border: 1px solid #f0e2d2;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 32px -16px rgba(0, 0, 0, 0.15);
+            border-color: #dacfbc;
+        }
+
+        /* Блок для изображения - полный размер без обрезки */
+        .cert-image {
+            width: 100%;
+            background-color: #f8f4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid #ece1d2;
+            min-height: 320px;
+        }
+
+        .cert-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            display: block;
+            background: #fffdf7;
+        }
+
+        .cert-card:hover .cert-image img {
+            transform: scale(1.01);
+        }
+
+        .cert-placeholder {
+            width: 100%;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eae3d6;
+            color: #a48e72;
+            font-size: 2rem;
+            font-weight: 400;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .cert-placeholder span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .cert-caption {
+            padding: 1rem 1rem 1.2rem;
+            text-align: center;
+            background: #fffdf9;
+        }
+        .cert-caption p {
+            font-weight: 500;
+            color: #2c5530;
+            font-size: 0.9rem;
+            letter-spacing: -0.2px;
+        }
+
+        .info-note {
+            margin-top: 2.5rem;
+            padding: 1rem 1.5rem;
+            background: #ecf3e7;
+            border-radius: 32px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4c6b41;
+            border: 1px solid #d9e2ce;
+        }
+
+        /* ========== ПОЛНОЭКРАННОЕ МОДАЛЬНОЕ ОКНО ДЛЯ ПРОСМОТРА ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            cursor: pointer;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-container {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            cursor: default;
+            animation: zoomIn 0.25s ease-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-container img {
+            width: auto;
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255,245,225,0.9);
+            background: #fffef5;
+        }
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,200,0.3);
+            font-weight: 400;
+        }
+        .modal-close:hover {
+            background: #a12a2a;
+            transform: scale(1.05);
+        }
+        .modal-caption {
+            position: absolute;
+            bottom: -32px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #f0ebdd;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 6px 16px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+        @media (max-width: 680px) {
+            .modal-close { top: -35px; right: -5px; width: 38px; height: 38px; font-size: 24px; }
+            .modal-caption { bottom: -28px; font-size: 0.75rem; }
+        }
+
+        .regular-text {
+            font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+            color: #2c3e2f;
+            background: #fffff2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 0 1px #f3ebdf, 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.65;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ ========== */
+        @media (max-width: 880px) {
+            .container { padding: 0 20px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.85rem; white-space: nowrap; }
+            .logo-text { font-size: 1.1rem; }
+            .logo-placeholder { width: 46px; height: 46px; }
+        }
+
+        @media (max-width: 780px) {
+            .header .container { flex-wrap: nowrap; justify-content: space-between; }
+            .menu-toggle { display: block; order: 3; }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+            }
+            .nav-links a:hover { background: #e5dfd1; color: #1e3a5f; }
+            .page { margin: 1.2rem 1rem; padding: 1.2rem 1.2rem 2rem; }
+            .cert-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder { width: 42px; height: 42px; }
+            .logo-text { font-size: 0.95rem; }
+            .page { padding: 1rem; margin: 0.8rem; }
+            .cert-grid { gap: 18px; grid-template-columns: 1fr; }
+            .cert-image { min-height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-placeholder" id="logoPlaceholder">
+                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                </div>
+                <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#" data-page="home">Главная</a>
+                <a href="organizah.html">Об организации</a>
+                <a href="team.html">Наша команда</a>
+                <a href="help.html">Кому помогаем</a>
+                <a href="partner.html">Наши партнеры</a>
+                <a href="#" data-page="contacts">Контакты</a>
+                <a href="what_help.html">Как помочь</a>
+                <a href="photo.html">Фотогалерея</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА: Мои сертификаты (убрана 4-я лишняя карточка, полноразмерные фото + клик) -->
+    <div id="home-page" class="page active-page">
+        <div class="certificates-header">
+            <h1>📜 Мои сертификаты</h1>
+            <div class="certificates-sub">Документы, подтверждающие квалификацию и достижения (нажмите на диплом для детального просмотра)</div>
+        </div>
+
+        <!-- Сетка сертификатов: только три карточки, все изображения отображаются полностью (object-fit: contain) -->
+        <div class="cert-grid" id="certificatesGrid">
+            <!-- Карточка 1 -->
+            <div class="cert-card" data-full-img="Certificate_1.png" data-caption="Сертификат о повышении квалификации (психологическое консультирование)">
+                <div class="cert-image">
+                    <img src="Certificate_1.png" alt="Сертификат №1 - Психология" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №1<br>Психология');">
+                </div>
+                <div class="cert-caption">
+                    <p>⚖️ <strong>Диплом</strong> Юрист по специальности "Юриспруденция"</p>
+                </div>
+            </div>
+            <!-- Карточка 2 -->
+            <div class="cert-card" data-full-img="Certificate_2.png" data-caption="Сертификат участника юридического форума по правам семьи">
+                <div class="cert-image">
+                    <img src="Certificate_2.png" alt="Сертификат №2 - Юридический форум" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №2<br>Юриспруденция');">
+                </div>
+                <div class="cert-caption">
+                    <p>🎓 <strong>Диплом</strong> о профессиональной переподготовке</p>
+                </div>
+            </div>
+            <!-- Карточка 3 -->
+            <div class="cert-card" data-full-img="Certificate_3.png" data-caption="Диплом о профессиональной переподготовке 'Психолог-консультант'">
+                <div class="cert-image">
+                    <img src="Certificate_3.png" alt="Сертификат №3 - Переподготовка" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №3<br>Переподготовка');">
+                </div>
+                <div class="cert-caption">
+                    <p>🎓 <strong>Диплом</strong> профессиональной переподготовки</p>
+                </div>
+            </div>
+            <!-- Четвертая карточка УДАЛЕНА по вашему требованию -->
+        </div>
+        <div class="info-note">
+            📌 Все сертификаты представлены в оригинальном масштабе — нажмите на любой документ, чтобы открыть его в полноэкранном режиме.<br>
+            
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА КОНТАКТЫ -->
+    <div id="contacts-page" class="page">
+        <h1>Контакты и связь</h1>
+        <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
+        <div class="regular-text">
+            <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
+            <p>📧 Электронная почта: <strong>info@nadezhda-center.ru</strong></p>
+            <p>📍 Адрес: г. Москва, ул. Добрая, д. 12, стр. 3 (офис 204)</p>
+            <p>💬 Мессенджеры: Telegram / WhatsApp по номеру +7 (999) 123-45-67</p>
+            <p>🕒 График работы: Пн–Пт 10:00–19:00, Сб по предварительной записи.</p>
+            <p style="margin-top: 1rem;">⭐ Следите за нашими новостями и анонсами мероприятий в социальных сетях (ссылки по запросу).</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+    </footer>
+
+    <!-- Модальное окно для полноэкранного просмотра -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-container">
+            <img id="modalImage" src="" alt="Полноразмерный сертификат">
+            <div class="modal-close" id="modalCloseBtn">✕</div>
+            <div id="modalCaption" class="modal-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Функция для генерации заглушки
+        function getPlaceholderHTML(title) {
+            return `<div class="cert-placeholder">🖼️<span>${title}</span><span style="font-size:0.7rem;">добавьте фото</span></div>`;
+        }
+
+        // Инициализация: корректная обработка ошибок загрузки изображений в карточках (чтобы placeholder не ломал верстку)
+        function initCertImages() {
+            const certImages = document.querySelectorAll('.cert-card .cert-image img');
+            certImages.forEach(img => {
+                img.addEventListener('error', function(e) {
+                    if (!this.parentElement.querySelector('.cert-placeholder')) {
+                        const altText = this.alt || 'Сертификат';
+                        this.parentElement.innerHTML = getPlaceholderHTML(altText);
+                    }
+                });
+                if (!img.complete) {
+                    img.addEventListener('load', () => {});
+                    img.addEventListener('error', () => {
+                        if (!img.parentElement.querySelector('.cert-placeholder')) {
+                            const altText = img.alt || 'Сертификат';
+                            img.parentElement.innerHTML = getPlaceholderHTML(altText);
+                        }
+                    });
+                } else if (img.naturalWidth === 0 && img.naturalHeight === 0) {
+                    const altText = img.alt || 'Сертификат';
+                    img.parentElement.innerHTML = getPlaceholderHTML(altText);
+                }
+            });
+        }
+
+        // ========== ПОЛНОЭКРАННЫЙ ПРОСМОТР ПРИ КЛИКЕ НА КАРТОЧКУ/ИЗОБРАЖЕНИЕ ==========
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const modalClose = document.getElementById('modalCloseBtn');
+
+        function openFullImage(imgSrc, captionText) {
+            if (!modal || !modalImg) return;
+            modalImg.src = imgSrc;
+            modalImg.alt = captionText || 'Сертификат';
+            if (modalCaption) {
+                modalCaption.textContent = captionText || 'Нажмите в любом месте, чтобы закрыть';
+            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // предотвращаем прокрутку фона
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                // Небольшая задержка для очистки src, чтобы при повторном открытии не мигал старый контент
+                setTimeout(() => {
+                    if (modalImg) modalImg.src = '';
+                }, 200);
+            }
+        }
+
+        // Добавляем обработчики клика на каждую карточку сертификата
+        function bindCertClickEvents() {
+            const certCards = document.querySelectorAll('.cert-card');
+            certCards.forEach(card => {
+                // Очищаем предыдущие обработчики, чтобы не дублировать (просто обновляем)
+                const newCard = card.cloneNode(true);
+                card.parentNode.replaceChild(newCard, card);
+                // На новой карточке вешаем событие
+                newCard.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Получаем данные из атрибутов data-full-img и data-caption
+                    let fullImgUrl = newCard.getAttribute('data-full-img');
+                    let caption = newCard.getAttribute('data-caption');
+                    
+                    // Если data-full-img не задан, пытаемся взять src из вложенного img (но приоритет data-атрибуту)
+                    if (!fullImgUrl) {
+                        const innerImg = newCard.querySelector('.cert-image img');
+                        if (innerImg && innerImg.src && !innerImg.src.includes('placeholder')) {
+                            fullImgUrl = innerImg.src;
+                        } else {
+                            // fallback: если нет картинки, можно показать заглушку либо ничего
+                            const placeholderDiv = newCard.querySelector('.cert-placeholder');
+                            if (placeholderDiv) {
+                                alert('Изображение временно отсутствует, загрузите сертификат.');
+                                return;
+                            }
+                            fullImgUrl = innerImg ? innerImg.src : '';
+                        }
+                    }
+                    
+                    // Если caption отсутствует, берем текст из .cert-caption p
+                    if (!caption) {
+                        const captionP = newCard.querySelector('.cert-caption p');
+                        caption = captionP ? captionP.innerText : 'Сертификат';
+                    }
+                    
+                    if (fullImgUrl && fullImgUrl.trim() !== '') {
+                        openFullImage(fullImgUrl, caption);
+                    } else {
+                        console.warn('Нет изображения для просмотра');
+                        alert('Изображение сертификата пока недоступно, загрузите файл.');
+                    }
+                });
+            });
+        }
+
+        // Закрытие модального окна: по клику на фон, на кнопку закрытия, по Escape
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === modalClose) {
+                    closeModal();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+
+        // ========== УПРАВЛЕНИЕ СТРАНИЦАМИ (SPA для home/contacts) ==========
+        const pages = {
+            home: document.getElementById('home-page'),
+            contacts: document.getElementById('contacts-page')
+        };
+
+        function showPage(pageId) {
+            Object.values(pages).forEach(page => {
+                if (page) page.classList.remove('active-page');
+            });
+            if (pages[pageId]) {
+                pages[pageId].classList.add('active-page');
+                // Если переключаемся на главную страницу — перепривязываем события (так как карточки могли быть пересозданы)
+                if (pageId === 'home') {
+                    setTimeout(() => {
+                        bindCertClickEvents();
+                        initCertImages(); // на всякий случай переинициализация заглушек
+                    }, 30);
+                }
+                document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.style.borderBottomColor = '#2b6c9e';
+                    } else if (link.getAttribute('data-page')) {
+                        link.style.borderBottomColor = 'transparent';
+                    }
+                });
+            } else {
+                if(pages.home) pages.home.classList.add('active-page');
+            }
+        }
+
+        document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId && pages[pageId]) {
+                    showPage(pageId);
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                } else {
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('show');
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+            });
+            const allNavLinks = navLinks.querySelectorAll('a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (menuToggle) menuToggle.textContent = '☰';
+                    }
+                });
+            });
+            document.addEventListener('click', (event) => {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Логотип: обработчик ошибки
+        const logoImg = document.querySelector('.logo-placeholder img');
+        if (logoImg) {
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                parent.style.backgroundColor = '#dde5d4';
+                parent.style.border = '1px solid #cbdbb8';
+                parent.innerHTML = '🤝';
+                parent.style.fontSize = '28px';
+                parent.style.display = 'flex';
+                parent.style.alignItems = 'center';
+                parent.style.justifyContent = 'center';
+            };
+        }
+
+        // Инициализация всех компонентов
+        function init() {
+            initCertImages();
+            bindCertClickEvents();    // привязываем клик для полноэкранного режима
+        }
+        init();
+
+        // Если требуется добавить сертификаты динамически (функция для возможного расширения)
+        window.addCertificate = function(imageSrc, captionText, fullImageSrc) {
+            const grid = document.getElementById('certificatesGrid');
+            if (!grid) return;
+            const card = document.createElement('div');
+            card.className = 'cert-card';
+            const fullImg = fullImageSrc || imageSrc;
+            card.setAttribute('data-full-img', fullImg);
+            card.setAttribute('data-caption', captionText || 'Сертификат');
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'cert-image';
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.alt = captionText || 'Сертификат';
+            img.loading = 'lazy';
+            img.onerror = function() {
+                if (!imgDiv.querySelector('.cert-placeholder')) {
+                    imgDiv.innerHTML = getPlaceholderHTML(captionText || 'Сертификат');
+                }
+            };
+            imgDiv.appendChild(img);
+            const captionDiv = document.createElement('div');
+            captionDiv.className = 'cert-caption';
+            const p = document.createElement('p');
+            p.textContent = captionText || 'Сертификат';
+            captionDiv.appendChild(p);
+            card.appendChild(imgDiv);
+            card.appendChild(captionDiv);
+            grid.appendChild(card);
+            // Привязываем событие клика для новой карточки
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                let imgUrl = card.getAttribute('data-full-img');
+                let cap = card.getAttribute('data-caption');
+                if (imgUrl) openFullImage(imgUrl, cap);
+                else alert('Изображение отсутствует');
+            });
+        };
+        console.log('✅ Страница обновлена: 3 сертификата (4-я карточка удалена), полноразмерные фото, клик для увеличения');
+    </script>
+</body>
+</html>
