@@ -285,9 +285,16 @@
             border-radius: 24px;
             margin-top: 0.25rem;
             box-shadow: inset 0 0 0 1px #f1e9de, 0 2px 6px rgba(0,0,0,0.02);
-            max-height: 350px;
+            max-height: 400px;
             overflow-y: auto;
             scrollbar-width: thin;
+        }
+
+        .description ul {
+            margin: 0.5rem 0 0.5rem 1.5rem;
+        }
+        .description li {
+            margin-bottom: 0.3rem;
         }
 
         .description::-webkit-scrollbar {
@@ -367,7 +374,7 @@
             }
             .description {
                 text-align: left;
-                max-height: 280px;
+                max-height: 320px;
             }
             .photo-frame {
                 max-width: 220px;
@@ -499,7 +506,7 @@
             <div class="team-card" data-person="director" data-cert-page="certificate_general.html">
                 <div class="card-photo">
                     <div class="photo-frame" id="photoDirContainer">
-                        <img src="general.png" alt="Фото генерального директора" id="directorPhoto" style="width:100%; height:100%; object-fit:cover;">
+                        <img src="general.png" alt="Фото генерального директора" id="directorPhoto">
                     </div>
                 </div>
                 <div class="card-info">
@@ -526,7 +533,7 @@
             <div class="team-card" data-person="accountant" data-cert-page="certificate_accountant.html">
                 <div class="card-photo">
                     <div class="photo-frame">
-                        <img src="бухгалтер.png" alt="Фото бухгалтера" id="accountantPhoto" style="width:100%; height:100%; object-fit:cover;">
+                        <img src="бухгалтер.png" alt="Фото бухгалтера" id="accountantPhoto">
                     </div>
                 </div>
                 <div class="card-info">
@@ -541,11 +548,50 @@
                 </div>
             </div>
 
-            <!-- БЛОК 3: ФОТОГРАФ -->
+            <!-- БЛОК 3: ЮРИСТ, ПЕДАГОГ-ПСИХОЛОГ (ОТФОРМАТИРОВАННЫЙ ТЕКСТ + ФОТО) -->
+            <div class="team-card" data-person="lawyer-psychologist" data-cert-page="certificate_lawyer_psychologist.html">
+                <div class="card-photo">
+                    <div class="photo-frame">
+                        <img src="Юрист.png" alt="Володченкова Виктория Игоревна — юрист, педагог-психолог" id="lawyerPsychPhoto">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Юрист, Педагог-психолог</div>
+                    <div class="description">
+                        <p><strong>Володченкова Виктория Игоревна</strong> — юрист, педагог-психолог, жена священника и просто очень активный человек 😊</p>
+                        <p><strong>Родина и характер</strong><br>
+                        Родилась в тихом Сафоновском районе Смоленской области. Оттуда — твёрдость характера и щемящая любовь к малой родине.</p>
+                        
+                        <p><strong>Образование:</strong></p>
+                        <ul>
+                            <li>🎓2001 — Московский колледж госслужбы, специальность «правоведение». Помню тот гордый момент, когда впервые назвала себя будущим защитником закона.</li>
+                            <li>🎓2007 — Смоленский филиал Московского университета МВД.</li>
+                            <li>📖2008 — Московский университет социально-правовой и экономической безопасности (юриспруденция).</li>
+                            <li>📖2011 — получила диплом юриста 💪</li>
+                            <li>📖2024 — Московский психолого-социальный университет. Училась взахлёб, будто открывала новые двери.</li>
+                            <li>📖2025 — получила квалификацию «Психолог в социальной сфере». Это было как возвращение домой — только теперь учусь лечить не законами, а словом, любовью и поддержкой ❤️</li>
+                        </ul>
+
+                        <p><strong>Служба и призвание</strong><br>
+                        С 2005 по 2022 — служила в ГИБДД МВД России. 17 лет стали для меня эпохой: научилась не сдаваться, быть человечной, слышать людей за сухими протоколами и сохранять лицо даже в самой строгой форме. Я горжусь, что носила погоны.</p>
+
+                        <p><strong>Семья и служение</strong><br>
+                        Я жена священника отца Сергия, настоятеля храма в честь Святого Благоверного князя Дмитрия Донского в деревне Шаталово. Это особая радость — и особая ответственность. ✨</p>
+
+                        <p><strong>Душевные встречи и помощь людям</strong><br>
+                        Обожаю наши тёплые, душевные встречи при храме, где никто не торопится расходиться и где всегда тепло. Люблю делиться тем, что считаю важным: основы духовно-нравственного воспитания. Провожу поддерживающие беседы с детьми и пожилыми. Видеть, как загораются глаза у тех, кому просто дали слово и внимание — это бесценно.</p>
+
+                        <p>Так в моей жизни соединились три стихии: закон, понимание души и желание учить и помогать людям.</p>
+                    </div>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
+                </div>
+            </div>
+
+            <!-- БЛОК 4: ФОТОГРАФ -->
             <div class="team-card" data-person="photographer" data-cert-page="certificates_photographer.html">
                 <div class="card-photo">
                     <div class="photo-frame">
-                        <img src="фотограф.png" alt="Фото фотографа" id="photographerPhoto" style="width:100%; height:100%; object-fit:cover;">
+                        <img src="фотограф.png" alt="Фото фотографа" id="photographerPhoto">
                     </div>
                 </div>
                 <div class="card-info">
@@ -556,12 +602,8 @@
                         <p>Юрий продолжил дело отца. Для него фотография — не работа, а способ оставаться собой, быть близко к людям и сохранять для них самые важные моменты. С особым трепетом относится к съёмкам мероприятий, где царит живая атмосфера.</p>
                         <p>Важное направление — сотрудничество с Центром помощи «Надежда». Здесь его камера служит инструментом, чтобы рассказать истории людей, показать их силу, тепло и человечность.</p>
                     </div>
-                    <button class="certificate-btn">📜 Мои сертификаты</button>
                 </div>
             </div>
-
-            <!-- БЛОК 4: СОЦИАЛЬНЫЙ КООРДИНАТОР (дополнительный) -->
-        
         </div>
     </div>
 
@@ -570,9 +612,10 @@
     </footer>
 
     <script>
-        // ========== УПРАВЛЕНИЕ ФОТО: заглушки, анимация, подгрузка ==========
+        // ========== УПРАВЛЕНИЕ ФОТО: заглушки, анимация, корректная подгрузка ==========
         function setupImageWithPlaceholder(imgElement, altText, defaultEmoji = '👤') {
             if (!imgElement) return;
+            // Если src не задан или пустой, или ссылка ведет на текущую страницу — подменяем
             if (!imgElement.src || imgElement.src === "" || imgElement.src === window.location.href || imgElement.src.includes('undefined')) {
                 triggerPlaceholder(imgElement, altText, defaultEmoji);
             } else {
@@ -588,10 +631,11 @@
                 const placeholderDiv = document.createElement('div');
                 placeholderDiv.className = 'photo-placeholder-text';
                 let icon = defaultEmoji;
-                if (altText.includes('директор') || altText.includes('Генеральный')) icon = '👩‍💼';
-                else if (altText.includes('бухгалтер')) icon = '🧾';
-                else if (altText.includes('фотограф')) icon = '📸';
-                else if (altText.includes('координатор') || altText.includes('Психолог')) icon = '🤝';
+                if (altText.includes('Генеральный директор')) icon = '👩‍💼';
+                else if (altText.includes('Главный бухгалтер')) icon = '🧾';
+                else if (altText.includes('Фотограф')) icon = '📸';
+                else if (altText.includes('юрист') || altText.includes('психолог') || altText.includes('Педагог-психолог')) icon = '⚖️🧠';
+                else icon = '👤';
                 placeholderDiv.innerHTML = `${icon}<br><span style="font-size:0.8rem; margin-top:8px; display:block;">Фото сотрудника</span>`;
                 placeholderDiv.style.fontSize = '2.8rem';
                 placeholderDiv.style.flexDirection = 'column';
@@ -609,22 +653,35 @@
         // Получаем элементы фото
         const directorImg = document.getElementById('directorPhoto');
         const accountantImg = document.getElementById('accountantPhoto');
+        const lawyerPsychImg = document.getElementById('lawyerPsychPhoto');
         const photographerImg = document.getElementById('photographerPhoto');
-        const fourthImg = document.getElementById('fourthPhoto');
         
-        // ★★★ ЗДЕСЬ ВЫ ВСТАВЛЯЕТЕ СВОИ ПУТИ К ФОТОГРАФИЯМ ★★★
-        // Если фото нет — покажутся красивые заглушки с анимацией
-        if (directorImg) directorImg.src = "general.png";           // замените на свой путь, например "images/director.jpg"
-        if (accountantImg) accountantImg.src = "бухгалтер.png";       // замените на свой путь
-        if (photographerImg) photographerImg.src = "фотограф.png";      // замените на свой путь
-        if (fourthImg) fourthImg.src = "координатор.png";         // замените на свой путь
+        // ★★★ ПУТИ К ФОТОГРАФИЯМ (исправлены для юриста: путь "Юрист.png" указан явно) ★★★
+        if (directorImg) directorImg.src = "general.png";
+        if (accountantImg) accountantImg.src = "бухгалтер.png";
+        if (lawyerPsychImg) lawyerPsychImg.src = "Юрист.png";        // четкий путь к фото юриста (файл Юрист.png)
+        if (photographerImg) photographerImg.src = "фотограф.png";
         
-        // Заглушки если фото не загрузились
+        // Устанавливаем onerror и заглушки для всех изображений
         setupImageWithPlaceholder(directorImg, 'Генеральный директор', '👩‍💼');
         setupImageWithPlaceholder(accountantImg, 'Главный бухгалтер', '🧾');
+        setupImageWithPlaceholder(lawyerPsychImg, 'Юрист, педагог-психолог', '⚖️🧠');
         setupImageWithPlaceholder(photographerImg, 'Фотограф', '📸');
-        setupImageWithPlaceholder(fourthImg, 'Социальный координатор', '🤝');
         
+        // Дополнительная проверка: если фото юриста не загрузилось, но файл существует технически,
+        // перезапрос с добавлением версии (необязательно, но сохранит чистоту)
+        if (lawyerPsychImg) {
+            const originalSrc = lawyerPsychImg.src;
+            lawyerPsychImg.onerror = function() {
+                if (!this.dataset.fallbackAttempted) {
+                    this.dataset.fallbackAttempted = "true";
+                    this.src = "Юрист.png";
+                } else {
+                    triggerPlaceholder(this, 'Юрист, педагог-психолог', '⚖️🧠');
+                }
+            };
+        }
+
         // Логотип fallback
         const logoImg = document.querySelector('.logo-placeholder img');
         if (logoImg) {
@@ -668,18 +725,14 @@
         }
         
         // ========== КНОПКИ "МОИ СЕРТИФИКАТЫ" ==========
-        // Теперь ссылки на страницы сертификатов хранятся в data-атрибутах родительского div (team-card)
-        // JavaScript только считывает эти значения и выполняет переход.
         const allCertBtns = document.querySelectorAll('.certificate-btn');
         allCertBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Ищем родительскую карточку team-card, у которой есть атрибут data-cert-page
                 const teamCard = btn.closest('.team-card');
                 if (teamCard) {
                     const certPage = teamCard.getAttribute('data-cert-page');
                     if (certPage && certPage.trim() !== "") {
-                        // Переход на страницу сертификатов
                         window.location.href = certPage;
                     } else {
                         alert('Страница с сертификатами в разработке. Скоро мы добавим все достижения!');
@@ -690,8 +743,7 @@
             });
         });
         
-        // Небольшой эффект: чтобы фото "дышали" даже при скролле, оставляем ключевые кадры floatSoft
-        console.log('✅ Сайт команды обновлён: ссылки на сертификаты вынесены в data-атрибуты HTML, JavaScript только управляет переходами.');
+        console.log('✅ Обновлено: текст юриста-психолога оформлен корректно + фото работает по пути "Юрист.png"');
     </script>
 </body>
 </html>
