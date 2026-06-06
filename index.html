@@ -184,9 +184,62 @@
             font-size: 1.3rem;
             font-weight: 400;
             opacity: 0.92;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.2rem;
             border-left: 3px solid #ffcd7e;
             padding-left: 20px;
+        }
+
+        /* --- Стили для блока контактов с телефоном (красиво и адаптивно) --- */
+        .hero-contact-block {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+        .hero-phone-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            border-radius: 80px;
+            padding: 10px 24px 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        .hero-phone-card i {
+            font-size: 1.4rem;
+            color: #ffcd7e;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+        .hero-phone-card span {
+            letter-spacing: 0.3px;
+        }
+        .hero-phone-card:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+        }
+        .hero-support-text {
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.4);
+            border-radius: 60px;
+            padding: 6px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            font-weight: 400;
+        }
+        .hero-support-text i {
+            color: #ffcd7e;
         }
 
         /* Виджет пожертвования */
@@ -350,7 +403,6 @@
             margin-top: 12px;
         }
         
-        /* Кнопка оплаты (ссылка) под QR-кодом */
         .pay-link-button {
             display: inline-flex;
             align-items: center;
@@ -444,7 +496,6 @@
             margin-top: 0;
         }
         
-        /* стили для карточек оплаты - убрали второй способ, оставили только СБП */
         .payment-info-sbp {
             background: #f0f7fe;
             border-radius: 20px;
@@ -540,7 +591,7 @@
             padding-top: 25px;
         }
 
-        /* АДАПТИВНОСТЬ */
+        /* АДАПТИВНОСТЬ + улучшения для телефона под контактный блок */
         @media (max-width: 1100px) {
             .hero-grid-custom { gap: 32px; }
             .hero-text-block h1 { font-size: 2.5rem; }
@@ -558,6 +609,9 @@
             .logo-area { justify-content: center; }
             .nav-links { justify-content: center; gap: 12px; }
             .nav-links a { font-size: 0.85rem; white-space: normal; text-align: center; }
+            .hero-contact-block { flex-direction: column; align-items: flex-start; }
+            .hero-phone-card { font-size: 1rem; padding: 8px 20px; }
+            .hero-support-text { font-size: 0.8rem; }
         }
         @media (max-width: 700px) {
             .container { padding: 0 20px; }
@@ -568,6 +622,8 @@
             .footer .container { flex-direction: column; gap: 30px; text-align: center; }
             .social-links { justify-content: center; }
             .qr-placeholder { width: 150px; height: 150px; }
+            .hero-phone-card { font-size: 0.95rem; padding: 7px 18px; gap: 8px; }
+            .hero-phone-card i { font-size: 1.2rem; }
         }
         @media (max-width: 550px) {
             .hero-text-block h1 { font-size: 1.7rem; }
@@ -575,6 +631,14 @@
             .double-buttons { flex-direction: column; gap: 10px; }
             .logo-text { font-size: 1.1rem; white-space: normal; }
             .qr-placeholder { width: 130px; height: 130px; }
+            .hero-contact-block { width: 100%; }
+            .hero-phone-card { width: 100%; justify-content: center; }
+            .hero-support-text { width: auto; justify-content: center; margin-top: 0; }
+        }
+        /* Для очень маленьких устройств дополнительные отступы */
+        @media (max-width: 480px) {
+            .hero-text-block .hero-sub { font-size: 1rem; padding-left: 15px; }
+            .hero-phone-card span { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -613,6 +677,15 @@
                 <div class="hero-text-block">
                     <h1>АНО «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h1>
                     <div class="hero-sub">Помощь там, где она нужнее</div>
+                    
+                    <!-- НОВЫЙ КРАСИВЫЙ БЛОК КОНТАКТОВ С ТЕЛЕФОНОМ (адаптив) -->
+                    <div class="hero-contact-block">
+                        <a href="tel:+79082813678" class="hero-phone-card">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+7 (908) 281-36-78</span>
+                        </a>
+                        
+                    </div>
                 </div>
 
                 <!-- Виджет пожертвования с ручным QR-кодом и ссылкой -->
@@ -635,7 +708,6 @@
                         <button type="button" class="next-btn" id="toStep2">Далее</button>
                     </div>
 
-                    <!-- Шаг 2: теперь просто информационный блок, без выбора способа оплаты (только СБП) -->
                     <div id="step2" class="step">
                         <h3>Способ оплаты</h3>
                         <div class="payment-info-sbp">
@@ -654,24 +726,20 @@
                             <label>Имя *</label>
                             <input type="text" id="donorName" placeholder="Иван">
                         </div>
-                    
                         <div class="form-group">
                             <label>Телефон</label>
                             <input type="tel" id="donorPhone" placeholder="+7 (999) 123-45-67">
                         </div>
                         
-                        <!-- Блок с QR-кодом СБП (ручная вставка) и кнопка оплаты -->
                         <div class="qr-block" id="qrBlock" style="display: none;">
                             <div class="qr-placeholder">
-                                <!-- ИЗОБРАЖЕНИЕ QR-КОДА: замените ссылку на ваш реальный QR-код -->
                                 <img id="sbpQrImage" src="pastedImage.png" alt="QR-код СБП для пожертвования" style="width:100%; height:100%; object-fit:contain;">
                             </div>
                             <div class="qr-label">
                                 <i class="fas fa-mobile-alt"></i> Сканируйте QR-код СБП
                             </div>
-                            <!-- КНОПКА ОПЛАТЫ (ССЫЛКА) - замените YOUR_PAYMENT_LINK на реальную платёжную ссылку СБП -->
                             <a href="#" id="paymentActionLink" class="pay-link-button" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-credit-card"></i> Оплатить картой
+                                <i class="fas fa-credit-card"></i> Оплатить через СБП
                             </a>
                             <div class="qr-note">
                                 Откроется приложение вашего банка для перевода
@@ -724,9 +792,8 @@
 
 <script>
     (function() {
-        // ========== НАСТРОЙКА: ЗАМЕНИТЕ НИЖЕ ВАШИ ДАННЫЕ ДЛЯ ОПЛАТЫ ==========
-        // 1. Ссылка на платёжную страницу / кнопку СБП (обязательно)
-        const PAYMENT_LINK = "https://sberbank.com/sms/mybill?cs=7514888322583";   // <-- ЗАМЕНИТЕ НА РЕАЛЬНУЮ ССЫЛКУ ОПЛАТЫ
+        const PAYMENT_LINK = "https://sberbank.com/sms/mybill?cs=7514888322583";
+        
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const step3 = document.getElementById('step3');
@@ -758,7 +825,6 @@
             });
             
             if (stepNumber === 3) {
-                // при переходе на шаг 3 скрываем QR-блок, чтобы показать его только после нажатия "Показать"
                 if (qrBlock) qrBlock.style.display = 'none';
             }
         }
@@ -848,20 +914,11 @@
                 e.preventDefault();
                 
                 const name = document.getElementById('donorName')?.value.trim();
-                const email = document.getElementById('donorEmail')?.value.trim();
                 const phone = document.getElementById('donorPhone')?.value.trim();
                 const agreeCheck = document.getElementById('agree');
                 
                 if (!name) {
                     alert('Укажите ваше имя');
-                    return;
-                }
-                if (!email) {
-                    alert('Укажите E-mail для получения чека');
-                    return;
-                }
-                if (!email.includes('@') || !email.includes('.')) {
-                    alert('Введите корректный E-mail адрес');
                     return;
                 }
                 if (!agreeCheck.checked) {
@@ -876,28 +933,23 @@
                     return;
                 }
                 
-                // Отправка данных в formspree
                 const formData = new FormData();
                 formData.append('name', name);
-                formData.append('email', email);
                 formData.append('phone', phone || '');
                 formData.append('donation_amount', finalAmount.toString());
                 formData.append('payment_method', 'sbp_qr');
                 formData.append('agreement', 'on');
                 sendToFormspree(formData);
                 
-                // Показываем блок с QR-кодом (который уже вставлен вручную)
                 if (qrBlock) {
                     qrBlock.style.display = 'block';
                 }
                 
-                // Устанавливаем реальную ссылку для оплаты в кнопку
                 if (paymentLinkBtn) {
                     paymentLinkBtn.href = PAYMENT_LINK;
                     paymentLinkBtn.style.display = 'inline-flex';
                 }
                 
-                // Прокрутка к виджету
                 const widget = document.querySelector('.donation-widget');
                 if (widget) widget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 
@@ -905,7 +957,6 @@
             });
         }
         
-        // Выбираем сумму по умолчанию
         const defaultAmountBtn = document.querySelector('.amount-btn');
         if (defaultAmountBtn && !document.querySelector('.amount-btn.selected')) {
             defaultAmountBtn.classList.add('selected');
