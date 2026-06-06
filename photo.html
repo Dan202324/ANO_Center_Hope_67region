@@ -175,7 +175,7 @@
             box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.18);
         }
 
-        /* Слайдер-контейнер — фиксированное соотношение 4/3 для идеального отображения фото */
+        /* Слайдер-контейнер — фиксированное соотношение 4/3 */
         .slider-container {
             position: relative;
             width: 100%;
@@ -206,7 +206,6 @@
             background: #cfc6b6;
         }
 
-        /* Кнопки навигации слайдера */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -240,7 +239,6 @@
             right: 12px;
         }
 
-        /* индикаторы точек */
         .slider-dots {
             position: absolute;
             bottom: 14px;
@@ -269,38 +267,63 @@
             box-shadow: 0 0 6px #ffefb0;
         }
 
-        /* Контент карточки — выравнивание и читаемость */
+        /* Контент карточки — красивое оформление текста */
         .card-content {
             padding: 1.6rem 1.5rem 2rem;
             background: #fffff8;
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
+        /* Базовое выравнивание по ширине для всего текста в карточке */
         .card-content p {
             font-size: 1rem;
             line-height: 1.6;
             color: #2a3b2c;
             margin-bottom: 0.6rem;
-            text-align: left;
+            text-align: justify;
             word-break: break-word;
         }
 
-        .card-content strong {
-            color: #2d6a4f;
-            font-weight: 700;
-            background: transparent;
-        }
-
-        /* Дополнительная жирность для важных фраз */
-        .card-content p strong.emphasis {
-            font-size: 1.02rem;
-            letter-spacing: -0.2px;
+        .card-content {
+            text-align: justify;
         }
         
-        /* будущий раздел */
+        /* Стили для жирного текста — делаем акцент красиво */
+        .card-content strong, 
+        .card-content b {
+            font-weight: 700;
+            color: #2d6a4f;
+            display: inline;
+            background: linear-gradient(120deg, rgba(109, 141, 78, 0.08) 0%, rgba(109, 141, 78, 0) 80%);
+            padding: 0 2px;
+        }
+        
+        /* Особо важные блоки (эмодзи/даты) */
+        .card-content p strong.emphasis-badge {
+            font-size: 1.02rem;
+            letter-spacing: -0.2px;
+            background: transparent;
+        }
+        
+        /* Добавляем лёгкий акцент на списки */
+        .card-content br + strong {
+            margin-top: 4px;
+            display: inline-block;
+        }
+        
+        /* Сохраняем маркированные списки читаемыми */
+        .card-content ul, .card-content ol {
+            margin: 0.5rem 0 0.75rem 1.5rem;
+            text-align: left;
+        }
+        .card-content li {
+            margin-bottom: 0.3rem;
+            text-align: justify;
+        }
+
         .empty-future {
             text-align: center;
             padding: 3rem 2rem;
@@ -325,7 +348,6 @@
             margin-top: 2rem;
         }
 
-        /* Адаптивность */
         @media (max-width: 780px) {
             .container {
                 padding: 0 20px;
@@ -400,7 +422,6 @@
             }
         }
 
-        /* Анимация появления карточек */
         .merged-card {
             opacity: 0;
             transform: translateY(12px);
@@ -416,20 +437,16 @@
         .cards-grid .merged-card:nth-child(2) { animation-delay: 0.07s; }
         .cards-grid .merged-card:nth-child(3) { animation-delay: 0.12s; }
         .cards-grid .merged-card:nth-child(4) { animation-delay: 0.17s; }
+        .cards-grid .merged-card:nth-child(5) { animation-delay: 0.22s; }
+        .cards-grid .merged-card:nth-child(6) { animation-delay: 0.27s; }
+        .cards-grid .merged-card:nth-child(7) { animation-delay: 0.32s; }
 
         .card-content p:last-child {
             margin-bottom: 0;
         }
         
-        /* скрываем исходные галереи */
         .gallery-images {
             display: none;
-        }
-        
-        /* Небольшая стилизация для текста — жирные акценты */
-        .card-content p strong:first-child {
-            display: inline-block;
-            margin-bottom: 0.2rem;
         }
     </style>
 </head>
@@ -457,11 +474,45 @@
 </header>
 
 <main class="timeline-section">
-    <!-- 2026 год: карточки с фотографиями. Все изображения автоматически станут полноценным слайдером с соотношением 4:3 -->
+    <!-- 2026 год: карточки с фотографиями + выверенная жирность (содержание не изменено) -->
     <div class="year-category">
         <div class="year-badge">2026</div>
         <div class="cards-grid" id="cards2026Grid">
 
+            <!-- КАРТОЧКА 1: Тренинг для соискателей -->
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="P_10.png" alt="Команда Центра Надежда за работой">
+                    <img src="P_11.png" alt="Уютный офис Центра Надежда">
+                    <img src="P_12.png" alt="Уютный офис Центра Надежда">
+                </div>
+                <div class="card-content">
+                    <p><strong>5 июня 2026 года</strong> прошёл наш тренинг для соискателей <strong>«Самопрезентация и резюме: первые шаги к работе мечты»</strong>. ✨</p>
+                    <p>Мы разобрали:<br>
+✔️ Как составить резюме, чтобы его заметили.<br>
+✔️ Секреты уверенной самопрезентации.<br>
+✔️ Главные правила диалога с работодателем на первой встрече.</p>
+                    <p>Участницы не только получили новые знания, но и отработали ключевые моменты на практике. Теперь они точно знают, как говорить о своих сильных сторонах и производить нужное впечатление.</p>
+                    <p><strong>Уверена, эти навыки помогут им успешно трудоустроиться!</strong> 🚀</p>
+                    <p>Благодарю всех за активность. Двигаемся дальше — <strong>к вашим победам!</strong></p>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 2: Гуманитарная помощь 1 июня -->
+            <div class="merged-card">
+                <div class="gallery-images">
+                    <img src="P_01.png" alt="Команда Центра Надежда за работой">
+                    <img src="P_02.png" alt="Уютный офис Центра Надежда">
+                    <img src="P_03.png" alt="Уютный офис Центра Надежда">
+                    <img src="P_04.png" alt="Уютный офис Центра Надежда">
+                </div>
+                <div class="card-content">
+                    <p>Хоть и небольшую, но честно собранную <strong>гуманитарную помощь для наших ребят, находящихся в СВО, мы отправили 1 июня 2026 года.</strong> Ребята были очень благодарны!</p>
+                    <p><strong>Мы уже не раз убеждались: когда мы вместе — мы сила.</strong> И сегодня хочется сказать слова огромной, до слёз благодарности каждому, кто откликнулся на наши просьбы и принял участие в сборе. ❤️</p>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 3: Женский клуб «Древо рода» -->
             <div class="merged-card">
                 <div class="gallery-images">
                     <img src="Photo_010.jpg" alt="Команда Центра Надежда за работой">
@@ -470,19 +521,16 @@
                     <img src="Photo_013.jpg" alt="Уютный офис Центра Надежда">
                 </div>
                 <div class="card-content">
-                    <p>1 июня прошло мероприятие для женского клуба женщин, которые на сегодняшний день в поиске работы  «Древо рода» как инструмент профориентации.
-
-Снятие «синдрома самозванца»
-
-В условиях жесткого рынка труда многие специалисты теряют уверенность. Они видят только свои текущие недостатки, но упускают из виду фундамент, на котором стоят.
-В ходе мероприятия мы предложили участникам (соискателям и действующим сотрудникам) не просто нарисовать схему родственников, а проанализировать, какие архетипы поведения, профессиональные династии и ценности передаются в семье.
-
-Результат: Участники осознали, что их стрессоустойчивость, трудоголизм или талант к переговорам — это не просто строчки в резюме, а часть родовой истории. Это дало мощный эмоциональный ресурс для прохождения сложных собеседований.
-«Древо рода» — это не эзотерика. Это метод стратегического планирования карьеры, который помогает собрать воедино разрозненные навыки и превратить их в мощное личное бренд-сообщение.
-Все ушли в хорошем настроении получив новые знания  ❤️</p>
+                    <p><strong>1 июня прошло мероприятие для женского клуба женщин, которые на сегодняшний день в поиске работы «Древо рода» как инструмент профориентации.</strong> Снятие «синдрома самозванца».</p>
+                    <p>В условиях жесткого рынка труда многие специалисты теряют уверенность. Они видят только свои текущие недостатки, но упускают из виду фундамент, на котором стоят.<br> 
+                    В ходе мероприятия мы предложили участникам (соискателям и действующим сотрудникам) не просто нарисовать схему родственников, а проанализировать, какие архетипы поведения, профессиональные династии и ценности передаются в семье.</p>
+                    <p><strong>Результат:</strong> Участники осознали, что их стрессоустойчивость, трудоголизм или талант к переговорам — это не просто строчки в резюме, а часть родовой истории. Это дало мощный эмоциональный ресурс для прохождения сложных собеседований.</p>
+                    <p><strong>«Древо рода»</strong> — это не эзотерика. Это метод стратегического планирования карьеры, который помогает собрать воедино разрозненные навыки и превратить их в мощное личное бренд-сообщение.</p>
+                    <p>Все ушли в хорошем настроении, получив новые знания ❤️</p>
                 </div>
             </div>
 
+            <!-- КАРТОЧКА 4: Консультация с ветераном СВО -->
             <div class="merged-card">
                 <div class="gallery-images">
                     <img src="Photo_001.jpg" alt="Команда Центра Надежда за работой">
@@ -490,15 +538,15 @@
                 </div>
                 <div class="card-content">
                     <p><strong>«Консультация с ветераном СВО: поиск себя и новая опора» — опора на себя.</strong></p>
-                    <p>За столом напротив — мужчина. Участник СВО. За плечами — колоссальный опыт выживания, ответственности, принятия решений там, где цена ошибки — жизнь.
-А сегодня он говорит мне: «Я не знаю, кто я на гражданке. Ищу себя. И боюсь, что никому не нужен на работе». Нет понимания, куда двигаться дальше, но очень хочется его найти.</p>
-                    <p>1. «Ищу себя» — это не слабость. Это честность после того, как старые роли перестали работать, а новые ещё не родились.
-2. Трудоустройство для него — это не про деньги. Это про «как найти себя, где стать нужным и востребованным специалистом».</p>
-                    <p>Ветеран СВО приходит на консультацию не за готовыми ответами — он приходит за направлением. Его главный ресурс — уже не броня и оружие, а честность перед самим собой. И первый шаг к новой опоре — мы смогли построить вместе!❣️</p>
+                    <p>За столом напротив — мужчина. Участник СВО. За плечами — колоссальный опыт выживания, ответственности, принятия решений там, где цена ошибки — жизнь.<br>
+                    А сегодня он говорит мне: <strong>«Я не знаю, кто я на гражданке. Ищу себя. И боюсь, что никому не нужен на работе».</strong> Нет понимания, куда двигаться дальше, но очень хочется его найти.</p>
+                    <p><strong>1. «Ищу себя» — это не слабость.</strong> Это честность после того, как старые роли перестали работать, а новые ещё не родились.<br>
+                    <strong>2. Трудоустройство для него — это не про деньги.</strong> Это про «как найти себя, где стать нужным и востребованным специалистом».</p>
+                    <p>Ветеран СВО приходит на консультацию не за готовыми ответами — он приходит за направлением. Его главный ресурс — уже не броня и оружие, а честность перед самим собой. <strong>И первый шаг к новой опоре — мы смогли построить вместе!</strong>❣️</p>
                 </div>
             </div>
             
-            
+            <!-- КАРТОЧКА 5: Знакомство с центром "Надежда" (история) -->
             <div class="merged-card">
                 <div class="gallery-images">
                     <img src="Photo_01.png" alt="Команда Центра Надежда за работой">
@@ -506,15 +554,16 @@
                 </div>
                 <div class="card-content">
                     <p><strong>🍀 Познакомимся? Мы — АНО Центр «Надежда» г. Починок 🍀</strong><br>
-Имя выбрано не случайно, в память о моей бабушке Надежде, как самая дорогая реликвия нашего рода. Почему открылся этот "Центр Надежда"? Потому что с уходом бабушки в нашей семье обнаружилась пустота. Не просто горечь потери, а отсутствие того тепла, к которому все привыкли. И я решила, что в память о ней я сделаю что-то важное и очень хорошее! ♥</p>
+                    Имя выбрано не случайно, в память о моей бабушке Надежде, как самая дорогая реликвия нашего рода. Почему открылся этот "Центр Надежда"? Потому что с уходом бабушки в нашей семье обнаружилась пустота. Не просто горечь потери, а отсутствие того тепла, к которому все привыкли. <strong>И я решила, что в память о ней я сделаю что-то важное и очень хорошее!</strong> ♥</p>
                     <p><strong>♥ Я хорошо помню её руки и её любовь.</strong> Когда-то бабушка держала меня за руку и учила быть доброй, любящей, открытой сердцем к людям. Помогать — не на словах, а на деле, даже когда самой трудно! Эти уроки остались со мной навсегда, но долгое время жили только внутри...</p>
                     <p><strong>✅ И вот однажды я поняла: этого мало.</strong> Просто помнить и просто быть добрым человеком — недостаточно. Нужно дело, в котором эти уроки обретут форму. ❣️ Так родился центр. Не как памятник из камня, а как живое продолжение её рук и её сердца. Теперь всё, чему она меня учила, осуществилось — не во мне одной, а в работе «Надежды».</p>
-                    <p>Мы открылись, чтобы делать ровно то, что делала она: поддерживать тех, кто оказался в трудной ситуации. Без громких фраз, без показухи — по-семейному, по-настоящему ❤️. Для нас «Надежда» — это не просто бренд. Это наша фамильная ответственность. Добро пожаловать в место, где помогают так, как учила бабушка Надежда. Пока мы работаем — она продолжает жить. ❣️</p>
-                    <p><strong>Генеральный директор центра: Сидоренкова Наталья Юрьевна<br>📞 8 908 2813678</strong></p>
+                    <p>Мы открылись, чтобы делать ровно то, что делала она: поддерживать тех, кто оказался в трудной ситуации. Без громких фраз, без показухи — по-семейному, по-настоящему ❤️. <strong>Для нас «Надежда» — это не просто бренд. Это наша фамильная ответственность.</strong> Добро пожаловать в место, где помогают так, как учила бабушка Надежда. Пока мы работаем — она продолжает жить. ❣️</p>
+                    <p><strong>Генеральный директор центра: Сидоренкова Наталья Юрьевна</strong><br>
+                    <strong>📞 8 908 2813678</strong></p>
                 </div>
             </div>
 
-            <!-- КАРТОЧКА 2: Участие в слёте «Объединяя усилия» (4 фото) -->
+            <!-- КАРТОЧКА 6: Участие в слёте «Объединяя усилия» -->
             <div class="merged-card">
                 <div class="gallery-images">
                     <img src="Photo_21.png" alt="Выступление на слёте Объединяя усилия">
@@ -524,19 +573,19 @@
                 </div>
                 <div class="card-content">
                     <p><strong>🌟 Я, Сидоренкова Наталья Юрьевна, приняла участие в практикоориентированной обучающей программе областного методического слёта с международным участием «Объединяя усилия».</strong></p>
-                    <p>Ключевая тема нашего фокуса — ранняя помощь детям и семьям. Мы говорили о том, что:<br>
-· возраст — не барьер, а ресурс;<br>
-· с каждым годом открываются новые возможности в возрасте;<br>
-· чем раньше начинается поддержка, тем больше шансов у ребёнка и семьи на комфортное развитие.</p>
-                    <p>В ходе слёта состоялся живой обмен опытом между Смоленском и учреждениями Витебска, и я получила реальные, практические знания, которые можно внедрять уже завтра. Когда мы соединяем раннюю помощь, уважение к возрасту и международное сотрудничество — рождаются настоящие новые возможности.</p>
+                    <p><strong>Ключевая тема нашего фокуса — ранняя помощь детям и семьям.</strong> Мы говорили о том, что:<br>
+                    · возраст — не барьер, а ресурс;<br>
+                    · с каждым годом открываются новые возможности в возрасте;<br>
+                    · чем раньше начинается поддержка, тем больше шансов у ребёнка и семьи на комфортное развитие.</p>
+                    <p>В ходе слёта состоялся живой обмен опытом между Смоленском и учреждениями Витебска, и я получила реальные, практические знания, которые можно внедрять уже завтра. <strong>Когда мы соединяем раннюю помощь, уважение к возрасту и международное сотрудничество — рождаются настоящие новые возможности.</strong></p>
                     <p><strong>👶 Ранняя помощь детям и семьям — это не просто метод, это философия.</strong><br>
-📆 Возраст — это не ступор, а этап с огромным потенциалом.<br>
-⭐ Новые возможности в возрасте есть всегда, если знать, как их увидеть.<br>
-Благодарю коллег из Смоленска и Витебска за обмен опытом и глубокие практические знания.</p>
+                    📆 Возраст — это не ступор, а этап с огромным потенциалом.<br>
+                    ⭐ Новые возможности в возрасте есть всегда, если знать, как их увидеть.<br>
+                    Благодарю коллег из Смоленска и Витебска за обмен опытом и глубокие практические знания.</p>
                 </div>
             </div>
 
-            <!-- КАРТОЧКА 3: Гуманитарная миссия / помощь СВО -->
+            <!-- КАРТОЧКА 7: Гуманитарная миссия / помощь СВО -->
             <div class="merged-card">
                 <div class="gallery-images">
                     <img src="Photo_31.png" alt="Сбор гуманитарной помощи для бойцов">
@@ -545,8 +594,8 @@
                 <div class="card-content">
                     <p><strong>❣️ Когда сердце отзывается помочь, помогите сердцем ❣️</strong></p>
                     <p>На днях АНО ЦЕНТР ПОМОЩИ "НАДЕЖДА" г.Починок собрала и отправила очередную партию посылок для наших ребят — участников СВО. Это не просто «гуманитарка». За каждой коробкой — забота и желание сказать: <strong>«Мы вас ждём. Вы не одни, Мы рядом!»</strong></p>
-                    <p>Что внутри? Самое нужное: тёплые вещи, окопные свечи, медикаменты, письма с родными словами. Если вы тоже хотите быть причастными — не проходите мимо.</p>
-                    <p>👉 Наведите камеру на QR-код и отправьте частичку тепла ❤️<br>А я даю гарантии и все фото/видео отчёты! Всё дойдёт адресам в первые руки 🥰</p>
+                    <p>Что внутри? Самое нужное: тёплые вещи, окопные свечи, медикаменты, письма с родными словами. <strong>Если вы тоже хотите быть причастными — не проходите мимо.</strong></p>
+                    <p>👉 Наведите камеру на QR-код и отправьте частичку тепла ❤️<br>А я даю гарантии и все фото/видео отчёты! <strong>Всё дойдёт адресам в первые руки</strong> 🥰</p>
                     <p><strong>#СвоихНеБросаем #Мырядом</strong></p>
                 </div>
             </div>
@@ -568,12 +617,7 @@
 
 <script>
     (function() {
-        // ------------------------------------------------------------------
-        // УНИВЕРСАЛЬНЫЙ СЛАЙДЕР из img внутри .gallery-images.
-        // ВАЖНО: теперь фотографии идеально вписываются в соотношение 4:3 и полностью видны.
-        // Скрипт автоматически создаёт кнопки, точки, автопрокрутку.
-        // ------------------------------------------------------------------
-
+        // УНИВЕРСАЛЬНЫЙ СЛАЙДЕР из img внутри .gallery-images
         function buildSliderFromGallery(galleryContainer, cardElement) {
             const imgElements = Array.from(galleryContainer.querySelectorAll('img'));
             if (imgElements.length === 0) return;
@@ -583,9 +627,7 @@
                 alt: img.getAttribute('alt') || `Фото ${idx+1}`
             }));
 
-            // скрываем исходный контейнер
             galleryContainer.style.display = 'none';
-
             const sliderContainer = document.createElement('div');
             sliderContainer.className = 'slider-container';
 
@@ -609,10 +651,8 @@
                 slideDiv.appendChild(img);
                 track.appendChild(slideDiv);
             });
-
             sliderContainer.appendChild(track);
 
-            // Кнопки
             const btnPrev = document.createElement('button');
             btnPrev.className = 'slider-btn slider-prev';
             btnPrev.innerHTML = '‹';
@@ -622,7 +662,6 @@
             sliderContainer.appendChild(btnPrev);
             sliderContainer.appendChild(btnNext);
 
-            // Точки
             const dotsContainer = document.createElement('div');
             dotsContainer.className = 'slider-dots';
             for (let i = 0; i < slidesData.length; i++) {
@@ -638,7 +677,8 @@
                         const newIndex = i;
                         const slideWidth = trackElem.parentElement.clientWidth;
                         trackElem.style.transform = `translateX(-${newIndex * slideWidth}px)`;
-                        updateDotsActive(currentSlider, newIndex);
+                        const dots = currentSlider.querySelectorAll('.slider-dot');
+                        dots.forEach((d, idx) => idx === newIndex ? d.classList.add('active') : d.classList.remove('active'));
                         if (currentSlider.sliderCurrentIndex !== undefined) currentSlider.sliderCurrentIndex = newIndex;
                         resetAutoPlayForSlider(currentSlider);
                     }
@@ -657,14 +697,6 @@
                 track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
             }
 
-            function updateDotsActive(sliderC, activeIdx) {
-                const dots = sliderC.querySelectorAll('.slider-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === activeIdx) dot.classList.add('active');
-                    else dot.classList.remove('active');
-                });
-            }
-
             function goToSlide(index, skipSmooth = false) {
                 const maxIndex = slidesData.length - 1;
                 if (index < 0) index = 0;
@@ -679,54 +711,19 @@
                 } else {
                     track.style.transform = `translateX(${translateValue}px)`;
                 }
-                updateDotsActive(sliderContainer, currentIndex);
+                const dots = sliderContainer.querySelectorAll('.slider-dot');
+                dots.forEach((dot, idx) => idx === currentIndex ? dot.classList.add('active') : dot.classList.remove('active'));
             }
 
-            function nextSlide() {
-                if (currentIndex + 1 < slidesData.length) {
-                    goToSlide(currentIndex + 1);
-                } else {
-                    goToSlide(0);
-                }
-            }
+            function nextSlide() { goToSlide(currentIndex + 1 >= slidesData.length ? 0 : currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1 < 0 ? slidesData.length - 1 : currentIndex - 1); }
 
-            function prevSlide() {
-                if (currentIndex - 1 >= 0) {
-                    goToSlide(currentIndex - 1);
-                } else {
-                    goToSlide(slidesData.length - 1);
-                }
-            }
+            btnNext.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); resetAutoPlayForSlider(sliderContainer); });
+            btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); resetAutoPlayForSlider(sliderContainer); });
 
-            btnNext.addEventListener('click', (e) => {
-                e.stopPropagation();
-                nextSlide();
-                resetAutoPlayForSlider(sliderContainer);
-            });
-            btnPrev.addEventListener('click', (e) => {
-                e.stopPropagation();
-                prevSlide();
-                resetAutoPlayForSlider(sliderContainer);
-            });
-
-            window.addEventListener('resize', () => {
-                if (sliderContainer.isConnected) {
-                    slideWidth = sliderContainer.clientWidth;
-                    goToSlide(currentIndex, true);
-                }
-            });
-
+            window.addEventListener('resize', () => { if (sliderContainer.isConnected) { slideWidth = sliderContainer.clientWidth; goToSlide(currentIndex, true); } });
             sliderContainer.sliderCurrentIndex = 0;
 
-            // Автопрокрутка
-            function startAutoPlay() {
-                if (autoInterval) clearInterval(autoInterval);
-                autoInterval = setInterval(() => {
-                    if (document.hasFocus() && sliderContainer.isConnected && sliderContainer.closest('.merged-card')) {
-                        nextSlide();
-                    }
-                }, 5000);
-            }
             function resetAutoPlayForSlider(sliderC) {
                 if (sliderC.autoInterval) clearInterval(sliderC.autoInterval);
                 sliderC.autoInterval = setInterval(() => {
@@ -736,69 +733,24 @@
                     }
                 }, 5000);
             }
-            startAutoPlay();
-            sliderContainer.autoInterval = autoInterval;
-
-            sliderContainer.addEventListener('mouseenter', () => {
-                if (sliderContainer.autoInterval) {
-                    clearInterval(sliderContainer.autoInterval);
-                    sliderContainer.autoInterval = null;
-                }
-            });
-            sliderContainer.addEventListener('mouseleave', () => {
-                if (!sliderContainer.autoInterval) {
-                    sliderContainer.autoInterval = setInterval(() => {
-                        if (document.hasFocus() && sliderContainer.isConnected) {
-                            const nextBtn = sliderContainer.querySelector('.slider-next');
-                            if (nextBtn) nextBtn.click();
-                        }
-                    }, 5000);
-                }
-            });
-
-            setTimeout(() => {
-                if (sliderContainer.clientWidth) {
-                    slideWidth = sliderContainer.clientWidth;
-                    goToSlide(currentIndex, true);
-                }
-            }, 80);
-
+            resetAutoPlayForSlider(sliderContainer);
+            sliderContainer.addEventListener('mouseenter', () => { if (sliderContainer.autoInterval) { clearInterval(sliderContainer.autoInterval); sliderContainer.autoInterval = null; } });
+            sliderContainer.addEventListener('mouseleave', () => { if (!sliderContainer.autoInterval) resetAutoPlayForSlider(sliderContainer); });
+            setTimeout(() => { if (sliderContainer.clientWidth) { slideWidth = sliderContainer.clientWidth; goToSlide(currentIndex, true); } }, 80);
             const contentDiv = cardElement.querySelector('.card-content');
-            if (contentDiv) {
-                cardElement.insertBefore(sliderContainer, contentDiv);
-            } else {
-                cardElement.appendChild(sliderContainer);
-            }
+            if (contentDiv) cardElement.insertBefore(sliderContainer, contentDiv);
+            else cardElement.appendChild(sliderContainer);
         }
 
         function initAllImgBasedSliders() {
-            const cards = document.querySelectorAll('.merged-card');
-            cards.forEach(card => {
+            document.querySelectorAll('.merged-card').forEach(card => {
                 if (card.querySelector('.slider-container')) return;
                 const galleryDiv = card.querySelector('.gallery-images');
-                if (galleryDiv && galleryDiv.querySelectorAll('img').length > 0) {
-                    buildSliderFromGallery(galleryDiv, card);
-                }
+                if (galleryDiv && galleryDiv.querySelectorAll('img').length > 0) buildSliderFromGallery(galleryDiv, card);
             });
         }
-
         initAllImgBasedSliders();
-
-        const observer = new MutationObserver(() => {
-            const cardsWithoutSlider = document.querySelectorAll('.merged-card:not(.slider-initialized)');
-            cardsWithoutSlider.forEach(card => {
-                if (!card.querySelector('.slider-container')) {
-                    const gallery = card.querySelector('.gallery-images');
-                    if (gallery && gallery.querySelectorAll('img').length > 0) {
-                        card.classList.add('slider-initialized');
-                        buildSliderFromGallery(gallery, card);
-                    }
-                } else {
-                    card.classList.add('slider-initialized');
-                }
-            });
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
+        new MutationObserver(() => initAllImgBasedSliders()).observe(document.body, { childList: true, subtree: true });
 
         // Мобильное меню
         const menuToggle = document.getElementById('menuToggle');
@@ -809,13 +761,10 @@
                 navLinks.classList.toggle('show');
                 menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
             });
-            const allNavLinks = navLinks.querySelectorAll('a');
-            allNavLinks.forEach(link => {
+            document.querySelectorAll('#navLinks a').forEach(link => {
                 link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('show')) {
-                        navLinks.classList.remove('show');
-                        if (menuToggle) menuToggle.textContent = '☰';
-                    }
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
                 });
             });
             document.addEventListener('click', (event) => {
