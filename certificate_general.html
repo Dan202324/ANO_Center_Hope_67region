@@ -26,7 +26,7 @@
             padding: 0 24px;
         }
 
-        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ ========== */
         .header {
             position: sticky;
             top: 0;
@@ -88,7 +88,6 @@
             color: #5f7d9c;
         }
 
-        /* Гамбургер-меню для мобильных */
         .menu-toggle {
             display: none;
             background: none;
@@ -129,7 +128,7 @@
             border-bottom-color: #2b6c9e;
         }
 
-        /* ========== ОСНОВНОЙ КОНТЕНТ (галерея сертификатов) ========== */
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
         .page {
             display: none;
             max-width: 1280px;
@@ -152,7 +151,6 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        /* Стили для блока "Мои сертификаты" */
         .certificates-header {
             text-align: left;
             margin-bottom: 1.8rem;
@@ -175,18 +173,16 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Сетка для сертификатов — аккуратные карточки */
+        /* Сетка для сертификатов — карточки с полноразмерными изображениями (без кликабельности) */
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
 
         .cert-card {
-            background: #ffffffdd;
-            backdrop-filter: blur(4px);
             background: #fffef9;
             border-radius: 28px;
             overflow: hidden;
@@ -195,6 +191,8 @@
             border: 1px solid #f0e2d2;
             display: flex;
             flex-direction: column;
+            /* Убран курсор pointer, так как клик больше не открывает модалку */
+            cursor: default;
         }
 
         .cert-card:hover {
@@ -203,10 +201,9 @@
             border-color: #dacfbc;
         }
 
-        /* Блок для изображения */
+        /* Блок для изображения - полный размер без обрезки */
         .cert-image {
             width: 100%;
-            aspect-ratio: 3 / 4; /* классическое соотношение для сертификата/диплома */
             background-color: #f8f4ec;
             display: flex;
             align-items: center;
@@ -214,24 +211,25 @@
             overflow: hidden;
             position: relative;
             border-bottom: 1px solid #ece1d2;
+            min-height: 320px;
         }
 
         .cert-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
             transition: transform 0.3s ease;
             display: block;
+            background: #fffdf7;
         }
 
         .cert-card:hover .cert-image img {
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
 
-        /* Заглушка если картинка не загрузилась */
         .cert-placeholder {
             width: 100%;
-            height: 100%;
+            min-height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -242,7 +240,7 @@
             flex-direction: column;
             gap: 8px;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
         .cert-placeholder span {
             font-size: 0.85rem;
@@ -261,7 +259,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* дополнительный текст (можно опционально) */
         .info-note {
             margin-top: 2.5rem;
             padding: 1rem 1.5rem;
@@ -273,7 +270,6 @@
             border: 1px solid #d9e2ce;
         }
 
-        /* страница контактов (сохранилась для навигации, но главная изменена) */
         .regular-text {
             font-size: clamp(0.95rem, 3.5vw, 1.08rem);
             color: #2c3e2f;
@@ -293,7 +289,7 @@
             margin-top: 2rem;
         }
 
-        /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УЛУЧШЕНИЯ) ========== */
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 880px) {
             .container { padding: 0 20px; }
             .nav-links { gap: 12px; }
@@ -342,15 +338,15 @@
             }
             .nav-links a:hover { background: #e5dfd1; color: #1e3a5f; }
             .page { margin: 1.2rem 1rem; padding: 1.2rem 1.2rem 2rem; }
-            .cert-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+            .cert-grid { gap: 20px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
         }
 
         @media (max-width: 480px) {
             .logo-placeholder { width: 42px; height: 42px; }
             .logo-text { font-size: 0.95rem; }
             .page { padding: 1rem; margin: 0.8rem; }
-            .cert-grid { gap: 16px; grid-template-columns: 1fr; }
-            .cert-image { aspect-ratio: 4 / 3; }
+            .cert-grid { gap: 18px; grid-template-columns: 1fr; }
+            .cert-image { min-height: 260px; }
         }
     </style>
 </head>
@@ -366,82 +362,114 @@
             </div>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
             <nav class="nav-links" id="navLinks">
-                <a href="index.html" data-page="home">Главная</a>
+                <a href="#" data-page="home">Главная</a>
                 <a href="organizah.html">Об организации</a>
                 <a href="team.html">Наша команда</a>
                 <a href="help.html">Кому помогаем</a>
                 <a href="partner.html">Наши партнеры</a>
-                <a href="#" data-page="contacts">Отзывы</a>
+                <a href="contact.html" data-page="contacts">Отзывы</a>
                 <a href="what_help.html">Как помочь</a>
                 <a href="photo.html">Фотогалерея</a>
             </nav>
         </div>
     </header>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА (новая: Мои сертификаты) -->
+    <!-- ГЛАВНАЯ СТРАНИЦА: Мои сертификаты (полноразмерные фото, без полноэкранного режима) -->
     <div id="home-page" class="page active-page">
         <div class="certificates-header">
             <h1>📜 Мои сертификаты</h1>
             <div class="certificates-sub">Документы, подтверждающие квалификацию и достижения</div>
         </div>
 
-        <!-- Сетка сертификатов: вы можете легко вставить свои изображения, заменив src -->
+        <!-- Сетка сертификатов: все карточки с изображениями, клик неактивен -->
         <div class="cert-grid" id="certificatesGrid">
-            <!-- Пример карточки 1 -->
+            <!-- Карточка 1 -->
             <div class="cert-card">
                 <div class="cert-image">
-                    <img src="certificate_1.jpg" alt="Сертификат 1" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №1');">
-                </div>
-                <div class="cert-caption">
-                    <p>Сертификат повышения квалификации</p>
+                    <img src="Диплом_Н.Ю_1.png" alt="Сертификат №1 - Психология" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №1<br>Психология');">
                 </div>
             </div>
-            <!-- Пример карточки 2 -->
+            <!-- Карточка 2 -->
             <div class="cert-card">
                 <div class="cert-image">
-                    <img src="certificate_2.jpg" alt="Сертификат 2" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №2');">
-                </div>
-                <div class="cert-caption">
-                    <p>Диплом профессиональной переподготовки</p>
+                    <img src="Диплом_Н.Ю_2.png" alt="Сертификат №2 - Юридический форум" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №2<br>Юриспруденция');">
                 </div>
             </div>
-            <!-- Пример карточки 3 -->
+            <!-- Карточка 3 -->
             <div class="cert-card">
                 <div class="cert-image">
-                    <img src="certificate_3.jpg" alt="Сертификат 3" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №3');">
-                </div>
-                <div class="cert-caption">
-                    <p>Благодарственное письмо</p>
+                    <img src="Диплом_Н.Ю_3.png" alt="Сертификат №3 - Переподготовка" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №3<br>Переподготовка');">
                 </div>
             </div>
-            <!-- Пример карточки 4 -->
+            <!-- Карточка 4 -->
             <div class="cert-card">
                 <div class="cert-image">
-                    <img src="certificate_4.jpg" alt="Сертификат 4" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №4');">
-                </div>
-                <div class="cert-caption">
-                    <p>Сертификат участника конференции</p>
+                    <img src="Диплом_Н.Ю_4.png" alt="Сертификат №4" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №4');">
                 </div>
             </div>
-            <!-- Добавьте сколько нужно карточек, можно копировать блок .cert-card -->
+            <!-- Карточка 5 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_5.png" alt="Сертификат №5" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №5');">
+                </div>
+            </div>
+            <!-- Карточка 6 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_6.png" alt="Сертификат №6" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №6');">
+                </div>
+            </div>
+            <!-- Карточка 7 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_7.png" alt="Сертификат №7" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №7');">
+                </div>
+            </div>
+            <!-- Карточка 8 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_8.png" alt="Сертификат №8" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №8');">
+                </div>
+            </div>
+            <!-- Карточка 9 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_9.png" alt="Сертификат №9" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №9');">
+                </div>
+            </div>
+            <!-- Карточка 10 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_10.png" alt="Сертификат №10" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №10');">
+                </div>
+            </div>
+            <!-- Карточка 11 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_11.png" alt="Сертификат №11" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №11');">
+                </div>
+            </div>
+            <!-- Карточка 12 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_12.jpg" alt="Сертификат №12" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №12');">
+                </div>
+            </div>
+            <!-- Карточка 13 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_13.jpg" alt="Сертификат №13" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №13');">
+                </div>
+            </div>
+            <!-- Карточка 14 -->
+            <div class="cert-card">
+                <div class="cert-image">
+                    <img src="Диплом_Н.Ю_14.jpg" alt="Сертификат №14" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=getPlaceholderHTML('Сертификат №14');">
+                </div>
+            </div>
         </div>
         <div class="info-note">
-            📌 Здесь будут размещены мои профессиональные сертификаты. Замените изображения <strong>certificate_1.jpg</strong> и т.д. на свои фото. 
-            При желании можно добавлять новые карточки в блок <strong>#certificatesGrid</strong>.
-        </div>
-    </div>
-
-    <!-- СТРАНИЦА КОНТАКТЫ (оставлена для полноты навигации) -->
-    <div id="contacts-page" class="page">
-        <h1>Контакты и связь</h1>
-        <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
-        <div class="regular-text">
-            <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
-            <p>📧 Электронная почта: <strong>info@nadezhda-center.ru</strong></p>
-            <p>📍 Адрес: г. Москва, ул. Добрая, д. 12, стр. 3 (офис 204)</p>
-            <p>💬 Мессенджеры: Telegram / WhatsApp по номеру +7 (999) 123-45-67</p>
-            <p>🕒 График работы: Пн–Пт 10:00–19:00, Сб по предварительной записи.</p>
-            <p style="margin-top: 1rem;">⭐ Следите за нашими новостями и анонсами мероприятий в социальных сетях (ссылки по запросу).</p>
+            📌 Все сертификаты представлены в оригинальном масштабе. Просмотр документов осуществляется прямо на странице.
         </div>
     </div>
 
@@ -450,14 +478,14 @@
     </footer>
 
     <script>
-        // Функция для генерации заглушки, если изображение не загружено
+        // Функция для генерации заглушки
         function getPlaceholderHTML(title) {
             return `<div class="cert-placeholder">🖼️<span>${title}</span><span style="font-size:0.7rem;">добавьте фото</span></div>`;
         }
 
-        // Инициализация: пройти по всем картинкам сертификатов, на случай если onerror не сработал динамически 
+        // Инициализация обработчиков ошибок загрузки изображений
         function initCertImages() {
-            const certImages = document.querySelectorAll('.cert-image img');
+            const certImages = document.querySelectorAll('.cert-card .cert-image img');
             certImages.forEach(img => {
                 img.addEventListener('error', function(e) {
                     if (!this.parentElement.querySelector('.cert-placeholder')) {
@@ -465,9 +493,7 @@
                         this.parentElement.innerHTML = getPlaceholderHTML(altText);
                     }
                 });
-                // если src пустой или битый, вызываем error принудительно
                 if (!img.complete) {
-                    img.addEventListener('load', () => {});
                     img.addEventListener('error', () => {
                         if (!img.parentElement.querySelector('.cert-placeholder')) {
                             const altText = img.alt || 'Сертификат';
@@ -475,69 +501,58 @@
                         }
                     });
                 } else if (img.naturalWidth === 0 && img.naturalHeight === 0) {
-                    // картинка не загрузилась
                     const altText = img.alt || 'Сертификат';
                     img.parentElement.innerHTML = getPlaceholderHTML(altText);
                 }
             });
         }
 
-        // ========== УПРАВЛЕНИЕ СТРАНИЦАМИ (SINGLE PAGE LOGIC) ==========
-        // Чтобы сохранить навигацию (ссылки "Главная" и "Контакты" работали без перезагрузки)
-        // А остальные ссылки (Об организации, Наша команда и т.д.) ведут на отдельные html файлы, как и было.
-        // На странице есть ссылки с data-page (Главная, Контакты) и обычные href на другие файлы.
+        // ========== УПРАВЛЕНИЕ СТРАНИЦАМИ (SPA для home/contacts — contacts не используется, но оставлено для совместимости) ==========
         const pages = {
             home: document.getElementById('home-page'),
             contacts: document.getElementById('contacts-page')
         };
 
         function showPage(pageId) {
-            // Скрыть все страницы
             Object.values(pages).forEach(page => {
                 if (page) page.classList.remove('active-page');
             });
             if (pages[pageId]) {
                 pages[pageId].classList.add('active-page');
-                // Обновить состояние активной ссылки (по желанию)
-                document.querySelectorAll('.nav-links a').forEach(link => {
+                if (pageId === 'home') {
+                    setTimeout(() => {
+                        initCertImages();
+                    }, 30);
+                }
+                document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
                     if (link.getAttribute('data-page') === pageId) {
                         link.style.borderBottomColor = '#2b6c9e';
-                        link.style.color = '#1e3a5f';
                     } else if (link.getAttribute('data-page')) {
                         link.style.borderBottomColor = 'transparent';
-                        link.style.color = '#1e3a5f';
                     }
                 });
             } else {
-                // если страница не найдена (такого не должно быть)
                 if(pages.home) pages.home.classList.add('active-page');
             }
         }
 
-        // Обработчик для внутренних ссылок с data-page (без перезагрузки)
         document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const pageId = link.getAttribute('data-page');
                 if (pageId && pages[pageId]) {
                     showPage(pageId);
-                    // Закрыть мобильное меню при клике
                     if (navLinks.classList.contains('show')) {
                         navLinks.classList.remove('show');
                         if (menuToggle) menuToggle.textContent = '☰';
                     }
                 } else {
-                    // fallback если страницы нет
                     window.location.href = link.getAttribute('href');
                 }
             });
         });
 
-        // Для ссылок без data-page (внешние файлы) ничего не меняем, они ведут на другие html.
-        // Чтобы корректно работала кнопка "Главная" при переходе с другого html? на этой странице будет работать.
-        // Также обрабатываем "Контакты", "Главная" из меню.
-
-        // ========== МОБИЛЬНОЕ МЕНЮ ==========
+        // Мобильное меню
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -547,7 +562,6 @@
                 navLinks.classList.toggle('show');
                 menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
             });
-
             const allNavLinks = navLinks.querySelectorAll('a');
             allNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -557,7 +571,6 @@
                     }
                 });
             });
-
             document.addEventListener('click', (event) => {
                 if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
                     navLinks.classList.remove('show');
@@ -566,7 +579,7 @@
             });
         }
 
-        // Логотип: если картинка не загрузилась, покажем символ
+        // Логотип: обработчик ошибки
         const logoImg = document.querySelector('.logo-placeholder img');
         if (logoImg) {
             logoImg.onerror = function() {
@@ -582,37 +595,13 @@
             };
         }
 
-        // Инициализация заглушек для картинок сертификатов
-        initCertImages();
+        // Инициализация
+        function init() {
+            initCertImages();
+        }
+        init();
 
-        // Дополнительно: если нужно динамически добавлять сертификаты, можно использовать функцию addCertificate
-        window.addCertificate = function(imageSrc, captionText) {
-            const grid = document.getElementById('certificatesGrid');
-            if (!grid) return;
-            const card = document.createElement('div');
-            card.className = 'cert-card';
-            const imgDiv = document.createElement('div');
-            imgDiv.className = 'cert-image';
-            const img = document.createElement('img');
-            img.src = imageSrc;
-            img.alt = captionText || 'Сертификат';
-            img.onerror = function() {
-                if (!imgDiv.querySelector('.cert-placeholder')) {
-                    imgDiv.innerHTML = getPlaceholderHTML(captionText || 'Сертификат');
-                }
-            };
-            imgDiv.appendChild(img);
-            const captionDiv = document.createElement('div');
-            captionDiv.className = 'cert-caption';
-            const p = document.createElement('p');
-            p.textContent = captionText || 'Сертификат';
-            captionDiv.appendChild(p);
-            card.appendChild(imgDiv);
-            card.appendChild(captionDiv);
-            grid.appendChild(card);
-        };
-
-        console.log('✅ Сайт обновлён: главная страница — "Мои сертификаты". Верхняя панель сохранена, блоки сертификатов — компактные карточки.');
+        console.log('✅ Страница готова: полноэкранный режим для дипломов удалён.');
     </script>
 </body>
 </html>
