@@ -282,6 +282,75 @@
             border: 1px solid #e9dfd0;
         }
 
+        /* --- Стили для видеотзыва --- */
+        .video-review-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2dcd0;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            padding: 24px 28px;
+        }
+        .video-review-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+            border-color: #d0caba;
+        }
+        .video-review-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2b5b2c;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .video-review-title span {
+            background: #e9f0e3;
+            font-size: 0.75rem;
+            font-weight: normal;
+            padding: 4px 14px;
+            border-radius: 60px;
+            color: #5a7c4a;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Ограничиваем ширину для вертикального видео */
+            margin: 0 auto;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #1a1a1a;
+            aspect-ratio: 9 / 16; /* ВЕРТИКАЛЬНОЕ СООТНОШЕНИЕ СТОРОН */
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+            object-fit: cover;
+        }
+        /* запасной вариант, если video не подхватит абсолют */
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-review-note {
+            text-align: center;
+            color: #7c6b4f;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
         footer {
             text-align: center;
             padding: 2rem 1rem 2rem;
@@ -392,6 +461,10 @@
                 font-size: 1.7rem;
                 padding-left: 20px;
             }
+            .video-wrapper {
+                max-width: 280px; /* чуть уже на мобильных */
+                aspect-ratio: 9 / 16;
+            }
         }
 
         @media (max-width: 480px) {
@@ -412,6 +485,13 @@
             .review-text {
                 padding: 16px 18px;
                 font-size: 0.95rem;
+            }
+            .video-review-card {
+                padding: 18px 16px;
+            }
+            .video-wrapper {
+                max-width: 220px;
+                aspect-ratio: 9 / 16;
             }
         }
 
@@ -457,8 +537,7 @@
                 <div class="section-sub">💬 Тёплые слова от тех, кому мы помогли — искренность и благодарность</div>
             </div>
 
-
-            <!-- ОТЗЫВ 1 (оригинал) -->
+            <!-- ОТЗЫВ 1 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">✨</span>
@@ -474,7 +553,7 @@
                 </div>
             </div>
 
-            <!-- ОТЗЫВ 2 (оригинал) -->
+            <!-- ОТЗЫВ 2 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">Ю</span>
@@ -490,7 +569,7 @@
                 </div>
             </div>
 
-            <!-- ОТЗЫВ 3 (оригинал, развернутый) -->
+            <!-- ОТЗЫВ 3 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">✨</span>
@@ -514,7 +593,7 @@
                 </div>
             </div>
 
-            <!-- ОТЗЫВ 4 (оригинал от Юлии) -->
+            <!-- ОТЗЫВ 4 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">Ю</span>
@@ -522,7 +601,7 @@
                 <div class="review-content">
                     <div class="review-name">Юлия</div>
                     <div class="review-text">
-                        Огромное спасибо Наталье за проведённую со мной вчера трансформационную практику! Она была направлена на прощение обид на родителей! Это было настолько сильно, что переворачивает сознание!) я очень рада что попала именно к Наталье и не просто так свела нас судьба) мне было это действительно очень нужно) и одним своим главным инсайтом хочу поделиться и с вами) изменяя себя мы меняем жизни наших детей и потомков! Это настолько мощно и масштабно что хочется изменять себя и свою жизнь намного быстрее)) ❤️❤️❤️❤️😘
+                        Огромное спасибо Наталье за проведённую со мной вчера трансформационную практику! Она была направлена на прощение обид на родителей! Это было настолько сильно, что переворачивает сознание!) я очень рада что попала именно к Наталье и не просто так свела нас судьба) мне это было действительно очень нужно) и одним своим главным инсайтом хочу поделиться и с вами) изменяя себя мы меняем жизни наших детей и потомков! Это настолько мощно и масштабно что хочется изменять себя и свою жизнь намного быстрее)) ❤️❤️❤️❤️😘
                     </div>
                     <div class="review-footer">
                         <span class="review-date">📅 3 апреля</span>
@@ -530,7 +609,7 @@
                 </div>
             </div>
 
-            <!-- ОТЗЫВ 5 (оригинал - глубокий) -->
+            <!-- ОТЗЫВ 5 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">✨</span>
@@ -547,8 +626,7 @@
                 </div>
             </div>
 
-            <!-- ОТЗЫВ 6 (последний оригинал из вашего кода — дубль первого, оставлен как отдельный, но с другим именем чтобы сохранить целостность) 
-                 Поскольку в исходном коде был повтор первого отзыва, я сохраняю его как дополнительный, чтобы не потерять контент -->
+            <!-- ОТЗЫВ 6 -->
             <div class="review-card">
                 <div class="review-avatar">
                     <span class="avatar-initials">✨</span>
@@ -996,7 +1074,20 @@
                 </div>
             </div>
 
-            
+            <!-- ===== ВИДЕООТЗЫВ (ВЕРТИКАЛЬНОЕ ВИДЕО) ===== -->
+            <div class="video-review-card">
+                <div class="video-review-title">
+                    🎥 Видеоотзыв
+                    <span>Новое</span>
+                </div>
+                <div class="video-wrapper">
+                    <video controls preload="metadata" playsinline>
+                        <source src="Video_01.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+                
+            </div>
 
         </div>
     </main>
@@ -1035,7 +1126,7 @@
             });
         }
 
-        // Логотип: заглушка если не загрузился (оригинальный механизм)
+        // Логотип: заглушка если не загрузился
         const logoImg = document.querySelector('.logo-placeholder img');
         if (logoImg) {
             logoImg.onerror = function() {
@@ -1051,7 +1142,7 @@
             };
         }
 
-        // Стилизация аватарок: создание единообразной мягкой палитры для строгого, но тёплого вида
+        // Стилизация аватарок
         const avatarDivs = document.querySelectorAll('.review-avatar');
         const pastelColors = ['#e0efda', '#f4e3cf', '#daeaf0', '#f0dfcf', '#e1d9f2', '#fde6cd', '#d4e2d4', '#f5e8dd'];
         avatarDivs.forEach((avatar, idx) => {
@@ -1062,8 +1153,7 @@
             }
         });
 
-        console.log("✅ Страница отзывов — дизайн строже, углы карточек прямые, все оригинальные отзывы сохранены.");
-        console.log("💡 Добавление новых отзывов: копируйте блок .review-card и меняйте содержимое.");
+        console.log("✅ Страница отзывов — видео теперь вертикальное (9:16), адаптивность сохранена.");
     </script>
 </body>
 </html>
