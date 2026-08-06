@@ -1,0 +1,422 @@
+/* ==========================================================================
+   site-shared.css — АНО Центр «Надежда»
+   Единая дизайн-система: подключается на всех страницах ПОСЛЕ встроенных
+   стилей страницы, чтобы аккуратно унифицировать шапку/навигацию/подвал,
+   добавить мягкие тона, анимации и правильную адаптивность,
+   не ломая существующую вёрстку и контент.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap');
+
+/* Единый шрифт на всех страницах сайта (перекрывает встроенные Segoe UI/системные стеки) */
+body {
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --nh-navy: #1e3a5f;
+  --nh-navy-deep: #0f2c44;
+  --nh-blue: #2b6c9e;
+  --nh-gold: #ffcd7e;
+  --nh-green: #21a67a;
+  --nh-bg: #f8faff;
+  --nh-blush: #f7ebee;
+  --nh-blush-deep: #e8b9c4;
+  --nh-lavender: #eef1fb;
+  --nh-cream: #fbf6ee;
+  --nh-shadow: 0 10px 30px -12px rgba(15, 44, 68, 0.18);
+  --nh-radius: 22px;
+  --nh-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Плавная прокрутка и общий фон под мягкий тон */
+html { scroll-behavior: smooth; }
+body { -webkit-tap-highlight-color: transparent; }
+
+/* ==========================================================================
+   ШАПКА — унификация на всех страницах в одну строку с адаптивным меню
+   ========================================================================== */
+
+.header, header.header {
+  padding: 10px 0 !important;
+}
+
+.header .container,
+header.header .container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .header .container,
+  header.header .container {
+    flex-wrap: wrap !important;
+  }
+}
+
+.logo-area { min-width: 0; }
+.logo-text, .brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Навигация — стабильно в одну строку на десктопе */
+.nav-links {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 22px) !important;
+  margin-left: auto;
+  transition: max-height .35s var(--nh-ease), opacity .3s ease, transform .3s var(--nh-ease);
+}
+
+.nav-links a {
+  white-space: nowrap;
+  font-size: clamp(0.78rem, 0.95vw, 0.95rem) !important;
+  position: relative;
+  text-decoration: none;
+  color: var(--nh-navy);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--nh-blue);
+  border-bottom-color: var(--nh-blue);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nh-blue), var(--nh-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s var(--nh-ease);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* Кнопка "гамбургер" — единый стиль */
+.menu-toggle, .nh-menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--nh-lavender);
+  color: var(--nh-navy);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .2s ease, transform .2s ease;
+}
+.menu-toggle:hover, .nh-menu-toggle:hover { background: #e2e9fb; transform: translateY(-1px); }
+
+@media (max-width: 900px) {
+  .menu-toggle, .nh-menu-toggle { display: inline-flex !important; }
+
+  .nav-links {
+    order: 5;
+    width: 100%;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 2px !important;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-left: 0;
+    pointer-events: none;
+  }
+  .nav-links.show,
+  .nav-links.nh-open {
+    max-height: 640px;
+    opacity: 1;
+    pointer-events: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(30, 58, 95, 0.1);
+  }
+  .nav-links a {
+    padding: 12px 6px !important;
+    border-bottom: 1px solid rgba(30, 58, 95, 0.06);
+    font-size: 0.95rem !important;
+    text-align: left;
+  }
+  .nav-links a::after { display: none; }
+}
+
+/* ==========================================================================
+   ЕДИНЫЙ ПОДВАЛ (FOOTER)
+   ========================================================================== */
+
+.footer {
+  background: #ffffffea;
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(170, 195, 220, 0.5);
+  padding: 48px 0 30px;
+  margin-top: 40px;
+}
+
+.footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-address, .footer-contacts, .footer-social {
+  flex: 1 1 220px;
+}
+
+.footer h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer p {
+  color: #3b5672;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.footer-contacts p i {
+  width: 28px;
+  color: #2b6c9e;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #f0f4fa;
+  padding: 8px 16px;
+  border-radius: 40px;
+  text-decoration: none;
+  color: #1e3a5f;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border: 1px solid #e0eaf3;
+}
+
+.social-links a i {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.social-links a:hover {
+  background: #1e3a5f;
+  color: white;
+  border-color: #1e3a5f;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 45px;
+  color: #7b95b3;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(170, 195, 220, 0.3);
+  padding-top: 25px;
+}
+
+/* ==========================================================================
+   МЯГКИЕ АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ
+   ========================================================================== */
+
+.nh-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s var(--nh-ease), transform .7s var(--nh-ease);
+  will-change: opacity, transform;
+}
+.nh-reveal.nh-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nh-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Мягкое "приподнимание" карточек/кнопок при наведении */
+a[class*="btn"], button[class*="btn"] {
+  transition: transform .2s var(--nh-ease), box-shadow .2s var(--nh-ease), filter .2s ease;
+}
+a[class*="btn"]:hover, button[class*="btn"]:not(:disabled):hover {
+  filter: brightness(1.03);
+}
+a[class*="btn"]:active, button[class*="btn"]:active { transform: scale(0.97); }
+
+[class*="card"] {
+  transition: transform .35s var(--nh-ease), box-shadow .35s var(--nh-ease);
+}
+[class*="card"]:hover {
+  transform: translateY(-5px);
+}
+
+/* ==========================================================================
+   ФОТОГАЛЕРЕЯ / СЛАЙДЕРЫ — лёгкий зум и курсор "лупа" + лайтбокс
+   ========================================================================== */
+
+.slider-slide img,
+.gallery-images img,
+[class*="gallery"] img,
+[class*="photo"] img {
+  cursor: zoom-in;
+  transition: transform .5s var(--nh-ease), filter .3s ease;
+}
+.slider-slide:hover img { transform: scale(1.045); }
+
+/* Лайтбокс, создаётся динамически скриптом site-shared.js */
+.nh-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 20, 35, 0.92);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  padding: 20px;
+}
+.nh-lightbox.nh-open { opacity: 1; pointer-events: auto; }
+.nh-lightbox img {
+  max-width: min(92vw, 1100px);
+  max-height: 88vh;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  transform: scale(.96);
+  transition: transform .3s var(--nh-ease);
+  object-fit: contain;
+}
+.nh-lightbox.nh-open img { transform: scale(1); }
+.nh-lightbox-close,
+.nh-lightbox-prev,
+.nh-lightbox-next {
+  position: absolute;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, transform .2s ease;
+}
+.nh-lightbox-close:hover,
+.nh-lightbox-prev:hover,
+.nh-lightbox-next:hover { background: rgba(255,255,255,0.28); }
+.nh-lightbox-close { top: 18px; right: 18px; }
+.nh-lightbox-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+.nh-lightbox-next { right: 18px; top: 50%; transform: translateY(-50%); }
+.nh-lightbox-counter {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  background: rgba(255,255,255,0.14);
+  padding: 5px 16px;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-family: "Inter", sans-serif;
+}
+@media (max-width: 600px) {
+  .nh-lightbox-prev, .nh-lightbox-next { width: 38px; height: 38px; font-size: 1rem; }
+  .nh-lightbox-close { width: 38px; height: 38px; top: 10px; right: 10px; }
+}
+
+/* ==========================================================================
+   PWA — тост-приглашение "установить на главный экран"
+   ========================================================================== */
+
+.nh-install-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translate(-50%, 130%);
+  z-index: 9998;
+  background: #ffffff;
+  border: 1px solid rgba(30,58,95,0.1);
+  box-shadow: var(--nh-shadow);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(94vw, 420px);
+  transition: transform .45s var(--nh-ease);
+  font-family: "Inter", sans-serif;
+}
+.nh-install-toast.nh-show { transform: translate(-50%, 0); }
+.nh-install-toast .nh-install-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--nh-lavender);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--nh-navy); font-size: 1.2rem; flex-shrink: 0;
+}
+.nh-install-toast .nh-install-text { flex: 1; min-width: 0; }
+.nh-install-toast .nh-install-text b { display: block; color: var(--nh-navy); font-size: 0.9rem; }
+.nh-install-toast .nh-install-text span { display: block; color: #6c8aab; font-size: 0.78rem; margin-top: 2px; }
+.nh-install-toast .nh-install-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.nh-install-btn, .nh-dismiss-btn {
+  border: none; border-radius: 30px; cursor: pointer; font-weight: 600;
+  font-family: inherit; transition: transform .2s ease, background .2s ease;
+}
+.nh-install-btn { background: var(--nh-navy); color: #fff; padding: 9px 16px; font-size: 0.82rem; }
+.nh-install-btn:hover { background: var(--nh-navy-deep); }
+.nh-dismiss-btn { background: transparent; color: #8ba1b8; padding: 9px 10px; font-size: 1rem; }
+.nh-dismiss-btn:hover { color: #4d6480; }
+
+/* ==========================================================================
+   МЕЛКАЯ АДАПТИВНАЯ ПОЛИРОВКА ДЛЯ ВСЕХ УСТРОЙСТВ
+   ========================================================================== */
+
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 400px) {
+  .logo-text, .brand-name { font-size: 1rem !important; }
+}
+
+/* Safe-area для iOS (чёлка/жесты) при установленном PWA */
+@supports (padding: max(0px)) {
+  .header, header.header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .nh-install-toast {
+    bottom: max(18px, env(safe-area-inset-bottom));
+  }
+}
