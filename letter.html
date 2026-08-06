@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Благодарственные письма | АНО Центр "Надежда"</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Логотип с подсветкой.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff7ed 100%);
+            color: #2c3e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== ВЕРХНЯЯ ПАНЕЛЬ (навигация + лого + название) ========== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(230, 220, 205, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            background-color: #f5f0e6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1e3a5f;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: #5f7d9c;
+        }
+
+        /* Гамбургер-меню для мобильных */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #1e3a5f;
+            padding: 8px;
+            line-height: 1;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #2b6c9e;
+            border-bottom-color: #2b6c9e;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ (СТРАНИЦА БЛАГОДАРНОСТЕЙ) ========== */
+        .page {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.8rem 2rem 2.5rem;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0e5d8;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(8px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #3f5e38;
+            letter-spacing: -0.02em;
+            border-left: 6px solid #9bc18b;
+            padding-left: 1rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            font-weight: 400;
+            color: #6f825e;
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #ddcfbc;
+            padding-bottom: 0.6rem;
+        }
+
+        /* Галерея благодарственных писем (сетка) */
+        .gratitude-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .gallery-item {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.25s ease;
+            border: 1px solid #efe3d4;
+            display: flex;
+            flex-direction: column;
+            background: #fffef7;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.2);
+            border-color: #c9dcbb;
+        }
+
+        /* контейнер для изображения с фиксированным соотношением */
+        .image-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 130%; /* чуть вытянутый вертикальный формат под письма, но картинка адаптируется */
+            background: #f3efea;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;   /* сохраняет пропорции, письмо видно целиком без обрезания */
+            transition: transform 0.3s ease;
+            background-color: #fcf8f0;
+            padding: 8px;
+        }
+
+        .gallery-item:hover .image-container img {
+            transform: scale(1.02);
+        }
+
+        .caption {
+            padding: 0.9rem 1rem 1.2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4c6b42;
+            border-top: 1px solid #f0e4d4;
+            background: #fffef9;
+            letter-spacing: 0.3px;
+        }
+
+        .caption span {
+            display: inline-block;
+            background: #ecf3e5;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #5f7b4a;
+        }
+
+        /* подсказка для пустой галереи или когда фото еще не добавлены */
+        .empty-gallery-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #fffcf5;
+            border-radius: 40px;
+            border: 2px dashed #d9cdb7;
+            color: #b09a7a;
+            font-size: 1.1rem;
+            margin: 2rem 0;
+        }
+        .empty-gallery-message p {
+            margin: 0.5rem 0;
+        }
+        .empty-gallery-message .emoji-hint {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* подвал */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2rem;
+            font-size: 0.8rem;
+            color: #a29078;
+            border-top: 1px solid #e6ddcf;
+            margin-top: 2rem;
+        }
+
+        /* ========== АДАПТИВНОСТЬ ========== */
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            .logo-placeholder {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .header .container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 253, 245, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 20px 24px 28px;
+                border-radius: 0 0 28px 28px;
+                box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+                transform: translateY(-120%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s;
+                z-index: 99;
+                border-bottom: 1px solid #e7dccf;
+            }
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                white-space: normal;
+                text-align: center;
+                padding: 12px 10px;
+                font-size: 1rem;
+                border-radius: 40px;
+                background: rgba(240, 235, 225, 0.5);
+                border-bottom: none;
+                width: 100%;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover {
+                background: #e5dfd1;
+                border-bottom-color: transparent;
+                color: #1e3a5f;
+            }
+            .logo-area {
+                flex: 1;
+            }
+            .page {
+                margin: 1.2rem 1rem;
+                padding: 1.2rem 1.2rem 2rem;
+            }
+            .gratitude-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.5rem;
+            }
+            .image-container {
+                padding-bottom: 125%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+            .logo-text {
+                font-size: 0.95rem;
+            }
+            .logo-text span {
+                display: inline-block;
+            }
+            .page {
+                padding: 1rem;
+                margin: 0.8rem;
+            }
+            .gratitude-gallery {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+            .image-container {
+                padding-bottom: 120%;
+            }
+            .caption {
+                font-size: 0.8rem;
+                padding: 0.7rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a5f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="АНО Центр Надежда">
+    <link rel="stylesheet" href="site-shared.css">
+    <link rel="apple-touch-icon" href="Логотип с подсветкой.png">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo-area">
+            <div class="logo-placeholder" id="logoPlaceholder">
+                <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+            </div>
+            <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Главная</a>
+            <a href="organizah.html">Об организации</a>
+            <a href="team.html">Наша команда</a>
+            <a href="help.html">Кому помогаем</a>
+            <a href="partner.html">Наши партнеры</a>
+            <a href="contact.html">Отзывы</a>
+            <a href="what_help.html">Как помочь</a>
+            <a href="photo.html">Фотогалерея</a>
+        </nav>
+    </div>
+</header>
+
+<!-- СТРАНИЦА: БЛАГОДАРСТВЕННЫЕ ПИСЬМА -->
+<div class="page">
+    <h1>Благодарственные письма</h1>
+
+    
+    <!-- ГАЛЕРЕЯ БЛАГОДАРСТВЕННЫХ ПИСЕМ -->
+    <div id="gratitudeGrid" class="gratitude-gallery">
+        <!-- Сюда динамически будут добавляться карточки писем через JS, но также можно вручную вставить фото.
+             При загрузке страницы считываем массив изображений, если он пуст — показываем подсказку.
+             Пользователь сможет позже добавить фото, заменив пути в массиве или просто вставив теги <img> в HTML. 
+             Однако для удобства я сделаю универсальный механизм: по умолчанию галерея загружает массив imageList,
+             который легко отредактировать (добавить свои имена файлов). 
+             Также картинки можно будет просто вставлять напрямую в grid через дополнительные элементы, но скрипт позаботится 
+             об отображении как существующих, так и будущих.  -->
+    </div>
+
+    <!-- невидимый шаблон для сообщения об отсутствии фото (если галерея пуста) -->
+    <div id="emptyMessageTemplate" style="display: none;">
+        <div class="empty-gallery-message">
+            <div class="emoji-hint">📜✨</div>
+            <p>Здесь скоро появятся благодарственные письма</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
+</footer>
+
+<script>
+    // ========== НАСТРОЙКА ГАЛЕРЕИ БЛАГОДАРСТВЕННЫХ ПИСЕМ ==========
+    // ★★★ Здесь вы указываете имена файлов (пути) к изображениям благодарственных писем ★★★
+    // Пример: "pismo1.jpg", "pismo2.png", "blagodarnost_voennomu.jpeg"
+    // Поддерживаются любые форматы (jpg, png, webp, heic и т.д.)
+    // Если файлы лежат в отдельной папке, укажите путь: "letters/pismo_01.jpg"
+    // ----------------------------------------------------------------
+    let gratitudeImages = [
+        
+        // ⬇️⬇️⬇️ ВСТАВЬТЕ СВОИ ФАЙЛЫ СЮДА (можно пока оставить пустым массивом, потом добавить)
+        // Пример: "blagodarnost_1.jpg",
+        // Пример: "letters/ot_semi_ivanovyh.png",
+        // ------------------------------------------------------------
+        // Пока оставляем массив пустым — вы сможете добавить имена файлов позже.
+        // Для демонстрации покажу как будут выглядеть карточки, если добавить тестовые заглушки? 
+        // Но по заданию "потом я вставлю эти фотки" — лучше оставить массив пустым и показать подсказку.
+        // Однако, чтобы вы видели, как будет выглядеть галерея, можно добавить образец-заглушку.
+        // Но чтобы не мешать, сделаю так: если массив пуст — показываем сообщение с инструкцией.
+        // Но если вы хотите прямо сейчас увидеть структуру, можете раскомментировать строки ниже для примера:
+        // "sample_letter_placeholder.jpg" — заглушка, но её нет. Чтобы не было ошибок, лучше пусто.
+        // Я добавлю комментарий, но массив оставлю пустым, чтобы вы могли потом наполнить своими файлами.
+    ];
+
+    // ===== НЕБОЛЬШАЯ ЗАЩИТА: если вы хотите добавить пару демонстрационных надписей без реальных фото? 
+    // Не будем использовать заглушки, чтобы не создавать лишних ошибок 404. При пустом массиве показываем понятный блок.
+    // Также если вы позже добавите изображения вручную через HTML-разметку, скрипт их не удалит.
+    // Для гибкости: сначала попробуем найти контейнер. Если в нём уже есть дочерние элементы (кто-то добавил вручную),
+    // мы не будем перезаписывать, иначе — отрисуем на основе массива gratitudeImages.
+    
+    const gridContainer = document.getElementById('gratitudeGrid');
+    const emptyMessageDiv = document.getElementById('emptyMessageTemplate').innerHTML;
+
+    // Функция для создания карточки письма
+    function createLetterCard(imageSrc, altText = 'Благодарственное письмо') {
+        const card = document.createElement('div');
+        card.className = 'gallery-item';
+        
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'image-container';
+        
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = altText;
+        img.loading = 'lazy';
+        // Обработка ошибки загрузки изображения (если файл не найден)
+        img.onerror = function() {
+            this.onerror = null; // чтобы не зациклить
+            this.src = '';
+            this.alt = '⚠️ Файл не найден, добавьте изображение';
+            // Можно также стилизовать родителя
+            const parentContainer = this.closest('.image-container');
+            if (parentContainer) {
+                parentContainer.style.backgroundColor = '#f7ede1';
+                const errorSpan = document.createElement('div');
+                errorSpan.style.position = 'absolute';
+                errorSpan.style.bottom = '10px';
+                errorSpan.style.left = '0';
+                errorSpan.style.right = '0';
+                errorSpan.style.textAlign = 'center';
+                errorSpan.style.fontSize = '12px';
+                errorSpan.style.color = '#b9865b';
+                errorSpan.style.backgroundColor = 'rgba(255,250,235,0.8)';
+                errorSpan.style.padding = '4px';
+                errorSpan.innerText = '✖ фото не загружено';
+                if (!parentContainer.querySelector('.error-badge')) {
+                    errorSpan.className = 'error-badge';
+                    parentContainer.appendChild(errorSpan);
+                }
+            }
+        };
+        
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
+        
+        const captionDiv = document.createElement('div');
+        captionDiv.className = 'caption';
+        captionDiv.innerHTML = '<span>📜 Благодарственное письмо</span>';
+        card.appendChild(captionDiv);
+        
+        return card;
+    }
+
+    // Функция для отображения галереи на основе массива
+    function renderGalleryFromArray(imagesArray) {
+        if (!gridContainer) return;
+        // Очищаем контейнер, но только если мы собираемся рисовать на основе массива (чтобы избежать дублей)
+        // Однако если разработчик уже вручную добавил элементы, мы не хотим их удалять. 
+        // Проверяем: есть ли в gridContainer дочерние элементы с классом 'gallery-item' (если есть, значит, пользователь уже наполнил вручную)
+        const existingItems = gridContainer.querySelectorAll('.gallery-item');
+        if (existingItems.length > 0) {
+            // Если уже есть элементы (ручное добавление), не трогаем, только подстрахуемся что сообщение пустоты не нужно
+            // скроем возможное пустое сообщение, если оно вдруг появилось
+            const emptyMsgElem = gridContainer.querySelector('.empty-gallery-message');
+            if (emptyMsgElem) emptyMsgElem.remove();
+            return;
+        }
+        
+        // Если массив пуст - показываем информационное сообщение
+        if (!imagesArray.length) {
+            gridContainer.innerHTML = emptyMessageDiv;
+            return;
+        }
+        
+        // Иначе чистим и рендерим письма
+        gridContainer.innerHTML = '';
+        for (let i = 0; i < imagesArray.length; i++) {
+            const imgPath = imagesArray[i];
+            if (imgPath && imgPath.trim() !== '') {
+                const card = createLetterCard(imgPath, `Благодарственное письмо №${i+1}`);
+                gridContainer.appendChild(card);
+            }
+        }
+        // Если после добавления не оказалось карточек (все пути были пустые) — показываем сообщение
+        if (gridContainer.children.length === 0) {
+            gridContainer.innerHTML = emptyMessageDiv;
+        }
+    }
+
+    // Дополнительно: функция для "ленивого" наблюдения, если файлы будут добавляться динамически позже,
+    // но мы просто вызовем рендер при загрузке. Также, чтобы вы могли легко добавить изображения,
+    // я добавлю глобальный массив, который можно менять через консоль или при добавлении фото.
+    // Для вашего удобства: если вам нужно будет потом добавить новые фото без изменения кода, 
+    // вы можете просто вписать их в массив gratitudeImages, или добавить вручную HTML-элементы.
+    // Я сделаю так, что если вы в будущем измените массив и вызовете функцию обновления, можно добавить.
+    window.updateGratitudeGallery = function(newImagesArray) {
+        gratitudeImages = newImagesArray || [];
+        renderGalleryFromArray(gratitudeImages);
+    };
+    
+    // Инициализация галереи при загрузке
+    renderGalleryFromArray(gratitudeImages);
+    
+    // ========== АДАПТИВНОЕ МОБИЛЬНОЕ МЕНЮ (полностью как в исходном шаблоне) ==========
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('show');
+            menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+        });
+
+        const allNavLinks = navLinks.querySelectorAll('a');
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    if (menuToggle) menuToggle.textContent = '☰';
+                }
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                if (menuToggle) menuToggle.textContent = '☰';
+            }
+        });
+    }
+
+    // Обработка логотипа (если картинка не загружена, показываем иконку)
+    const logoImg = document.querySelector('.logo-placeholder img');
+    if (logoImg) {
+        logoImg.onerror = function() {
+            this.style.display = 'none';
+            const parent = this.parentElement;
+            parent.style.backgroundColor = '#dde5d4';
+            parent.style.border = '1px solid #cbdbb8';
+            parent.innerHTML = '🤝';
+            parent.style.fontSize = '28px';
+            parent.style.display = 'flex';
+            parent.style.alignItems = 'center';
+            parent.style.justifyContent = 'center';
+        };
+    }
+    
+    // Дополнительное примечание для разработчика в консоли
+    console.log('✅ Страница "Благодарственные письма" готова. Чтобы добавить фото писем, укажите пути в массиве gratitudeImages (в script) или вручную добавьте div с классом gallery-item в контейнер gratitudeGrid.');
+    console.log('Текущий массив изображений:', gratitudeImages);
+    if (gratitudeImages.length === 0) {
+        console.log('💡 Подсказка: добавьте имена файлов благодарственных писем в переменную gratitudeImages (например: "letter_1.jpg", "thanks_from_family.png") и страница автоматически отобразит галерею.');
+    }
+</script>
+    <script src="site-shared.js" defer></script>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-address">
+            <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+            <p>216456, СМОЛЕНСКАЯ ОБЛАСТЬ, М.О. ПОЧИНКОВСКИЙ, Д ЛУЧЕСА, УЛ САДОВАЯ, Д. 17А</p>
+        </div>
+        <div class="footer-contacts">
+            <h4><i class="fas fa-phone-alt"></i> Контакты</h4>
+            <p><i class="fas fa-phone-alt"></i> +7 (908) 281-36-78</p>
+            <p><i class="fas fa-phone-alt"></i> +7 (991) 519-89-87</p>
+            <p><i class="fas fa-envelope"></i> lapa0122@yandex.ru</p>
+        </div>
+        <div class="footer-social">
+            <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
+            <div class="social-links">
+                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer"><i class="fab fa-vk"></i> VK</a>
+                <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer"><i class="fab fa-odnoklassniki"></i> Одноклассники</a>
+                <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> MAX</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 АНО Центр «Надежда». Все права защищены.
+    </div>
+</footer>
+
+</body>
+</html>
