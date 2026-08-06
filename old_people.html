@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>АНО Центр "Надежда"</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Логотип с подсветкой.png">
     <style>
         * {
             margin: 0;
@@ -246,6 +249,35 @@
             margin-top: 2rem;
         }
 
+      .recommend-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffffec;
+            border: 1px solid #cbdbb8;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #3e6840;
+            background-color: #f9faf5;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-family: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .recommend-btn:hover {
+            background: #eef3e9;
+            border-color: #9bc18b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px -8px rgba(0,0,0,0.12);
+        }
+        .recommend-icon {
+            font-size: 1.2rem;
+        }
+
         /* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УЛУЧШЕНИЯ) ========== */
         @media (max-width: 880px) {
             .container {
@@ -370,6 +402,14 @@
             }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a5f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="АНО Центр Надежда">
+    <link rel="stylesheet" href="site-shared.css">
+    <link rel="apple-touch-icon" href="Логотип с подсветкой.png">
 </head>
 <body>
 
@@ -398,6 +438,9 @@
     <!-- ГЛАВНАЯ СТРАНИЦА (активная по умолчанию) - текст полностью заменен на тему помощи пожилым людям, заголовок и шапка нетронуты -->
     <div id="home-page" class="page active-page">
         <h3>АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ «ЦЕНТР СОЦИАЛЬНО-ПРАВОВОЙ И ПСИХОЛОГО-ПЕДАГОГИЧЕСКОЙ ПОМОЩИ ЛИЦАМ, ОКАЗАВШИМСЯ В ТРУДНОЙ ЖИЗНЕННОЙ СИТУАЦИИ «НАДЕЖДА»</h3>
+        <a href="old_rec.html" class="recommend-btn" id="recommendPageBtn">
+                <span class="recommend-icon">📘</span> Полезные рекомендации
+            </a>
         <div class="subtitle">Какую помощь психолог оказывает пожилым людям</div>
         <div class="regular-text">
             <p>Старение — это не только изменения в теле, но и серьезные психологические вызовы. В пожилом возрасте человек сталкивается с утратами, снижением социального статуса, изменением образа жизни, а часто — с одиночеством и ощущением ненужности.<br>
@@ -579,5 +622,33 @@
 
         console.log('✅ Контент главной страницы обновлен: помощь психолога пожилым людям, заголовок и шапка сохранены.');
     </script>
+    <script src="site-shared.js" defer></script>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-address">
+            <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+            <p>216456, СМОЛЕНСКАЯ ОБЛАСТЬ, М.О. ПОЧИНКОВСКИЙ, Д ЛУЧЕСА, УЛ САДОВАЯ, Д. 17А</p>
+        </div>
+        <div class="footer-contacts">
+            <h4><i class="fas fa-phone-alt"></i> Контакты</h4>
+            <p><i class="fas fa-phone-alt"></i> +7 (908) 281-36-78</p>
+            <p><i class="fas fa-phone-alt"></i> +7 (991) 519-89-87</p>
+            <p><i class="fas fa-envelope"></i> lapa0122@yandex.ru</p>
+        </div>
+        <div class="footer-social">
+            <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
+            <div class="social-links">
+                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer"><i class="fab fa-vk"></i> VK</a>
+                <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer"><i class="fab fa-odnoklassniki"></i> Одноклассники</a>
+                <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> MAX</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 АНО Центр «Надежда». Все права защищены.
+    </div>
+</footer>
+
 </body>
 </html>
