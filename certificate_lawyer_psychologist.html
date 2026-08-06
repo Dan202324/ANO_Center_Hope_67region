@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>АНО Центр "Надежда" | Мои сертификаты</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="Логотип с подсветкой.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Логотип с подсветкой.png">
     <style>
         * {
             margin: 0;
@@ -438,6 +441,14 @@
             .cert-image { min-height: 260px; }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a5f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="АНО Центр Надежда">
+    <link rel="stylesheet" href="site-shared.css">
+    <link rel="apple-touch-icon" href="Логотип с подсветкой.png">
 </head>
 <body>
 
@@ -456,7 +467,7 @@
                 <a href="team.html">Наша команда</a>
                 <a href="help.html">Кому помогаем</a>
                 <a href="partner.html">Наши партнеры</a>
-                <a href="#" data-page="contacts">Контакты</a>
+                <a href="contact.html" data-page="contacts">Отзывы</a>
                 <a href="what_help.html">Как помочь</a>
                 <a href="photo.html">Фотогалерея</a>
             </nav>
@@ -499,7 +510,9 @@
                     <p>🎓 <strong>Диплом</strong> профессиональной переподготовки</p>
                 </div>
             </div>
-            <!-- Четвертая карточка УДАЛЕНА по вашему требованию -->
+            
+
+            
         </div>
         <div class="info-note">
             📌 Все сертификаты представлены в оригинальном масштабе — нажмите на любой документ, чтобы открыть его в полноэкранном режиме.<br>
@@ -508,18 +521,7 @@
     </div>
 
     <!-- СТРАНИЦА КОНТАКТЫ -->
-    <div id="contacts-page" class="page">
-        <h1>Контакты и связь</h1>
-        <div class="subtitle">Мы всегда на связи — обращайтесь!</div>
-        <div class="regular-text">
-            <p>📞 Телефон горячей линии: <strong>8 (800) 555-35-35</strong> (ежедневно с 9:00 до 21:00)</p>
-            <p>📧 Электронная почта: <strong>info@nadezhda-center.ru</strong></p>
-            <p>📍 Адрес: г. Москва, ул. Добрая, д. 12, стр. 3 (офис 204)</p>
-            <p>💬 Мессенджеры: Telegram / WhatsApp по номеру +7 (999) 123-45-67</p>
-            <p>🕒 График работы: Пн–Пт 10:00–19:00, Сб по предварительной записи.</p>
-            <p style="margin-top: 1rem;">⭐ Следите за нашими новостями и анонсами мероприятий в социальных сетях (ссылки по запросу).</p>
-        </div>
-    </div>
+    
 
     <footer>
         <p>© 2025 АНО Центр «Надежда» — помогаем с заботой и теплом. Все права защищены.</p>
@@ -790,5 +792,33 @@
         };
         console.log('✅ Страница обновлена: 3 сертификата (4-я карточка удалена), полноразмерные фото, клик для увеличения');
     </script>
+    <script src="site-shared.js" defer></script>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-address">
+            <h4><i class="fas fa-map-marker-alt"></i> Адрес</h4>
+            <p>216456, СМОЛЕНСКАЯ ОБЛАСТЬ, М.О. ПОЧИНКОВСКИЙ, Д ЛУЧЕСА, УЛ САДОВАЯ, Д. 17А</p>
+        </div>
+        <div class="footer-contacts">
+            <h4><i class="fas fa-phone-alt"></i> Контакты</h4>
+            <p><i class="fas fa-phone-alt"></i> +7 (908) 281-36-78</p>
+            <p><i class="fas fa-phone-alt"></i> +7 (991) 519-89-87</p>
+            <p><i class="fas fa-envelope"></i> lapa0122@yandex.ru</p>
+        </div>
+        <div class="footer-social">
+            <h4><i class="fas fa-share-alt"></i> Мы в соцсетях</h4>
+            <div class="social-links">
+                <a href="https://vk.ru/id1106289480" target="_blank" rel="noopener noreferrer"><i class="fab fa-vk"></i> VK</a>
+                <a href="https://ok.ru/group/70000048244848" target="_blank" rel="noopener noreferrer"><i class="fab fa-odnoklassniki"></i> Одноклассники</a>
+                <a href="https://max.ru/join/hhFctbPPeQHQLstA1UNfmNgoU2gBixO4WHWefKIPVzs" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> MAX</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 АНО Центр «Надежда». Все права защищены.
+    </div>
+</footer>
+
 </body>
 </html>
