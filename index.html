@@ -254,11 +254,39 @@
             width: 100%;
         }
 
+        .widget-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #0f2c44;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .widget-title i {
+            color: #e0607e;
+        }
+        .step-progress-label {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #6c8aab;
+            background: #f0f4fc;
+            border-radius: 30px;
+            padding: 4px 14px;
+            display: block;
+            width: fit-content;
+            margin: 0 auto 18px;
+            transition: all 0.2s ease;
+        }
         .step-indicator {
             display: flex;
             justify-content: center;
             gap: 12px;
             margin-bottom: 25px;
+            padding-bottom: 4px;
         }
         .step-dot {
             width: 8px;
@@ -266,10 +294,28 @@
             background-color: #cbd6e4;
             border-radius: 20px;
             transition: all 0.25s ease;
+            position: relative;
         }
         .step-dot.active {
             width: 32px;
             background-color: #1e3a5f;
+        }
+        .step-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: #a9bbd0;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .step-dot.active::after {
+            opacity: 1;
+            color: #1e3a5f;
         }
 
         .step-content {
@@ -641,6 +687,13 @@
             .hero-phone-card span { font-size: 0.9rem; }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a5f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="АНО Центр Надежда">
+    <link rel="stylesheet" href="site-shared.css">
 </head>
 <body>
 
@@ -690,10 +743,14 @@
 
                 <!-- Виджет пожертвования с ручным QR-кодом и ссылкой -->
                 <div class="donation-widget">
+                    <div class="widget-title">
+                        <i class="fas fa-heart"></i> Форма пожертвования
+                    </div>
+                    <div class="step-progress-label" id="stepProgressLabel">Шаг 1 из 3 · Сумма пожертвования</div>
                     <div class="step-indicator" id="stepIndicator">
-                        <span class="step-dot active"></span>
-                        <span class="step-dot"></span>
-                        <span class="step-dot"></span>
+                        <span class="step-dot active" data-label="Сумма"></span> 
+                        <span class="step-dot" data-label="Оплата"></span>
+                        <span class="step-dot" data-label="Данные"></span>
                     </div>
 
                     <div id="step1" class="step active-step">
@@ -823,6 +880,12 @@
                 if (idx === stepNumber-1) dot.classList.add('active');
                 else dot.classList.remove('active');
             });
+            
+            const progressLabel = document.getElementById('stepProgressLabel');
+            if (progressLabel) {
+                const labels = ['Сумма пожертвования', 'Способ оплаты', 'Ваши контакты'];
+                progressLabel.textContent = `Шаг ${stepNumber} из 3 · ${labels[stepNumber-1]}`;
+            }
             
             if (stepNumber === 3) {
                 if (qrBlock) qrBlock.style.display = 'none';
@@ -963,5 +1026,6 @@
         }
     })();
 </script>
+    <script src="site-shared.js" defer></script>
 </body>
 </html>
