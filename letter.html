@@ -433,21 +433,43 @@
 
     
     <!-- ГАЛЕРЕЯ БЛАГОДАРСТВЕННЫХ ПИСЕМ -->
+    <!-- Чтобы добавить письмо, скопируйте блок <div class="gallery-item">...</div> и поменяйте имя файла в src -->
     <div id="gratitudeGrid" class="gratitude-gallery">
-        <!-- Сюда динамически будут добавляться карточки писем через JS, но также можно вручную вставить фото.
-             При загрузке страницы считываем массив изображений, если он пуст — показываем подсказку.
-             Пользователь сможет позже добавить фото, заменив пути в массиве или просто вставив теги <img> в HTML. 
-             Однако для удобства я сделаю универсальный механизм: по умолчанию галерея загружает массив imageList,
-             который легко отредактировать (добавить свои имена файлов). 
-             Также картинки можно будет просто вставлять напрямую в grid через дополнительные элементы, но скрипт позаботится 
-             об отображении как существующих, так и будущих.  -->
-    </div>
-
-    <!-- невидимый шаблон для сообщения об отсутствии фото (если галерея пуста) -->
-    <div id="emptyMessageTemplate" style="display: none;">
-        <div class="empty-gallery-message">
-            <div class="emoji-hint">📜✨</div>
-            <p>Здесь скоро появятся благодарственные письма</p>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_001.png" alt="Благодарственное письмо №1" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благодарственное письмо</span></div>
+        </div>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_002.png" alt="Благодарственное письмо №2" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благодарственное письмо</span></div>
+        </div>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_003.jpg" alt="Благодарственное письмо №3" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благодарственное письмо</span></div>
+        </div>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_004.jpg" alt="Благодарственное письмо №3" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благодарственное письмо</span></div>
+        </div>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_005.jpg" alt="Благодарственное письмо №3" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благodарственное письмо</span></div>
+        </div>
+        <div class="gallery-item">
+            <div class="image-container">
+                <img src="blago_006.jpg" alt="Благодарственное письмо №3" loading="lazy">
+            </div>
+            <div class="caption"><span>📜 Благодарственное письмо</span></div>
         </div>
     </div>
 </div>
@@ -457,137 +479,6 @@
 </footer>
 
 <script>
-    // ========== НАСТРОЙКА ГАЛЕРЕИ БЛАГОДАРСТВЕННЫХ ПИСЕМ ==========
-    // ★★★ Здесь вы указываете имена файлов (пути) к изображениям благодарственных писем ★★★
-    // Пример: "pismo1.jpg", "pismo2.png", "blagodarnost_voennomu.jpeg"
-    // Поддерживаются любые форматы (jpg, png, webp, heic и т.д.)
-    // Если файлы лежат в отдельной папке, укажите путь: "letters/pismo_01.jpg"
-    // ----------------------------------------------------------------
-    let gratitudeImages = [
-        
-        // ⬇️⬇️⬇️ ВСТАВЬТЕ СВОИ ФАЙЛЫ СЮДА (можно пока оставить пустым массивом, потом добавить)
-        // Пример: "blagodarnost_1.jpg",
-        // Пример: "letters/ot_semi_ivanovyh.png",
-        // ------------------------------------------------------------
-        // Пока оставляем массив пустым — вы сможете добавить имена файлов позже.
-        // Для демонстрации покажу как будут выглядеть карточки, если добавить тестовые заглушки? 
-        // Но по заданию "потом я вставлю эти фотки" — лучше оставить массив пустым и показать подсказку.
-        // Однако, чтобы вы видели, как будет выглядеть галерея, можно добавить образец-заглушку.
-        // Но чтобы не мешать, сделаю так: если массив пуст — показываем сообщение с инструкцией.
-        // Но если вы хотите прямо сейчас увидеть структуру, можете раскомментировать строки ниже для примера:
-        // "sample_letter_placeholder.jpg" — заглушка, но её нет. Чтобы не было ошибок, лучше пусто.
-        // Я добавлю комментарий, но массив оставлю пустым, чтобы вы могли потом наполнить своими файлами.
-    ];
-
-    // ===== НЕБОЛЬШАЯ ЗАЩИТА: если вы хотите добавить пару демонстрационных надписей без реальных фото? 
-    // Не будем использовать заглушки, чтобы не создавать лишних ошибок 404. При пустом массиве показываем понятный блок.
-    // Также если вы позже добавите изображения вручную через HTML-разметку, скрипт их не удалит.
-    // Для гибкости: сначала попробуем найти контейнер. Если в нём уже есть дочерние элементы (кто-то добавил вручную),
-    // мы не будем перезаписывать, иначе — отрисуем на основе массива gratitudeImages.
-    
-    const gridContainer = document.getElementById('gratitudeGrid');
-    const emptyMessageDiv = document.getElementById('emptyMessageTemplate').innerHTML;
-
-    // Функция для создания карточки письма
-    function createLetterCard(imageSrc, altText = 'Благодарственное письмо') {
-        const card = document.createElement('div');
-        card.className = 'gallery-item';
-        
-        const imgContainer = document.createElement('div');
-        imgContainer.className = 'image-container';
-        
-        const img = document.createElement('img');
-        img.src = imageSrc;
-        img.alt = altText;
-        img.loading = 'lazy';
-        // Обработка ошибки загрузки изображения (если файл не найден)
-        img.onerror = function() {
-            this.onerror = null; // чтобы не зациклить
-            this.src = '';
-            this.alt = '⚠️ Файл не найден, добавьте изображение';
-            // Можно также стилизовать родителя
-            const parentContainer = this.closest('.image-container');
-            if (parentContainer) {
-                parentContainer.style.backgroundColor = '#f7ede1';
-                const errorSpan = document.createElement('div');
-                errorSpan.style.position = 'absolute';
-                errorSpan.style.bottom = '10px';
-                errorSpan.style.left = '0';
-                errorSpan.style.right = '0';
-                errorSpan.style.textAlign = 'center';
-                errorSpan.style.fontSize = '12px';
-                errorSpan.style.color = '#b9865b';
-                errorSpan.style.backgroundColor = 'rgba(255,250,235,0.8)';
-                errorSpan.style.padding = '4px';
-                errorSpan.innerText = '✖ фото не загружено';
-                if (!parentContainer.querySelector('.error-badge')) {
-                    errorSpan.className = 'error-badge';
-                    parentContainer.appendChild(errorSpan);
-                }
-            }
-        };
-        
-        imgContainer.appendChild(img);
-        card.appendChild(imgContainer);
-        
-        const captionDiv = document.createElement('div');
-        captionDiv.className = 'caption';
-        captionDiv.innerHTML = '<span>📜 Благодарственное письмо</span>';
-        card.appendChild(captionDiv);
-        
-        return card;
-    }
-
-    // Функция для отображения галереи на основе массива
-    function renderGalleryFromArray(imagesArray) {
-        if (!gridContainer) return;
-        // Очищаем контейнер, но только если мы собираемся рисовать на основе массива (чтобы избежать дублей)
-        // Однако если разработчик уже вручную добавил элементы, мы не хотим их удалять. 
-        // Проверяем: есть ли в gridContainer дочерние элементы с классом 'gallery-item' (если есть, значит, пользователь уже наполнил вручную)
-        const existingItems = gridContainer.querySelectorAll('.gallery-item');
-        if (existingItems.length > 0) {
-            // Если уже есть элементы (ручное добавление), не трогаем, только подстрахуемся что сообщение пустоты не нужно
-            // скроем возможное пустое сообщение, если оно вдруг появилось
-            const emptyMsgElem = gridContainer.querySelector('.empty-gallery-message');
-            if (emptyMsgElem) emptyMsgElem.remove();
-            return;
-        }
-        
-        // Если массив пуст - показываем информационное сообщение
-        if (!imagesArray.length) {
-            gridContainer.innerHTML = emptyMessageDiv;
-            return;
-        }
-        
-        // Иначе чистим и рендерим письма
-        gridContainer.innerHTML = '';
-        for (let i = 0; i < imagesArray.length; i++) {
-            const imgPath = imagesArray[i];
-            if (imgPath && imgPath.trim() !== '') {
-                const card = createLetterCard(imgPath, `Благодарственное письмо №${i+1}`);
-                gridContainer.appendChild(card);
-            }
-        }
-        // Если после добавления не оказалось карточек (все пути были пустые) — показываем сообщение
-        if (gridContainer.children.length === 0) {
-            gridContainer.innerHTML = emptyMessageDiv;
-        }
-    }
-
-    // Дополнительно: функция для "ленивого" наблюдения, если файлы будут добавляться динамически позже,
-    // но мы просто вызовем рендер при загрузке. Также, чтобы вы могли легко добавить изображения,
-    // я добавлю глобальный массив, который можно менять через консоль или при добавлении фото.
-    // Для вашего удобства: если вам нужно будет потом добавить новые фото без изменения кода, 
-    // вы можете просто вписать их в массив gratitudeImages, или добавить вручную HTML-элементы.
-    // Я сделаю так, что если вы в будущем измените массив и вызовете функцию обновления, можно добавить.
-    window.updateGratitudeGallery = function(newImagesArray) {
-        gratitudeImages = newImagesArray || [];
-        renderGalleryFromArray(gratitudeImages);
-    };
-    
-    // Инициализация галереи при загрузке
-    renderGalleryFromArray(gratitudeImages);
-    
     // ========== АДАПТИВНОЕ МОБИЛЬНОЕ МЕНЮ (полностью как в исходном шаблоне) ==========
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -633,12 +524,6 @@
         };
     }
     
-    // Дополнительное примечание для разработчика в консоли
-    console.log('✅ Страница "Благодарственные письма" готова. Чтобы добавить фото писем, укажите пути в массиве gratitudeImages (в script) или вручную добавьте div с классом gallery-item в контейнер gratitudeGrid.');
-    console.log('Текущий массив изображений:', gratitudeImages);
-    if (gratitudeImages.length === 0) {
-        console.log('💡 Подсказка: добавьте имена файлов благодарственных писем в переменную gratitudeImages (например: "letter_1.jpg", "thanks_from_family.png") и страница автоматически отобразит галерею.');
-    }
 </script>
     <script src="site-shared.js" defer></script>
 
