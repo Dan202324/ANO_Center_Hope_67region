@@ -540,7 +540,25 @@
                 </div>
             </div>
 
-            <!-- БЛОК 2: ГЛАВНЫЙ БУХГАЛТЕР -->
+            <!-- БЛОК 2: ЧЕПУРЕНКОВА ГАЛИНА АЛЕКСАНДРОВНА -->
+            <div class="team-card" data-person="chepyrenkova" data-cert-page="certificate_chepyrenkova.html">
+                <div class="card-photo">
+                    <div class="photo-frame">
+                        <img src="Galina_chepyrenkova.jpg" alt="Фото Чепуренковой Галины Александровны" id="chepyrenkovaPhoto" style="object-position: center 15%;">
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="position">Социальный педагог</div>
+                    <div class="description">
+                        <p><strong>Чепуренкова Галина Александровна</strong> - Родилась в городе Смоленске 17 октября 1976 года.</p>
+                        <p>Красота и грация этого города заложили во мне качества гармонии и культуры. Училась в общеобразовательной школе №34 города Смоленска. Очень была увлечена театром. Проявляла любовь к растениям, после уроков посещала школьную теплицу. Всё это проявилось во мне как любовь к искусству и страстную любовь к природе. Первое образование конструктор – модельер, Смоленский текстильный колледж. Второе образование менеджер социо-культурной деятельности, Смоленский государственный институт искусств, закончила институт в 2011 году. 18 лет проработала в сфере культуры, как руководителя учреждения культуры. Параллельно уже во взрослом возрасте, занималась театром, окончила курс актёрского мастерства.</p>
+                        <p>Йога и философия, эти увлечения не покидают меня на протяжении многих лет.</p>
+                    </div>
+                    <button class="certificate-btn">📜 Мои сертификаты</button>
+                </div>
+            </div>
+
+            <!-- БЛОК 3: ГЛАВНЫЙ БУХГАЛТЕР -->
             <div class="team-card" data-person="accountant" data-cert-page="certificate_accountant.html">
                 <div class="card-photo">
                     <div class="photo-frame">
@@ -559,7 +577,7 @@
                 </div>
             </div>
 
-            <!-- БЛОК 3: ЮРИСТ, ПЕДАГОГ-ПСИХОЛОГ (ОТФОРМАТИРОВАННЫЙ ТЕКСТ + ФОТО) -->
+            <!-- БЛОК 4: ЮРИСТ, ПЕДАГОГ-ПСИХОЛОГ (ОТФОРМАТИРОВАННЫЙ ТЕКСТ + ФОТО) -->
             <div class="team-card" data-person="lawyer-psychologist" data-cert-page="certificate_lawyer_psychologist.html">
                 <div class="card-photo">
                     <div class="photo-frame">
@@ -598,7 +616,7 @@
                 </div>
             </div>
 
-            <!-- БЛОК 4: ФОТОГРАФ -->
+            <!-- БЛОК 5: ФОТОГРАФ -->
             <div class="team-card" data-person="photographer" data-cert-page="certificates_photographer.html">
                 <div class="card-photo">
                     <div class="photo-frame">
@@ -666,18 +684,21 @@
         const accountantImg = document.getElementById('accountantPhoto');
         const lawyerPsychImg = document.getElementById('lawyerPsychPhoto');
         const photographerImg = document.getElementById('photographerPhoto');
+        const chepyrenkovaImg = document.getElementById('chepyrenkovaPhoto');
         
         // ★★★ ПУТИ К ФОТОГРАФИЯМ (исправлены для юриста: путь "Юрист.png" указан явно) ★★★
         if (directorImg) directorImg.src = "general.png";
         if (accountantImg) accountantImg.src = "бухгалтер.png";
         if (lawyerPsychImg) lawyerPsychImg.src = "Юрист.png";        // четкий путь к фото юриста (файл Юрист.png)
         if (photographerImg) photographerImg.src = "фотограф.png";
+        if (chepyrenkovaImg) chepyrenkovaImg.src = "Galina_chepyrenkova.jpg";
         
         // Устанавливаем onerror и заглушки для всех изображений
         setupImageWithPlaceholder(directorImg, 'Генеральный директор', '👩‍💼');
         setupImageWithPlaceholder(accountantImg, 'Главный бухгалтер', '🧾');
         setupImageWithPlaceholder(lawyerPsychImg, 'Юрист, педагог-психолог', '⚖️🧠');
         setupImageWithPlaceholder(photographerImg, 'Фотограф', '📸');
+        setupImageWithPlaceholder(chepyrenkovaImg, 'Чепуренкова Галина Александровна', '👤');
         
         // Дополнительная проверка: если фото юриста не загрузилось, но файл существует технически,
         // перезапрос с добавлением версии (необязательно, но сохранит чистоту)
