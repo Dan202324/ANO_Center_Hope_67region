@@ -3,7 +3,7 @@
 // при этом всегда отдаёт свежий контент из сети (без риска показать устаревшую страницу
 // с некорректной анкетой на пожертвование).
 
-const CACHE_NAME = 'nadezhda-shell-v1';
+const CACHE_NAME = 'nadezhda-shell-v3';
 const OFFLINE_URL = 'index.html';
 
 self.addEventListener('install', (event) => {

@@ -580,7 +580,7 @@
         <div class="container">
             <div class="logo-area">
                 <div class="logo-placeholder" id="logoPlaceholder">
-                    <img src="Логотип с подсветкой.png" alt="Логотип Центр Надежда" onerror="this.onerror=null; this.parentElement.style.backgroundColor='#e9f0e5'; this.parentElement.innerHTML='🤝';">
+                    <img src="Логотип с подсветкой.png" alt="АНО Центр помощи «Надежда»" onerror="this.onerror=null; this.parentElement.innerHTML='🤝';">
                 </div>
                 <div class="logo-text">АНО Центр <span>«Надежда»</span></div>
             </div>
@@ -651,7 +651,6 @@
         const logoImg = document.querySelector('.logo-placeholder img');
         if (logoImg) {
             logoImg.onerror = function() {
-                this.parentElement.style.backgroundColor = '#dde5d4';
                 this.parentElement.innerHTML = '🤝';
                 this.parentElement.style.fontSize = '28px';
             };

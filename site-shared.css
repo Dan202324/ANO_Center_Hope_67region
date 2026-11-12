@@ -401,6 +401,84 @@ a[class*="btn"]:active, button[class*="btn"]:active { transform: scale(0.97); }
 .nh-dismiss-btn:hover { color: #4d6480; }
 
 /* ==========================================================================
+   ЛОГОТИП — только изображение, без рамок, подложек и теней.
+   Файл «Логотип с подсветкой.png» уже имеет прозрачный фон, поэтому
+   плашка/скругление/обводка вокруг него не нужны.
+   ========================================================================== */
+
+.logo-placeholder {
+  width: 80px !important;
+  height: 80px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.logo-placeholder img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+}
+
+/* Название рядом с логотипом может аккуратно сжиматься на узких экранах,
+   чтобы кнопка меню всегда оставалась видимой. */
+.logo-area { min-width: 0; }
+.logo-text {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+/* Планшеты и небольшие ноутбуки: логотип чуть компактнее, чтобы меню
+   помещалось в одну строку и не обрезалось справа. */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .header .container,
+  header.header .container {
+    gap: 8px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .nav-links {
+    gap: 6px !important;
+  }
+  .nav-links a {
+    font-size: 0.76rem !important;
+  }
+  .logo-area {
+    gap: 10px;
+  }
+  .logo-placeholder {
+    width: 64px !important;
+    height: 64px !important;
+  }
+  .logo-text {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo-placeholder {
+    width: 64px !important;
+    height: 64px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo-placeholder {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* ==========================================================================
    МЕЛКАЯ АДАПТИВНАЯ ПОЛИРОВКА ДЛЯ ВСЕХ УСТРОЙСТВ
    ========================================================================== */
 
